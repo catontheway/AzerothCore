@@ -10,6 +10,7 @@ void AddSC_TOP();
 
 // PlayerScripts
 void AddSC_ArenaObject();
+void AddSC_KillStreak();
 
 void AddIntelligentQuantumScripts()
 {
@@ -22,6 +23,7 @@ void AddIntelligentQuantumScripts()
 
     // PlayerScripts
     AddSC_ArenaObject();
+    AddSC_KillStreak();
 }
 
 #endif
