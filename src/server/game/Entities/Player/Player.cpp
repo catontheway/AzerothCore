@@ -7593,6 +7593,18 @@ void Player::UpdateArea(uint32 newArea)
 
     UpdateAreaDependentAuras(newArea);
 
+    if (this->GetMapId() == 0 && this->GetAreaId() == 2177)
+    {
+        if (Group* group = this->GetGroup())
+        {
+            if (group->GetMembersCount() >= 3)
+            {
+                this->RemoveFromGroup();
+                return;
+            }
+        }
+    }
+
     pvpInfo.IsInNoPvPArea = false;
     if (!area)
     {

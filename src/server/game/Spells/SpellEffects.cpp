@@ -439,7 +439,7 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                         pdamage = unitTarget->SpellDamageBonusTaken(m_caster, aura->GetSpellInfo(), pdamage, DOT, aura->GetBase()->GetStackAmount());
                         uint32 pct_dir = m_caster->CalculateSpellDamage(unitTarget, m_spellInfo, (effIndex + 1));
                         uint8 baseTotalTicks = uint8(m_caster->CalcSpellDuration(aura->GetSpellInfo()) / aura->GetSpellInfo()->Effects[EFFECT_0].Amplitude);
-                        
+
                         damage += int32(CalculatePct(pdamage * baseTotalTicks, pct_dir));
 
                         uint32 pct_dot = m_caster->CalculateSpellDamage(unitTarget, m_spellInfo, (effIndex + 2)) / 3;
@@ -884,8 +884,8 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
                     if (spell->DmgClass == SPELL_DAMAGE_CLASS_NONE && spell->SpellFamilyName == SPELLFAMILY_GENERIC)
                         for (uint8 i = EFFECT_0; i < MAX_SPELL_EFFECTS; ++i)
                         {
-                            if ((iter->second->GetEffectMask() & (1<<i)) && 
-                                spell->Effects[i].ApplyAuraName != SPELL_AURA_PERIODIC_DAMAGE && 
+                            if ((iter->second->GetEffectMask() & (1<<i)) &&
+                                spell->Effects[i].ApplyAuraName != SPELL_AURA_PERIODIC_DAMAGE &&
                                 spell->Effects[i].ApplyAuraName != SPELL_AURA_PERIODIC_TRIGGER_SPELL &&
                                 spell->Effects[i].ApplyAuraName != SPELL_AURA_DUMMY)
                             {
@@ -1773,7 +1773,7 @@ void Spell::DoCreateItem(uint8 /*effIndex*/, uint32 itemId)
 
         // send info to the client
         player->SendNewItem(pItem, addNumber, true, SelfCast);
-		
+
         sScriptMgr->OnCreateItem(player, pItem, addNumber);
 
         // we succeeded in creating at least one item, so a levelup is possible
@@ -3578,7 +3578,7 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
     {
         if (Unit* owner = m_caster->GetOwner())
             weaponDamage = owner->CalculateDamage(m_attackType, normalized, true);
-    }           
+    }
     else
         weaponDamage = m_caster->CalculateDamage(m_attackType, normalized, true);
 
@@ -3840,7 +3840,7 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                         case 3:
                         case 4:
                             itemId = 23585;
-                            break;            // Stouthammer Lite          
+                            break;            // Stouthammer Lite
                     }
                     DoCreateItem(effIndex, itemId);
                     break;
@@ -4283,6 +4283,12 @@ void Spell::EffectDuel(SpellEffIndex effIndex)
     if (casterAreaEntry && !(casterAreaEntry->flags & AREA_FLAG_ALLOW_DUELS))
     {
         SendCastResult(SPELL_FAILED_NO_DUELING);            // Dueling isn't allowed here
+        return;
+    }
+
+    if (caster->GetMapId() == 0 && caster->GetAreaId() == 2177)
+    {
+        SendCastResult(SPELL_FAILED_NO_DUELING);
         return;
     }
 
@@ -5004,7 +5010,7 @@ void Spell::EffectChargeDest(SpellEffIndex /*effIndex*/)
     {
         Position pos;
         destTarget->GetPosition(&pos);
-        
+
         if (!m_caster->IsWithinLOS(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ()))
         {
             float angle = m_caster->GetRelativeAngle(pos.GetPositionX(), pos.GetPositionY());
@@ -5023,7 +5029,7 @@ void Spell::EffectKnockBack(SpellEffIndex effIndex)
 
     if (!unitTarget)
         return;
-    
+
     // Xinef: allow entry specific spells to skip those checks
     if (m_spellInfo->Effects[effIndex].TargetA.GetCheckType() != TARGET_CHECK_ENTRY && m_spellInfo->Effects[effIndex].TargetB.GetCheckType() != TARGET_CHECK_ENTRY)
     {
@@ -5224,7 +5230,7 @@ void Spell::EffectResurrectPet(SpellEffIndex /*effIndex*/)
         player->SummonPet(0, x, y, z, player->GetOrientation(), SUMMON_PET, 0, 0, (uint64)damage, PET_LOAD_SUMMON_DEAD_PET);
         return;
     }
- 
+
     pet->SetPosition(x, y, z, player->GetOrientation());
 
     pet->SetUInt32Value(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_NONE);
