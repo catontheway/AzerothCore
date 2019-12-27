@@ -7,9 +7,6 @@ conf/*
 apps/drassil/*
 env/dist/*
 env/user/*
-modules/*
-!modules/*.md
-!modules/*.sh
 build*/
 var/*
 docker/build/cache
@@ -77,17 +74,3 @@ local.properties
 .loadpath
 .project
 .cproject
-
-
-# ==================
-#
-#  CUSTOM
-#  
-#  put below your custom ignore rules
-#  for example , if you want to include a 
-#  module directly in repositoryyou can do:
-#
-#  !modules/yourmodule
-#
-# ==================
-
