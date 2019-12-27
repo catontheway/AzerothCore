@@ -8,6 +8,9 @@ void AddSC_Teleport();
 void AddSC_Template();
 void AddSC_TOP();
 
+// PlayerScripts
+void AddSC_ArenaObject();
+
 void AddIntelligentQuantumScripts()
 {
     // CreatureScripts
@@ -16,6 +19,9 @@ void AddIntelligentQuantumScripts()
     AddSC_Teleport();
     AddSC_Template();
     AddSC_TOP();
+
+    // PlayerScripts
+    AddSC_ArenaObject();
 }
 
 #endif
