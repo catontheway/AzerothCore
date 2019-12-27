@@ -4,12 +4,14 @@
 // CreatureScripts
 void AddSC_BeastMastery();
 void AddSC_Template();
+void AddSC_TOP();
 
 void AddIntelligentQuantumScripts()
 {
     // CreatureScripts
     AddSC_BeastMastery();
     AddSC_Template();
+    AddSC_TOP();
 }
 
 #endif
