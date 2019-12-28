@@ -11,26 +11,27 @@ class PlayerScript_Duel : public PlayerScript
 			player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 	}
 
-	void GetPowers(Player * player)
+	void GetPowers(Player *player)
 	{
 		player->SetHealth(player->GetMaxHealth());
 
-		switch (player->getPowerType())
+		if (player->getPowerType() == POWER_RAGE)
+        {
+            DruidForm(player);
+            player->SetPower(POWER_RAGE, 0);
+        }
+		else if (player->getPowerType() == POWER_ENERGY)
 		{
-			case POWER_RAGE:
-				DruidForm(player);
-				player->SetPower(POWER_RAGE, 0);
-				break;
-			case POWER_ENERGY:
-				DruidForm(player);
-				player->SetPower(POWER_ENERGY, player->GetMaxPower(POWER_ENERGY));
-				break;
-			case POWER_RUNIC_POWER:
-				player->SetPower(POWER_RUNIC_POWER, 0);
-				break;
-			case POWER_MANA:
-				player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-				break;
+			DruidForm(player);
+			player->SetPower(POWER_ENERGY, player->GetMaxPower(POWER_ENERGY));
+		}
+		else if (player->getPowerType() == POWER_RUNIC_POWER)
+		{
+			player->SetPower(POWER_RUNIC_POWER, 0);
+		}
+		else if (player->getPowerType() == POWER_MANA)
+		{
+			player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 		}
 	}
 
@@ -50,7 +51,7 @@ class PlayerScript_Duel : public PlayerScript
 		}
 	}
 
-	void OnDuelStart(Player * player1, Player * player2)
+	void OnDuelStart(Player *player1, Player *player2)
 	{
         uint32 Auras[] =
         {
@@ -80,7 +81,7 @@ class PlayerScript_Duel : public PlayerScript
         SetPowers(player2);
 	}
 
-	void OnDuelEnd(Player * Winner, Player * Loser, DuelCompleteType type)
+	void OnDuelEnd(Player *Winner, Player *Loser, DuelCompleteType /*type*/)
 	{
         SetPowers(Winner);
         SetPowers(Loser);
