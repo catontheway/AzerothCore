@@ -7,6 +7,7 @@ void AddSC_Doctor();
 void AddSC_Teleport();
 void AddSC_Template();
 void AddSC_TOP();
+void AddSC_Transmogrifier();
 
 // PlayerScripts
 void AddSC_ArenaObject();
@@ -21,6 +22,7 @@ void AddIntelligentQuantumScripts()
     AddSC_Teleport();
     AddSC_Template();
     AddSC_TOP();
+    AddSC_Transmogrifier();
 
     // PlayerScripts
     AddSC_ArenaObject();
