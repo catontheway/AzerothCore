@@ -12,24 +12,24 @@ class PlayerScript_Gurubashi : public PlayerScript
 			if (Killer->GetGUID() == Killed->GetGUID() || Killed->GetMaxHealth() < 16000 || Killer->GetSession()->GetRemoteAddress() == Killed->GetSession()->GetRemoteAddress())
 				return;
 
-            // Priest Holy
-            if (Killed->HasSpell(27827))
-                Killed->RemoveAurasDueToSpell(27827);
-
 			if (Killed->GetTeamId() == TEAM_ALLIANCE)
 			{
                 Killer->ModifyHonorPoints(+350);
+                Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
 				Killed->AddAura(9438, Killed);
+                Killed->CastSpell(Killed, 36910, true);
 				Killed->TeleportTo(0, -13151.213867f, 224.389389f, 42.980206f, 2.379343f);
 			}
 			else
 			{
-				Killer->ModifyHonorPoints(+350);
+                Killer->ModifyHonorPoints(+350);
+                Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
 				Killed->AddAura(9438, Killed);
+                Killed->CastSpell(Killed, 36910, true);
 				Killed->TeleportTo(0, -13275.427734f, 289.899292f, 42.980019f, 6.019665f);
 			}
 		}
@@ -39,22 +39,22 @@ class PlayerScript_Gurubashi : public PlayerScript
 	{
 		if (Killed->GetMapId() == 0 && Killed->GetAreaId() == 2177)
 		{
-            // Priest Holy
-            if (Killed->HasSpell(27827))
-                Killed->RemoveAurasDueToSpell(27827);
-
 			if (Killed->GetTeamId() == TEAM_ALLIANCE)
 			{
+                Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
 				Killed->AddAura(9438, Killed);
+                Killed->CastSpell(Killed, 36910, true);
 				Killed->TeleportTo(0, -13151.213867f, 224.389389f, 42.980206f, 2.379343f);
 			}
 			else
 			{
+                Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
 				Killed->AddAura(9438, Killed);
+                Killed->CastSpell(Killed, 36910, true);
 				Killed->TeleportTo(0, -13275.427734f, 289.899292f, 42.980019f, 6.019665f);
 			}
 		}
@@ -90,6 +90,6 @@ class CreatureScript_Gurubashi : public CreatureScript
 
 void AddSC_Gurubashi()
 {
-	new PlayerScript_Gurubashi();
+    new PlayerScript_Gurubashi();
     new CreatureScript_Gurubashi();
 }
