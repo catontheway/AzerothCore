@@ -11,6 +11,7 @@ void AddSC_Transmogrifier();
 
 // PlayerScripts
 void AddSC_ArenaObject();
+void AddSC_Duel();
 void AddSC_Gurubashi();
 void AddSC_KillStreak();
 
@@ -26,6 +27,7 @@ void AddIntelligentQuantumScripts()
 
     // PlayerScripts
     AddSC_ArenaObject();
+    AddSC_Duel();
     AddSC_Gurubashi();
     AddSC_KillStreak();
 }
