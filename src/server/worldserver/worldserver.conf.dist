@@ -28,6 +28,7 @@
 #    ITEM DELETE OPTIONS
 #    CUSTOM SERVER OPTIONS
 #    TRANSMOGRIFICATION CONFIG
+#    CROSSFACTION BATTLEGROUND CONFIG
 #
 ###################################################################################################
 
@@ -3566,6 +3567,29 @@ Transmogrification.SetNpcText = 601084
 
 Transmogrification.SetCostModifier = 3.0
 Transmogrification.SetCopperCost = 0
+
+#
+###################################################################################################
+
+###################################################################################################
+# CROSSFACTION BATTLEGROUND CONFIG
+#
+#   CrossFactionBG.Enable
+#       Description: Enable mixed alliance and horde in one battleground
+#       Default: 0
+#
+#   CrossFactionBG.Average.ItemLevel.Enable
+#       Description: Enable check average item level for bg
+#       Default: 0
+#
+#   CrossFactionBG.Players.Count.In.Group
+#       Description: Maximum players in party for enter queue
+#       Default: 3
+#
+
+CrossFactionBG.Enable = 0
+CrossFactionBG.Average.ItemLevel.Enable = 0
+CrossFactionBG.Players.Count.In.Group = 3
 
 #
 ###################################################################################################

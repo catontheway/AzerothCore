@@ -10,6 +10,7 @@ void AddSC_TOP();
 void AddSC_Transmogrifier();
 
 // PlayerScripts
+void AddSC_CrossFactionBG();
 void AddSC_ArenaObject();
 void AddSC_Duel();
 void AddSC_Gurubashi();
@@ -27,6 +28,7 @@ void AddIntelligentQuantumScripts()
     AddSC_Transmogrifier();
 
     // PlayerScripts
+    AddSC_CrossFactionBG();
     AddSC_ArenaObject();
     AddSC_Duel();
     AddSC_Gurubashi();

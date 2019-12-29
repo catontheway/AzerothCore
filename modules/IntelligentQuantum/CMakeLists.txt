@@ -8,6 +8,8 @@ AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Transmogrification.cpp"
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Transmogrifier.cpp")
 
 # PlayerScripts
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/CrossFactionBG/CrossFactionBG.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/CrossFactionBG/CrossFactionBGScript.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/ArenaObject.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Duel.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Gurubashi.cpp")
