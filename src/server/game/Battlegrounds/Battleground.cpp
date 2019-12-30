@@ -379,7 +379,7 @@ TeamId Battleground::GetPrematureWinner()
         return TEAM_ALLIANCE;
     else if (GetPlayersCountByTeam(TEAM_HORDE) >= GetMinPlayersPerTeam())
         return TEAM_HORDE;
-        
+
     return TEAM_NEUTRAL;
 }
 
@@ -461,6 +461,9 @@ inline void Battleground::_ProcessJoin(uint32 diff)
     {
         m_Events |= BG_STARTING_EVENT_2;
         SendMessageToAll(StartMessageIds[BG_STARTING_EVENT_SECOND], CHAT_MSG_BG_SYSTEM_NEUTRAL);
+
+        if (this->isArena())
+            this->SendArenaReadyCheck();
     }
     // After 30 or 15 seconds, warning is signaled
     else if (GetStartDelayTime() <= StartDelayTimes[BG_STARTING_EVENT_THIRD] && !(m_Events & BG_STARTING_EVENT_3))
@@ -520,6 +523,13 @@ inline void Battleground::_ProcessJoin(uint32 diff)
             for (BattlegroundPlayerMap::const_iterator itr = GetPlayers().begin(); itr != GetPlayers().end(); ++itr)
                 if (Player* player = itr->second)
                 {
+                    if (!m_ArenaReadyCheckMap.count(itr->first))
+                    {
+                        WorldPacket data(0x3C6, 0x1);
+                        data << uint8(0x1);
+                        player->GetSession()->SendPacket(&data);
+                    }
+
                     WorldPacket status;
                     sBattlegroundMgr->BuildBattlegroundStatusPacket(&status, this, player->GetCurrentBattlegroundQueueSlot(), STATUS_IN_PROGRESS, 0, GetStartTime(), GetArenaType(), player->GetBgTeamId());
                     player->GetSession()->SendPacket(&status);
@@ -549,6 +559,7 @@ inline void Battleground::_ProcessJoin(uint32 diff)
                 ArenaSpectator::HandleResetCommand(*itr);
 
             CheckArenaWinConditions();
+            m_ArenaReadyCheckMap.clear();
 
             // pussywizard: arena spectator stuff
             if (GetStatus() == STATUS_IN_PROGRESS)
@@ -971,7 +982,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
                 // Arena lost => reset the win_rated_arena having the "no_lose" condition
                 player->ResetAchievementCriteria(ACHIEVEMENT_CRITERIA_CONDITION_NO_LOSE, 0);
             }
-            
+
             player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_PLAY_ARENA, GetMapId());
         }
 
@@ -1991,4 +2002,29 @@ void Battleground::RewardXPAtKill(Player* killer, Player* victim)
 uint8 Battleground::GetUniqueBracketId() const
 {
     return GetMinLevel() / 10;
+}
+
+void Battleground::SendArenaReadyCheck() const
+{
+    WorldPacket packet_0x1(0x051, 0x17);
+    packet_0x1.appendPackGUID(0xFFFFFFFF);
+    packet_0x1 << uint8(0x0);
+    packet_0x1 << std::string("Arena");
+    packet_0x1 << uint8(0x0);
+    packet_0x1 << uint8(0xa);
+    packet_0x1 << uint8(0x0);
+    packet_0x1 << uint8(0x4);
+    packet_0x1 << uint8(0x0);
+
+    WorldPacket packet_0x2(0x322, 0x8);
+    packet_0x2 << uint64(0xFFFFFFFF);
+
+    for (const auto itr : m_Players)
+    {
+        if (const Player* const player = ObjectAccessor::FindPlayer(itr.first))
+        {
+            player->GetSession()->SendPacket(&packet_0x1);
+            player->GetSession()->SendPacket(&packet_0x2);
+        }
+    }
 }
