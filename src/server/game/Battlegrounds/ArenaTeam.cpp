@@ -806,6 +806,16 @@ void ArenaTeam::MemberLost(Player* player, uint32 againstMatchmakerRating, int32
             itr->WeekGames +=1;
             itr->SeasonGames +=1;
 
+			if (sConfigMgr->GetBoolDefault("Arena.Reward.Active", true))
+			{
+				if (ARENA_TEAM_2v2)
+					player->AddItem(sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.2v2", 40753), sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.Count.2v2", 1));
+				else if (ARENA_TEAM_3v3)
+					player->AddItem(sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.3v3", 40753), sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.Count.3v3", 2));
+				else if (ARENA_TEAM_5v5)
+					player->AddItem(sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.5v5", 40753), sConfigMgr->GetIntDefault("Loser.Arena.Reward.Item.Count.5v5", 3));
+			}
+
             // update the unit fields
             player->SetArenaTeamInfoField(GetSlot(), ARENA_TEAM_GAMES_WEEK,  itr->WeekGames);
             player->SetArenaTeamInfoField(GetSlot(), ARENA_TEAM_GAMES_SEASON,  itr->SeasonGames);
@@ -837,6 +847,17 @@ void ArenaTeam::MemberWon(Player* player, uint32 againstMatchmakerRating, int32 
             itr->SeasonGames +=1;
             itr->SeasonWins += 1;
             itr->WeekWins += 1;
+
+			if (sConfigMgr->GetBoolDefault("Arena.Reward.Active", true))
+			{
+				if (ARENA_TEAM_2v2)
+					player->AddItem(sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.2v2", 40753), sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.Count.2v2", 2));
+				else if (ARENA_TEAM_3v3)
+					player->AddItem(sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.3v3", 40753), sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.Count.3v3", 3));
+				else if (ARENA_TEAM_5v5)
+					player->AddItem(sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.5v5", 40753), sConfigMgr->GetIntDefault("Winner.Arena.Reward.Item.Count.5v5", 5));
+			}
+
             // update unit fields
             player->SetArenaTeamInfoField(GetSlot(), ARENA_TEAM_GAMES_WEEK, itr->WeekGames);
             player->SetArenaTeamInfoField(GetSlot(), ARENA_TEAM_GAMES_SEASON, itr->SeasonGames);

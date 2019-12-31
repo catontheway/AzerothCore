@@ -2666,6 +2666,27 @@ Battleground.TrackDeserters.Enable = 1
 Battleground.InvitationType = 0
 
 #
+#    Battleground.Reward.Active
+#        Description: Battleground Reward Active
+#        Default:     0
+
+Battleground.Reward.Active = 0
+
+#
+#    Battleground.Reward.Item
+#        Description: Battleground Reward Item
+#        Default:     Item Entry = 40752
+
+Battleground.Reward.Item = 40752
+
+#
+#    Battleground.Reward.Item.Count
+#        Description: Battleground Reward Item Count
+#        Default:     1
+
+Battleground.Reward.Item.Count = 1
+
+#
 ###################################################################################################
 
 ###################################################################################################
@@ -2835,6 +2856,77 @@ Arena.ArenaLoseRatingModifier = 24
 #        Default:     24
 
 Arena.ArenaMatchmakerRatingModifier = 24
+
+#
+#    Arena.Reward.Active
+#        Description: Arena Reward Active
+#        Default:     0
+
+Arena.Reward.Active = 0
+
+#
+#    Winner.Arena.Reward.Item.2v2
+#	 Winner.Arena.Reward.Item.Count.2v2
+#        Description: Winner Arena Reward Item 2v2
+#					  Winner Arena Reward Item Count 2v2
+#        Default:     Item Entry = 40753
+#					  Count      = 2
+
+Winner.Arena.Reward.Item.2v2 = 40753
+Winner.Arena.Reward.Item.Count.2v2 = 2
+
+#
+#    Winner.Arena.Reward.Item.3v3
+#	 Winner.Arena.Reward.Item.Count.3v3
+#        Description: Winner Arena Reward Item 3v3
+#					  Winner Arena Reward Item Count.3v3
+#        Default:     Item Entry = 40753
+#					  Count      = 3
+
+Winner.Arena.Reward.Item.3v3 = 40753
+Winner.Arena.Reward.Item.Count.3v3 = 3
+
+#
+#    Winner.Arena.Reward.Item.5v5
+#	 Winner.Arena.Reward.Item.Count.5v5
+#        Description: Winner Arena Reward Item 5v5
+#				      Winner Arena Reward Item Count 5v5
+#        Default:     Item Entry = 40753
+#					  Count      = 5
+
+Winner.Arena.Reward.Item.5v5 = 40753
+Winner.Arena.Reward.Item.Count.5v5 = 5
+
+#
+#    Loser.Arena.Reward.Item.2v2
+#        Description: Loser Arena Reward Item 2v2
+#	                  Loser Arena Reward Item.Count 2v2
+#        Default:     Item Entry = 40753
+#					  Count      = 1
+
+Loser.Arena.Reward.Item.2v2 = 40753
+Loser.Arena.Reward.Item.Count.2v2 = 1
+
+#
+#    Loser.Arena.Reward.Item.3v3
+#	 Loser.Arena.Reward.Item.Count.3v3
+#        Description: Loser Arena Reward Item 3v3
+#        Default:     Item Entry = 40753
+#				      Count      = 2
+
+Loser.Arena.Reward.Item.3v3 = 40753
+Loser.Arena.Reward.Item.Count.3v3 = 2
+
+#
+#    Loser.Arena.Reward.Item.5v5
+#	 Loser.Arena.Reward.Item.Count.5v5
+#        Description: Loser Arena Reward Item 5v5
+#					  Loser Arena Reward Item.Count 5v5
+#        Default:     Item Entry = 40753
+#					  Count      = 3
+
+Loser.Arena.Reward.Item.5v5 = 40753
+Loser.Arena.Reward.Item.Count.5v5 = 3
 
 #
 ###################################################################################################
