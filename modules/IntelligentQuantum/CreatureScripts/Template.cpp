@@ -50,7 +50,7 @@ enum Enchant
     WRIST_30_SPELL_POWER = 2332,
 
     HANDS_44_ATTACK_POWER = 1603,
-    HANDS_23_SPELL_POWER = 3231,
+    HANDS_23_SPELL_POWER = 3246,
 
     WAIST_PRISMATIC = 3729,
 
@@ -66,6 +66,16 @@ enum Enchant
 
     SHIELD_21_RESILIENCE = 3229,
     SHIELD_TITANIUM_PLATING = 3849,
+};
+
+enum Skills
+{
+    DAGGERS = 1180,
+    ONE_H_AXES = 196,
+    ONE_H_MACES = 198,
+    ONE_H_SWORDS = 201,
+    PLATE_MAIL = 750,
+    MAIL = 8737
 };
 
 class CreatureScript_Template : public CreatureScript
@@ -88,17 +98,32 @@ public:
             }
         }
 
-        // Plate Mail
         switch (player->getClass())
         {
             case CLASS_WARRIOR:
             case CLASS_PALADIN:
             case CLASS_DEATH_KNIGHT:
-                player->learnSpell(750);
+                player->learnSpell(PLATE_MAIL);
+                player->learnSpell(ONE_H_AXES);
                 break;
             case CLASS_SHAMAN:
+                player->learnSpell(DAGGERS);
+                player->learnSpell(ONE_H_AXES);
+                player->learnSpell(MAIL);
+                break;
             case CLASS_HUNTER:
-                player->learnSpell(8737);
+                player->learnSpell(MAIL);
+                break;
+            case CLASS_ROGUE:
+                player->learnSpell(ONE_H_SWORDS);
+                player->learnSpell(ONE_H_AXES);
+                break;
+            case CLASS_PRIEST:
+            case CLASS_MAGE:
+                player->learnSpell(DAGGERS);
+                break;
+            case CLASS_WARLOCK:
+                player->learnSpell(ONE_H_SWORDS);
                 break;
             default:
                 break;
@@ -362,7 +387,12 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 51227, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 53132, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 51229, true);
-                player->EquipNewItem(EQUIPMENT_SLOT_BACK, 47546, true);
+
+                if (player->GetTeamId() == TEAM_HORDE)
+                    player->EquipNewItem(EQUIPMENT_SLOT_BACK, 47546, true);
+                else
+                    player->EquipNewItem(EQUIPMENT_SLOT_BACK, 47545, true);
+
                 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 51225, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 54559, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 51222, true);
@@ -487,6 +517,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -504,6 +535,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, SHIELD_21_RESILIENCE);
 
                 // Glyph
                 Glyph(player, 0, 706);
@@ -586,6 +618,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
@@ -605,6 +638,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, SHIELD_TITANIUM_PLATING);
 
                 // Glyph
                 Glyph(player, 0, 191);
@@ -672,6 +706,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, ORANGE_10_STRENGTH_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
@@ -752,7 +787,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51880, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
@@ -760,6 +795,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -845,7 +881,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51880, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -855,6 +891,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -940,7 +977,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51880, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
@@ -948,6 +985,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1041,7 +1079,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51395, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1050,6 +1088,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1138,7 +1177,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51395, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1147,6 +1186,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1239,7 +1279,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 51395, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1248,6 +1288,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1338,6 +1379,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1430,6 +1472,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -1513,12 +1556,13 @@ public:
                 // Socket
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ORANGE_12_SPELL_POWER_10_HASTE);
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
@@ -1618,6 +1662,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
@@ -1717,6 +1762,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
@@ -1816,6 +1862,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
@@ -1902,12 +1949,13 @@ public:
                 // Socket
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, RED_23_SPELL_POWER);
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT_2, ORANGE_12_SPELL_POWER_10_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_NECK), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, RED_23_SPELL_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_23_SPELL_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
@@ -1925,6 +1973,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, SHIELD_21_RESILIENCE);
 
                 // Glyph
                 Glyph(player, 0, 754);
@@ -1985,13 +2034,14 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 50463, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -2085,6 +2135,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -2103,6 +2154,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, SHIELD_21_RESILIENCE);
 
                 // Glyph
                 Glyph(player, 0, 223);
@@ -2171,6 +2223,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_3, ORANGE_12_SPELL_POWER_10_HASTE);
@@ -2248,8 +2301,8 @@ public:
 
                 if (player->GetTeamId() == TEAM_ALLIANCE)
                 {
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47115, true);
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47131, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47059, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47041, true);
                 }
                 else
                 {
@@ -2268,6 +2321,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_CRITICAL);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPIRIT);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, BLUE_20_SPIRIT);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPIRIT);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_23_SPELL_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPIRIT);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_3, YELLOW_20_CRITICAL);
@@ -2359,6 +2413,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_3, ORANGE_12_SPELL_POWER_10_HASTE);
@@ -2450,6 +2505,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
@@ -2537,6 +2593,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -2619,8 +2676,10 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), SOCK_ENCHANTMENT_SLOT_2, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
@@ -2695,8 +2754,8 @@ public:
 
                 if (player->GetTeamId() == TEAM_ALLIANCE)
                 {
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47115, true);
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47131, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47059, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47041, true);
                 }
                 else
                 {
@@ -2716,6 +2775,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_HASTE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
@@ -2796,7 +2856,7 @@ public:
                 player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 50456, true);
 
                 // Socket
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_CRITICAL_3_CRITICAL_DAMAGE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT, META_21_AGILITY_3_CRITICAL_DAMAGE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
@@ -2804,13 +2864,14 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
-                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
 
                 // Enchant
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
@@ -2826,8 +2887,8 @@ public:
 
                 // Glyph
                 Glyph(player, 0, 166);
-                Glyph(player, 1, 453);
-                Glyph(player, 2, 455);
+                Glyph(player, 1, 0);
+                Glyph(player, 2, 0);
                 Glyph(player, 3, 165);
                 Glyph(player, 4, 551);
                 Glyph(player, 5, 671);
@@ -2882,8 +2943,8 @@ public:
 
                 if (player->GetTeamId() == TEAM_ALLIANCE)
                 {
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47115, true);
-                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47131, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 47059, true);
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 47041, true);
                 }
                 else
                 {
@@ -2903,6 +2964,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), SOCK_ENCHANTMENT_SLOT_2, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, GREEN_10_RESILIENCE_5_MANA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, GREEN_10_RESILIENCE_5_MANA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -2923,12 +2985,12 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
 
                 // Glyph
-                Glyph(player, 0, 183);
-                Glyph(player, 1, 453);
-                Glyph(player, 2, 455);
-                Glyph(player, 3, 193);
-                Glyph(player, 4, 456);
-                Glyph(player, 5, 707);
+                Glyph(player, 0, 169);
+                Glyph(player, 1, 433);
+                Glyph(player, 2, 435);
+                Glyph(player, 3, 168);
+                Glyph(player, 4, 551);
+                Glyph(player, 5, 676);
 
                 // Talent
                 player->learnSpell(17051); player->addTalent(17051, player->GetActiveSpecMask(), true);
