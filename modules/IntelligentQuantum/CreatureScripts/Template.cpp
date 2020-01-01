@@ -2,7 +2,6 @@
 
 enum Gems
 {
-    META_42_ATTACK_POWER_RUN_SPEED = 3625,
     META_21_INTELLECTL_RESTORE_MANA = 3627,
     META_21_AGILITY_3_CRITICAL_DAMAGE = 3628,
     META_21_CRITICAL_3_CRITICAL_DAMAGE = 3621,
@@ -11,35 +10,62 @@ enum Gems
     RED_23_SPELL_POWER = 3520,
     RED_20_STRENGTH = 3518,
     RED_40_ATTACK_POWER = 3521,
-    RED_20_AGILITY = 3519,
 
-    YELLOW_20_INTELLECT = 3865,
-    YELLOW_20_HASTE = 3531,
-    YELLOW_20_HIT = 3528,
     YELLOW_20_RESILIENCE = 3530,
     YELLOW_20_CRITICAL = 3527,
 
-    PURPLE_12_SPELL_POWER_5_MANA = 3546,
-    PURPLE_10_STRENGTH_15_STAMINA = 3536,
     PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION = 3548,
     PURPLE_10_ARMOR_PENETRATION_15_STAMINA = 3543,
-    PURPLE_10_AGILITY_15_STAMINA = 3537,
 
-    ORANGE_20_STRENGTH_10_HIT = 3550,
     ORANGE_10_STRENGTH_10_RESILIENCE = 3552,
-    ORANGE_10_ATTACK_POWER_10_RESILIENCE = 3566,
     ORANGE_12_SPELL_POWER_10_HASTE = 3520,
-    ORANGE_20_ATTACK_POWER_10_HIT = 3565,
     ORANGE_12_SPELL_POWER_10_RESILIENCE = 3561,
 
     GREEN_10_HASTE_13_SPELL_PENETRATION = 3590,
-    GREEN_10_HASTE_15_STAMINA = 3577,
     GREEN_10_RESILIENCE_5_MANA = 3586,
 
     BLUE_20_SPELL_PENETRATION = 3535,
     BLUE_20_SPIRIT = 3864,
 
     ALL_STATS_10 = 3879
+};
+
+enum Enchant
+{
+    HEAD_50_ATTACK_POWER_20_RESILIENCE = 3795,
+    HEAD_50_ATTACK_POWER_20_CRITICAL = 3817,
+    HEAD_29_SPELL_POWER_20_RESILIENCE = 3796,
+
+    SHOULDER_40_ATTACK_POWER_15_RESILIENCE = 3793,
+    SHOULDER_40_ATTACK_POWER_15_CRITICAL = 3808,
+    SHOULDER_23_SPELL_POWER_15_RESILIENCE = 3794,
+
+    BACK_22_AGILITY = 1099,
+    BACK_23_HASTE = 3831,
+
+    CHEST_20_RESILIENCE = 3245,
+    CHEST_ALL_STATS = 3832,
+
+    WRIST_50_ATTACK_POWER = 3845,
+    WRIST_30_SPELL_POWER = 2332,
+
+    HANDS_44_ATTACK_POWER = 1603,
+    HANDS_23_SPELL_POWER = 3231,
+
+    WAIST_PRISMATIC = 3729,
+
+    LEGS_40_RESILIENCE_28_STAMINA = 3853,
+    LEGS_75_ATTACK_POWER_22_CRITICAL = 3823,
+    LEGS_50_SPELL_POWER_30_STAMINA = 3721,
+
+    FEET_15_STAMINA_MINOR_SPEED = 3232,
+
+    WEAPON_BERSERKING = 3789,
+    WEAPON_BLACK_MAGIC,
+    WEAPON_63_SPELL_POWER = 3834,
+
+    SHIELD_21_RESILIENCE = 3229,
+    SHIELD_TITANIUM_PLATING = 3849,
 };
 
 class CreatureScript_Template : public CreatureScript
@@ -91,9 +117,9 @@ public:
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Paladin (Retribution)", GOSSIP_SENDER_MAIN, 6);
                 break;
             case CLASS_ROGUE:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rouge (Assassination)", GOSSIP_SENDER_MAIN, 7);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rouge (Combat)", GOSSIP_SENDER_MAIN, 8);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rouge (Subtlety)", GOSSIP_SENDER_MAIN, 9);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Assassination)", GOSSIP_SENDER_MAIN, 7);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Combat)", GOSSIP_SENDER_MAIN, 8);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Subtlety)", GOSSIP_SENDER_MAIN, 9);
                 break;
             case CLASS_HUNTER:
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Hunter (Beast Mastery)", GOSSIP_SENDER_MAIN, 10);
@@ -140,6 +166,7 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
         player->resetTalents(true);
+        player->SendTalentsInfoData(false);
 
         switch (Actions)
         {
@@ -172,6 +199,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_20_ARMOR_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -181,6 +209,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_40_RESILIENCE_28_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 489);
+				Glyph(player, 1, 484);
+				Glyph(player, 2, 485);
+				Glyph(player, 3, 499);
+				Glyph(player, 4, 483);
+				Glyph(player, 5, 500);
 
                 // Talent
                 player->learnSpell(12658); player->addTalent(12658, player->GetActiveSpecMask(), true);
@@ -246,6 +294,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_20_ARMOR_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
@@ -257,6 +306,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT_2, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_40_RESILIENCE_28_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 509);
+				Glyph(player, 1, 484);
+				Glyph(player, 2, 851);
+				Glyph(player, 3, 490);
+				Glyph(player, 4, 483);
+				Glyph(player, 5, 494);
 
                 // Talent
                 player->learnSpell(12664); player->addTalent(12664, player->GetActiveSpecMask(), true);
@@ -319,6 +389,7 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_2, RED_20_ARMOR_PENETRATION);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), SOCK_ENCHANTMENT_SLOT_3, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), SOCK_ENCHANTMENT_SLOT_2, PURPLE_10_ARMOR_PENETRATION_15_STAMINA);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
@@ -329,36 +400,57 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_CRITICAL);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_ALL_STATS);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, SHIELD_TITANIUM_PLATING);
+
+                // Glyph
+                Glyph(player, 0, 503);
+				Glyph(player, 1, 484);
+				Glyph(player, 2, 485);
+				Glyph(player, 3, 763);
+				Glyph(player, 4, 483);
+				Glyph(player, 5, 502);
+
                 // Talent
-                player->learnSpell(12664); player->addTalent(12664, player->GetActiveSpecMask(), true);
-                player->learnSpell(16465); player->addTalent(16465, player->GetActiveSpecMask(), true);
-                player->learnSpell(12960); player->addTalent(12960, player->GetActiveSpecMask(), true);
-                player->learnSpell(16494); player->addTalent(16494, player->GetActiveSpecMask(), true);
-                player->learnSpell(12867); player->addTalent(12867, player->GetActiveSpecMask(), true);
-                player->learnSpell(61222); player->addTalent(61222, player->GetActiveSpecMask(), true);
-                player->learnSpell(12852); player->addTalent(12852, player->GetActiveSpecMask(), true);
-                player->learnSpell(12818); player->addTalent(12818, player->GetActiveSpecMask(), true);
+                player->learnSpell(12658); player->addTalent(12658, player->GetActiveSpecMask(), true);
+                player->learnSpell(12697); player->addTalent(12697, player->GetActiveSpecMask(), true);
                 player->learnSpell(12727); player->addTalent(12727, player->GetActiveSpecMask(), true);
-                player->learnSpell(50687); player->addTalent(50687, player->GetActiveSpecMask(), true);
-                player->learnSpell(12975); player->addTalent(12975, player->GetActiveSpecMask(), true);
+                player->learnSpell(12764); player->addTalent(12764, player->GetActiveSpecMask(), true);
                 player->learnSpell(12799); player->addTalent(12799, player->GetActiveSpecMask(), true);
-                player->learnSpell(29599); player->addTalent(29599, player->GetActiveSpecMask(), true);
-                player->learnSpell(59089); player->addTalent(59089, player->GetActiveSpecMask(), true);
+                player->learnSpell(12803); player->addTalent(12803, player->GetActiveSpecMask(), true);
                 player->learnSpell(12804); player->addTalent(12804, player->GetActiveSpecMask(), true);
-                player->learnSpell(12811); player->addTalent(12811, player->GetActiveSpecMask(), true);
                 player->learnSpell(12809); player->addTalent(12809, player->GetActiveSpecMask(), true);
+                player->learnSpell(12818); player->addTalent(12818, player->GetActiveSpecMask(), true);
+                player->learnSpell(12867); player->addTalent(12867, player->GetActiveSpecMask(), true);
                 player->learnSpell(12958); player->addTalent(12958, player->GetActiveSpecMask(), true);
+                player->learnSpell(12960); player->addTalent(12960, player->GetActiveSpecMask(), true);
+                player->learnSpell(12975); player->addTalent(12975, player->GetActiveSpecMask(), true);
+                player->learnSpell(16464); player->addTalent(16464, player->GetActiveSpecMask(), true);
+                player->learnSpell(16494); player->addTalent(16494, player->GetActiveSpecMask(), true);
                 player->learnSpell(16542); player->addTalent(16542, player->GetActiveSpecMask(), true);
-                player->learnSpell(29594); player->addTalent(29594, player->GetActiveSpecMask(), true);
-                player->learnSpell(29792); player->addTalent(29792, player->GetActiveSpecMask(), true);
-                player->learnSpell(29144); player->addTalent(29144, player->GetActiveSpecMask(), true);
-                player->learnSpell(46949); player->addTalent(46949, player->GetActiveSpecMask(), true);
-                player->learnSpell(57499); player->addTalent(57499, player->GetActiveSpecMask(), true);
                 player->learnSpell(20243); player->addTalent(20243, player->GetActiveSpecMask(), true);
-                player->learnSpell(47296); player->addTalent(47296, player->GetActiveSpecMask(), true);
-                player->learnSpell(46953); player->addTalent(46953, player->GetActiveSpecMask(), true);
-                player->learnSpell(58874); player->addTalent(58874, player->GetActiveSpecMask(), true);
+                player->learnSpell(29144); player->addTalent(29144, player->GetActiveSpecMask(), true);
+                player->learnSpell(29594); player->addTalent(29594, player->GetActiveSpecMask(), true);
+                player->learnSpell(29599); player->addTalent(29599, player->GetActiveSpecMask(), true);
+                player->learnSpell(29792); player->addTalent(29792, player->GetActiveSpecMask(), true);
                 player->learnSpell(46968); player->addTalent(46968, player->GetActiveSpecMask(), true);
+                player->learnSpell(46953); player->addTalent(46953, player->GetActiveSpecMask(), true);
+                player->learnSpell(47296); player->addTalent(47296, player->GetActiveSpecMask(), true);
+                player->learnSpell(50687); player->addTalent(50687, player->GetActiveSpecMask(), true);
+                player->learnSpell(57499); player->addTalent(57499, player->GetActiveSpecMask(), true);
+                player->learnSpell(58874); player->addTalent(58874, player->GetActiveSpecMask(), true);
+                player->learnSpell(61222); player->addTalent(61222, player->GetActiveSpecMask(), true);
+                player->learnSpell(59089); player->addTalent(59089, player->GetActiveSpecMask(), true);
 
                 player->PlayerTalkClass->SendCloseGossip();
                 break;
@@ -400,6 +492,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
+
+                // Glyph
+                Glyph(player, 0, 706);
+				Glyph(player, 1, 455);
+				Glyph(player, 2, 456);
+				Glyph(player, 3, 183);
+				Glyph(player, 4, 452);
+				Glyph(player, 5, 195);
 
                 // Talent
                 player->learnSpell(20208); player->addTalent(20208, player->GetActiveSpecMask(), true);
@@ -482,6 +594,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_ALL_STATS);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 191);
+				Glyph(player, 1, 456);
+				Glyph(player, 2, 457);
+				Glyph(player, 3, 705);
+				Glyph(player, 4, 452);
+				Glyph(player, 5, 183);
+
                 // Talent
                 player->learnSpell(20266); player->addTalent(20266, player->GetActiveSpecMask(), true);
                 player->learnSpell(53519); player->addTalent(53519, player->GetActiveSpecMask(), true);
@@ -548,6 +680,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, ALL_STATS_10);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 183);
+				Glyph(player, 1, 453);
+				Glyph(player, 2, 455);
+				Glyph(player, 3, 193);
+				Glyph(player, 4, 456);
+				Glyph(player, 5, 707);
+
                 // Talent
                 player->learnSpell(20105); player->addTalent(20105, player->GetActiveSpecMask(), true);
                 player->learnSpell(20332); player->addTalent(20332, player->GetActiveSpecMask(), true);
@@ -580,7 +732,7 @@ public:
                 player->PlayerTalkClass->SendCloseGossip();
                 break;
             case 7:
-                // Rouge Assassination Set
+                // Rogue Assassination Set
                 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 51494, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 51357, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 51496, true);
@@ -618,6 +770,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 733);
+				Glyph(player, 1, 464);
+				Glyph(player, 2, 467);
+				Glyph(player, 3, 405);
+				Glyph(player, 4, 469);
+				Glyph(player, 5, 408);
+
                 // Talent
                 player->learnSpell(14142); player->addTalent(14142, player->GetActiveSpecMask(), true);
                 player->learnSpell(14161); player->addTalent(14161, player->GetActiveSpecMask(), true);
@@ -652,7 +825,7 @@ public:
                 player->PlayerTalkClass->SendCloseGossip();
                 break;
             case 8:
-                // Rouge Combat Set
+                // Rogue Combat Set
                 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 51494, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 51822, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 51496, true);
@@ -692,6 +865,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 409);
+				Glyph(player, 1, 464);
+				Glyph(player, 2, 467);
+				Glyph(player, 3, 404);
+				Glyph(player, 4, 469);
+				Glyph(player, 5, 715);
+
                 // Talent
                 player->learnSpell(5952); player->addTalent(5952, player->GetActiveSpecMask(), true);
                 player->learnSpell(13750); player->addTalent(13750, player->GetActiveSpecMask(), true);
@@ -726,7 +920,7 @@ public:
                 player->PlayerTalkClass->SendCloseGossip();
                 break;
             case 9:
-                // Rouge Subtlety Set
+                // Rogue Subtlety Set
                 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 51494, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 51357, true);
                 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 51496, true);
@@ -763,6 +957,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 404);
+				Glyph(player, 1, 464);
+				Glyph(player, 2, 467);
+				Glyph(player, 3, 716);
+				Glyph(player, 4, 469);
+				Glyph(player, 5, 408);
 
                 // Talent
                 player->learnSpell(13866); player->addTalent(13866, player->GetActiveSpecMask(), true);
@@ -843,6 +1058,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 351);
+                Glyph(player, 1, 439);
+                Glyph(player, 2, 440);
+                Glyph(player, 3, 358);
+                Glyph(player, 4, 441);
+                Glyph(player, 5, 356);
+
                 // Talent
                 player->learnSpell(19421); player->addTalent(19421, player->GetActiveSpecMask(), true);
                 player->learnSpell(19431); player->addTalent(19431, player->GetActiveSpecMask(), true);
@@ -919,6 +1154,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 351);
+                Glyph(player, 1, 439);
+                Glyph(player, 2, 440);
+                Glyph(player, 3, 358);
+                Glyph(player, 4, 441);
+                Glyph(player, 5, 366);
 
                 // Talent
                 player->learnSpell(19256); player->addTalent(19256, player->GetActiveSpecMask(), true);
@@ -1001,6 +1256,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, RED_40_ATTACK_POWER);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 351);
+                Glyph(player, 1, 439);
+                Glyph(player, 2, 440);
+                Glyph(player, 3, 358);
+                Glyph(player, 4, 441);
+                Glyph(player, 5, 691);
+
                 // Talent
                 player->learnSpell(3674);  player->addTalent(3674,  player->GetActiveSpecMask(), true);
                 player->learnSpell(19259); player->addTalent(19259, player->GetActiveSpecMask(), true);
@@ -1069,6 +1344,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
+
+                // Glyph
+                Glyph(player, 0, 713);
+                Glyph(player, 1, 458);
+                Glyph(player, 2, 459);
+                Glyph(player, 3, 257);
+                Glyph(player, 4, 463);
+                Glyph(player, 5, 710);
 
                 // Talent
                 player->learnSpell(14791); player->addTalent(14791, player->GetActiveSpecMask(), true);
@@ -1142,6 +1437,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
+
+                // Glyph
+                Glyph(player, 0, 251);
+                Glyph(player, 1, 458);
+                Glyph(player, 2, 459);
+                Glyph(player, 3, 257);
+                Glyph(player, 4, 463);
+                Glyph(player, 5, 255);
+
                 // Talent
                 player->learnSpell(14767); player->addTalent(14767, player->GetActiveSpecMask(), true);
                 player->learnSpell(14771); player->addTalent(14771, player->GetActiveSpecMask(), true);
@@ -1210,6 +1525,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 263);
+                Glyph(player, 1, 463);
+                Glyph(player, 2, 458);
+                Glyph(player, 3, 257);
+                Glyph(player, 4, 459);
+                Glyph(player, 5, 708);
 
                 // Talent
                 player->learnSpell(14747); player->addTalent(14747, player->GetActiveSpecMask(), true);
@@ -1292,6 +1627,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_ARMOR_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPELL_PENETRATION);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 771);
+                Glyph(player, 2, 555);
+                Glyph(player, 1, 522);
+                Glyph(player, 3, 558);
+                Glyph(player, 4, 514);
+                Glyph(player, 5, 528);
+
                 // Talent
                 player->learnSpell(48982); player->addTalent(48982, player->GetActiveSpecMask(), true);
                 player->learnSpell(49005); player->addTalent(49005, player->GetActiveSpecMask(), true);
@@ -1371,6 +1726,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 525);
+                Glyph(player, 1, 522);
+                Glyph(player, 2, 518);
+                Glyph(player, 3, 773);
+                Glyph(player, 4, 553);
+                Glyph(player, 5, 521);
+
                 // Talent
                 player->learnSpell(48982); player->addTalent(48982, player->GetActiveSpecMask(), true);
                 player->learnSpell(49039); player->addTalent(49039, player->GetActiveSpecMask(), true);
@@ -1449,6 +1825,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_20_STRENGTH);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, RED_20_STRENGTH);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 772);
+                Glyph(player, 1, 522);
+                Glyph(player, 2, 553);
+                Glyph(player, 3, 771);
+                Glyph(player, 4, 518);
+                Glyph(player, 5, 527);
+
                 // Talent
                 player->learnSpell(49036); player->addTalent(49036, player->GetActiveSpecMask(), true);
                 player->learnSpell(49039); player->addTalent(49039, player->GetActiveSpecMask(), true);
@@ -1518,6 +1914,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 754);
+                Glyph(player, 2, 474);
+                Glyph(player, 1, 476);
+                Glyph(player, 3, 214);
+                Glyph(player, 4, 552);
+                Glyph(player, 5, 752);
+
                 // Talent
                 player->learnSpell(16041); player->addTalent(16041, player->GetActiveSpecMask(), true);
                 player->learnSpell(16108); player->addTalent(16108, player->GetActiveSpecMask(), true);
@@ -1582,6 +1998,27 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 228);
+                Glyph(player, 1, 552);
+                Glyph(player, 2, 475);
+                Glyph(player, 3, 736);
+                Glyph(player, 4, 476);
+                Glyph(player, 5, 754);
 
                 // Talent
                 player->learnSpell(16112); player->addTalent(16112, player->GetActiveSpecMask(), true);
@@ -1655,6 +2092,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 223);
+                Glyph(player, 1, 476);
+                Glyph(player, 2, 552);
+                Glyph(player, 3, 751);
+                Glyph(player, 4, 475);
+                Glyph(player, 5, 754);
+
                 // Talent
                 player->learnSpell(974);   player->addTalent(974,   player->GetActiveSpecMask(), true);
                 player->learnSpell(16130); player->addTalent(16130, player->GetActiveSpecMask(), true);
@@ -1721,6 +2178,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 329);
+                Glyph(player, 2, 447);
+                Glyph(player, 1, 446);
+                Glyph(player, 3, 315);
+                Glyph(player, 4, 451);
+                Glyph(player, 5, 312);
 
                 // Talent
                 player->learnSpell(12042); player->addTalent(12042, player->GetActiveSpecMask(), true);
@@ -1800,6 +2277,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_23_SPELL_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT_2, BLUE_20_SPIRIT);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 329);
+                Glyph(player, 1, 446);
+                Glyph(player, 2, 447);
+                Glyph(player, 3, 315);
+                Glyph(player, 4, 451);
+                Glyph(player, 5, 324);
+
                 // Talent
                 player->learnSpell(11080); player->addTalent(11080, player->GetActiveSpecMask(), true);
                 player->learnSpell(11113); player->addTalent(11113, player->GetActiveSpecMask(), true);
@@ -1870,6 +2367,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 700);
+                Glyph(player, 1, 446);
+                Glyph(player, 2, 447);
+                Glyph(player, 3, 315);
+                Glyph(player, 4, 451);
+                Glyph(player, 5, 329);
+
                 // Talent
                 player->learnSpell(12497); player->addTalent(12497, player->GetActiveSpecMask(), true);
                 player->learnSpell(16766); player->addTalent(16766, player->GetActiveSpecMask(), true);
@@ -1939,6 +2456,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 759);
+                Glyph(player, 1, 482);
+                Glyph(player, 2, 477);
+                Glyph(player, 3, 911);
+                Glyph(player, 4, 478);
+                Glyph(player, 5, 283);
+
                 // Talent
                 player->learnSpell(17785); player->addTalent(17785, player->GetActiveSpecMask(), true);
                 player->learnSpell(17805); player->addTalent(17805, player->GetActiveSpecMask(), true);
@@ -2005,6 +2542,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 759);
+                Glyph(player, 1, 479);
+                Glyph(player, 2, 480);
+                Glyph(player, 3, 281);
+                Glyph(player, 4, 477);
+                Glyph(player, 5, 274);
+
                 // Talent
                 player->learnSpell(17791); player->addTalent(17791, player->GetActiveSpecMask(), true);
                 player->learnSpell(17803); player->addTalent(17803, player->GetActiveSpecMask(), true);
@@ -2069,6 +2626,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), SOCK_ENCHANTMENT_SLOT, PURPLE_12_SPELL_POWER_12_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 759);
+                Glyph(player, 1, 479);
+                Glyph(player, 2, 480);
+                Glyph(player, 3, 273);
+                Glyph(player, 4, 478);
+                Glyph(player, 5, 283);
 
                 // Talent
                 player->learnSpell(17792); player->addTalent(17792, player->GetActiveSpecMask(), true);
@@ -2146,6 +2723,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, GREEN_10_HASTE_13_SPELL_PENETRATION);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BLACK_MAGIC);
+
+                // Glyph
+                Glyph(player, 0, 676);
+                Glyph(player, 1, 433);
+                Glyph(player, 2, 434);
+                Glyph(player, 3, 178);
+                Glyph(player, 4, 551);
+                Glyph(player, 5, 176);
+
                 // Talent
                 player->learnSpell(5570);  player->addTalent(5570,  player->GetActiveSpecMask(), true);
                 player->learnSpell(16818); player->addTalent(16818, player->GetActiveSpecMask(), true);
@@ -2214,6 +2811,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, RED_40_ATTACK_POWER);
+
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_50_ATTACK_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_40_ATTACK_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_22_AGILITY);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_50_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_44_ATTACK_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_75_ATTACK_POWER_22_CRITICAL);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_BERSERKING);
+
+                // Glyph
+                Glyph(player, 0, 166);
+                Glyph(player, 1, 453);
+                Glyph(player, 2, 455);
+                Glyph(player, 3, 165);
+                Glyph(player, 4, 551);
+                Glyph(player, 5, 671);
 
                 // Talent
                 player->learnSpell(16835); player->addTalent(16835, player->GetActiveSpecMask(), true);
@@ -2293,6 +2910,26 @@ public:
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), SOCK_ENCHANTMENT_SLOT, YELLOW_20_RESILIENCE);
                 ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), SOCK_ENCHANTMENT_SLOT, ORANGE_12_SPELL_POWER_10_RESILIENCE);
 
+                // Enchant
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD), PERM_ENCHANTMENT_SLOT, HEAD_29_SPELL_POWER_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS), PERM_ENCHANTMENT_SLOT, SHOULDER_23_SPELL_POWER_15_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK), PERM_ENCHANTMENT_SLOT, BACK_23_HASTE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST), PERM_ENCHANTMENT_SLOT, CHEST_20_RESILIENCE);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS), PERM_ENCHANTMENT_SLOT, WRIST_30_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS), PERM_ENCHANTMENT_SLOT, HANDS_23_SPELL_POWER);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), PRISMATIC_ENCHANTMENT_SLOT, WAIST_PRISMATIC);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), PERM_ENCHANTMENT_SLOT, LEGS_50_SPELL_POWER_30_STAMINA);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), PERM_ENCHANTMENT_SLOT, FEET_15_STAMINA_MINOR_SPEED);
+                ApplyBonus(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), PERM_ENCHANTMENT_SLOT, WEAPON_63_SPELL_POWER);
+
+                // Glyph
+                Glyph(player, 0, 183);
+                Glyph(player, 1, 453);
+                Glyph(player, 2, 455);
+                Glyph(player, 3, 193);
+                Glyph(player, 4, 456);
+                Glyph(player, 5, 707);
+
                 // Talent
                 player->learnSpell(17051); player->addTalent(17051, player->GetActiveSpecMask(), true);
                 player->learnSpell(17066); player->addTalent(17066, player->GetActiveSpecMask(), true);
@@ -2330,10 +2967,7 @@ public:
                 break;
         }
 
-        player->InitRunes();
-        player->InitStatsForLevel(true);
-        player->InitGlyphsForLevel();
-        player->InitTalentForLevel();
+        player->SetFreeTalentPoints(0);
         player->SendTalentsInfoData(false);
 
         if (player->GetTeamId() == TEAM_ALLIANCE)
