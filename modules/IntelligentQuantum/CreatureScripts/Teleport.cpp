@@ -18,7 +18,7 @@ class CreatureScript_Teleport : public CreatureScript
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_bg_winwsg:30|t|r .::DuelZone::.", GOSSIP_SENDER_MAIN, 13);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_BG_AB_defendflags:30|t|r .::PvPZone::.", GOSSIP_SENDER_MAIN, 14);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|t|r .::Icecrown::.", GOSSIP_SENDER_MAIN, 15);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Ability_hunter_huntervswild:30|t|r .::City Teleport::.", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Ability_hunter_huntervswild:30|t|r .::Daily Zone::.", GOSSIP_SENDER_MAIN, 1);
 
 		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 		return true;
@@ -52,15 +52,7 @@ class CreatureScript_Teleport : public CreatureScript
 				break;
 			case 1:
 				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportStormWind:25|t|r Stormwind", GOSSIP_SENDER_MAIN, 2);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportIronForge:25|t|r Ironforge", GOSSIP_SENDER_MAIN, 3);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportDarnassus:25|t|r Darnassus", GOSSIP_SENDER_MAIN, 4);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportExodar:25|t|r The Exodar", GOSSIP_SENDER_MAIN, 5);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportOrgrimmar:25|t|r Orgrimmar", GOSSIP_SENDER_MAIN, 6);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportThunderBluff:25|t|r Thunder Bluff", GOSSIP_SENDER_MAIN, 7);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportUnderCity:25|t|r Undercity", GOSSIP_SENDER_MAIN, 8);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportSilvermoon:25|t|r Silvermoon", GOSSIP_SENDER_MAIN, 9);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportDalaran:25|t|r Dalaran", GOSSIP_SENDER_MAIN, 10);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportShattrath:25|t|r Shattrath", GOSSIP_SENDER_MAIN, 11);
+            	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportOrgrimmar:25|t|r Orgrimmar", GOSSIP_SENDER_MAIN, 6);
 
 				player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 				break;
@@ -69,50 +61,9 @@ class CreatureScript_Teleport : public CreatureScript
 				player->TeleportTo(0, -9129.269531f, 388.208740f, 91.057014f, 0.637305f);
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
-			case 3:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(0, -5000.476074f, -859.561523f, 497.045746f, 5.405354f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 4:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(1, 9954.119141f, 2167.963867f, 1327.462891f, 1.536971f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 5:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(530, -4001.156982f, -11873.359375f, -0.527358f, 1.064644f);
-				player->SetPhaseMask(1, 1);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
 			case 6:
 				player->CastSpell(player, 35517, true);
 				player->TeleportTo(1, 1346.678955f, -4373.142090f, 26.181185f, 0.070212f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 7:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(1, -1267.347534f, 221.531189f, 59.157173f, 4.593608f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 8:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(0, 1887.412964f, 237.202225f, 57.703121f, 3.034173f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 9:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(530, 9370.547852f, -7277.637207f, 14.240896f, 0.007574f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 10:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(571, 5804.149902f, 624.770996f, 647.767029f, 1.640000f);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 11:
-				player->CastSpell(player, 35517, true);
-				player->TeleportTo(530, -1721.781128f, 5382.058105f, 1.545847f, 2.754345f);
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
 		}

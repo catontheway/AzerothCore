@@ -191,7 +191,6 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
         player->resetTalents(true);
-        player->SendTalentsInfoData(false);
 
         switch (Actions)
         {
@@ -3029,6 +3028,12 @@ public:
                 break;
         }
 
+        // Reset Stats
+        player->InitRunes();
+        player->InitStatsForLevel(true);
+        player->InitTaxiNodesForLevel();
+        player->InitGlyphsForLevel();
+        player->InitTalentForLevel();
         player->SetFreeTalentPoints(0);
         player->SendTalentsInfoData(false);
 
