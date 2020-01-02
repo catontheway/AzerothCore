@@ -14,11 +14,11 @@ class CreatureScript_Doctor : public CreatureScript
 			return false;
 		}
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Max Skill::.", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Remove Sickness::.", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Remove Shaman Debuff::.", GOSSIP_SENDER_MAIN, 3);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Remove Paladin Debuff::.", GOSSIP_SENDER_MAIN, 4);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Remove All Spell Coldown::.", GOSSIP_SENDER_MAIN, 5);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Warrior_SecondWind:25|t|r Max Skill", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Spell_Shadow_DeathScream:25|t|r Remove Sickness", GOSSIP_SENDER_MAIN, 2);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Spell_Nature_Sleep:25|t|r Remove Shaman Debuff", GOSSIP_SENDER_MAIN, 3);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Spell_holy_removecurse:25|t|r Remove Paladin Debuff", GOSSIP_SENDER_MAIN, 4);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Inv_misc_enggizmos_30:25|t|r Remove All Spell Coldown", GOSSIP_SENDER_MAIN, 5);
 
 		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 		return true;

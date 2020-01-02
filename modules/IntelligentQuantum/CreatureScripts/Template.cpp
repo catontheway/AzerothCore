@@ -132,54 +132,54 @@ public:
         switch (player->getClass())
         {
             case CLASS_WARRIOR:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warrior (Arms)", GOSSIP_SENDER_MAIN, 1);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warrior (Fury)", GOSSIP_SENDER_MAIN, 2);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warrior (Protection)", GOSSIP_SENDER_MAIN, 3);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_rogue_eviscerate:25|t|r Warrior (Arms)", GOSSIP_SENDER_MAIN, 1);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_warrior_innerrage:25|t|r Warrior (Fury)", GOSSIP_SENDER_MAIN, 2);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_warrior_defensivestance:25|t|r Warrior (Protection)", GOSSIP_SENDER_MAIN, 3);
                 break;
             case CLASS_PALADIN:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Paladin (Holy)", GOSSIP_SENDER_MAIN, 4);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Paladin (Protection)", GOSSIP_SENDER_MAIN, 5);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Paladin (Retribution)", GOSSIP_SENDER_MAIN, 6);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_holybolt:25|t|r Paladin (Holy)", GOSSIP_SENDER_MAIN, 4);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_devotionaura:25|t|r Paladin (Protection)", GOSSIP_SENDER_MAIN, 5);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_auraoflight:25|t|r Paladin (Retribution)", GOSSIP_SENDER_MAIN, 6);
                 break;
             case CLASS_ROGUE:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Assassination)", GOSSIP_SENDER_MAIN, 7);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Combat)", GOSSIP_SENDER_MAIN, 8);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Rogue (Subtlety)", GOSSIP_SENDER_MAIN, 9);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_rogue_eviscerate:25|t|r Rogue (Assassination)", GOSSIP_SENDER_MAIN, 7);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_backstab:25|t|r Rogue (Combat)", GOSSIP_SENDER_MAIN, 8);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_stealth:25|t|r Rogue (Subtlety)", GOSSIP_SENDER_MAIN, 9);
                 break;
             case CLASS_HUNTER:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Hunter (Beast Mastery)", GOSSIP_SENDER_MAIN, 10);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Hunter (Marksmanship)", GOSSIP_SENDER_MAIN, 11);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Hunter (Survival)", GOSSIP_SENDER_MAIN, 12);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_hunter_beasttaming:25|t|r Hunter (Beast Mastery)", GOSSIP_SENDER_MAIN, 10);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_marksmanship:25|t|r Hunter (Marksmanship)", GOSSIP_SENDER_MAIN, 11);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_Hunter_swiftstrike:25|t|r Hunter (Survival)", GOSSIP_SENDER_MAIN, 12);
                 break;
             case CLASS_PRIEST:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Priest (Discipline)", GOSSIP_SENDER_MAIN, 13);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Priest (Holy)", GOSSIP_SENDER_MAIN, 14);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Priest (Shadow)", GOSSIP_SENDER_MAIN, 15);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_wordfortitude:25|t|r Priest (Discipline)", GOSSIP_SENDER_MAIN, 13);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_holybolt:25|t|r Priest (Holy)", GOSSIP_SENDER_MAIN, 14);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_shadow_shadowwordpain:25|t|r Priest (Shadow)", GOSSIP_SENDER_MAIN, 15);
                 break;
             case CLASS_DEATH_KNIGHT:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "DeathKnight (Blood)", GOSSIP_SENDER_MAIN, 16);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "DeathKnight (Frost)", GOSSIP_SENDER_MAIN, 17);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "DeathKnight (Unholy)", GOSSIP_SENDER_MAIN, 18);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_deathknight_bloodpresence:25|t|r DeathKnight (Blood)", GOSSIP_SENDER_MAIN, 16);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_deathknight_frostpresence:25|t|r DeathKnight (Frost)", GOSSIP_SENDER_MAIN, 17);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_deathknight_unholypresence:25|t|r DeathKnight (Unholy)", GOSSIP_SENDER_MAIN, 18);
                 break;
             case CLASS_SHAMAN:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Shaman (Elemental)", GOSSIP_SENDER_MAIN, 19);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Shaman (Enhancement)", GOSSIP_SENDER_MAIN, 20);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Shaman (Restoration)", GOSSIP_SENDER_MAIN, 21);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_nature_lightning:25|t|r Shaman (Elemental)", GOSSIP_SENDER_MAIN, 19);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_nature_lightningshield:25|t|r Shaman (Enhancement)", GOSSIP_SENDER_MAIN, 20);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_nature_magicimmunity:25|t|r Shaman (Restoration)", GOSSIP_SENDER_MAIN, 21);
                 break;
             case CLASS_MAGE:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Mage (Arcane)", GOSSIP_SENDER_MAIN, 22);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Mage (Fire)", GOSSIP_SENDER_MAIN, 23);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Mage (Frost)", GOSSIP_SENDER_MAIN, 24);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_holy_magicalsentry:25|t|r Mage (Arcane)", GOSSIP_SENDER_MAIN, 22);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_fire_flamebolt:25|t|r Mage (Fire)", GOSSIP_SENDER_MAIN, 23);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_frost_frostbolt02:25|t|r Mage (Frost)", GOSSIP_SENDER_MAIN, 24);
                 break;
             case CLASS_WARLOCK:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warlock (Afflication)", GOSSIP_SENDER_MAIN, 25);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warlock (Demonology)", GOSSIP_SENDER_MAIN, 26);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Warlock (Destruction)", GOSSIP_SENDER_MAIN, 27);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_shadow_deathcoil:25|t|r Warlock (Afflication)", GOSSIP_SENDER_MAIN, 25);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_shadow_metamorphosis:25|t|r Warlock (Demonology)", GOSSIP_SENDER_MAIN, 26);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_shadow_rainoffire:25|t|r Warlock (Destruction)", GOSSIP_SENDER_MAIN, 27);
                 break;
             case CLASS_DRUID:
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Druid (Balance)", GOSSIP_SENDER_MAIN, 28);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Druid (Feral Combat)", GOSSIP_SENDER_MAIN, 29);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Druid (Restoration)", GOSSIP_SENDER_MAIN, 30);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_nature_starfall:25|t|r Druid (Balance)", GOSSIP_SENDER_MAIN, 28);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\ability_racial_bearform:25|t|r Druid (Feral Combat)", GOSSIP_SENDER_MAIN, 29);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\spell_nature_healingtouch:25|t|r Druid (Restoration)", GOSSIP_SENDER_MAIN, 30);
                 break;
         }
 
