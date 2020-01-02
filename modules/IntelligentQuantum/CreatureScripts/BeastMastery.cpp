@@ -64,7 +64,7 @@ class CreatureScript_BeastMastery : public CreatureScript
 
 	bool OnGossipHello(Player * player, Creature * m_creature)
 	{
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Hunter_BeastTaming:25|t|r Normal Pets", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Hunter_BeastTaming:30|t|r Normal Pets", GOSSIP_SENDER_MAIN, 1);
 
 		if (player->CanTameExoticPets())
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Hunter_BeastCall:30|t|r Exotic Pets", GOSSIP_SENDER_MAIN, 2);
