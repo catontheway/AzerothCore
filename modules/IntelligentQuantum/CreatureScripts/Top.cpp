@@ -9,11 +9,11 @@ class CreatureScript_TOP : public CreatureScript
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Killer", GOSSIP_SENDER_MAIN, 6);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Played Time", GOSSIP_SENDER_MAIN, 10);
-		// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Guild", GOSSIP_SENDER_MAIN, 11); SOON
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Achievement", GOSSIP_SENDER_MAIN, 12);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank13:25|t|r TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_killxenemies_generalsroom:25|t|r TOP Killer", GOSSIP_SENDER_MAIN, 6);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\INV_Misc_Map_01:25|t|r TOP Played Time", GOSSIP_SENDER_MAIN, 10);
+		// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Spell_Holy_DevineAegis:25|t|r TOP Guild", GOSSIP_SENDER_MAIN, 11); SOON
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank12:25|t|r TOP Achievement", GOSSIP_SENDER_MAIN, 12);
 
 		player->SEND_GOSSIP_MENU(68, creature->GetGUID());
 		return true;
@@ -27,10 +27,10 @@ class CreatureScript_TOP : public CreatureScript
 		{
 			case 1:
 			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 2v2", GOSSIP_SENDER_MAIN, 2);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 3v3", GOSSIP_SENDER_MAIN, 3);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 5v5", GOSSIP_SENDER_MAIN, 4);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Top 5 Arena Points", GOSSIP_SENDER_MAIN, 5);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_2v2_7:25|t|r Arena Team Top 2v2", GOSSIP_SENDER_MAIN, 2);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_3v3_7:25|t|r Arena Team Top 3v3", GOSSIP_SENDER_MAIN, 3);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_5v5_7:25|t|r Arena Team Top 5v5", GOSSIP_SENDER_MAIN, 4);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\PVPFrame\\Pvp-arenapoints-icon:25|t|r Top 5 Arena Points", GOSSIP_SENDER_MAIN, 5);
 
 				player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 				return true;
@@ -152,9 +152,9 @@ class CreatureScript_TOP : public CreatureScript
             }
             case 6:
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Total Kills", GOSSIP_SENDER_MAIN, 7);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Today Kills", GOSSIP_SENDER_MAIN, 8);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Yesterday Kills", GOSSIP_SENDER_MAIN, 9);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carrier:25|t|r Total Kills", GOSSIP_SENDER_MAIN, 7);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carriereos:25|t|r Today Kills", GOSSIP_SENDER_MAIN, 8);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carrierwsg:25|t|r Yesterday Kills", GOSSIP_SENDER_MAIN, 9);
 
                 player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
                 return true;

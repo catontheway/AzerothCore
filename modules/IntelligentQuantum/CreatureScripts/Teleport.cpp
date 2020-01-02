@@ -14,11 +14,11 @@ class CreatureScript_Teleport : public CreatureScript
 			return false;
 		}
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Shop::.", GOSSIP_SENDER_MAIN, 12);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::DuelZone::.", GOSSIP_SENDER_MAIN, 13);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::PvPZone::.", GOSSIP_SENDER_MAIN, 14);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::Icecrown::.", GOSSIP_SENDER_MAIN, 15);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, ".::City Teleport::.", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Temp:30|t|r .::Shop::.", GOSSIP_SENDER_MAIN, 12);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_bg_winwsg:30|t|r .::DuelZone::.", GOSSIP_SENDER_MAIN, 13);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_BG_AB_defendflags:30|t|r .::PvPZone::.", GOSSIP_SENDER_MAIN, 14);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|t|r .::Icecrown::.", GOSSIP_SENDER_MAIN, 15);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Ability_hunter_huntervswild:30|t|r .::City Teleport::.", GOSSIP_SENDER_MAIN, 1);
 
 		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 		return true;
