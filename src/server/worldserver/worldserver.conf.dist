@@ -29,6 +29,7 @@
 #    CUSTOM SERVER OPTIONS
 #    TRANSMOGRIFICATION CONFIG
 #    CROSSFACTION BATTLEGROUND CONFIG
+#    EVENT LEVELUP CONFIG
 #
 ###################################################################################################
 
@@ -3682,6 +3683,51 @@ Transmogrification.SetCopperCost = 0
 CrossFactionBG.Enable = 0
 CrossFactionBG.Average.ItemLevel.Enable = 0
 CrossFactionBG.Players.Count.In.Group = 3
+
+#
+###################################################################################################
+
+###################################################################################################
+# EVENT LEVELUP CONFIG
+#
+#     Event.Level.Active
+#        Description:
+#            			1 - (Enabled)
+#          Default:		0 - (Disabled)
+
+Event.Level.Active = 0
+
+#
+#     Event.Start.Level
+#        Description:
+#
+#        Default:	60
+
+Event.Start.Level = 60
+
+#
+#     Event.Start.Level.Heroic
+#        Description:
+#
+#        Default:	70
+
+Event.Start.Level.Heroic = 70
+
+#
+#     Event.Max.Level
+#        Description:
+#
+#        Default:	80
+
+Event.Max.Level = 80
+
+#
+#     Event.Reward.Money
+#        Description: Player Modify Money
+#
+#        Default:	10000000 = 1k Gold
+
+Event.Reward.Money = 10000000
 
 #
 ###################################################################################################
