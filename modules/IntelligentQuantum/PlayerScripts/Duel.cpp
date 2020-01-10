@@ -80,12 +80,6 @@ class PlayerScript_Duel : public PlayerScript
         SetPowers(player1);
         SetPowers(player2);
 	}
-
-	void OnDuelEnd(Player *Winner, Player *Loser, DuelCompleteType /*type*/)
-	{
-        SetPowers(Winner);
-        SetPowers(Loser);
-	}
 };
 
 void AddSC_Duel()

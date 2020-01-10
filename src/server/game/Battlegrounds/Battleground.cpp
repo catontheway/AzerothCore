@@ -113,6 +113,7 @@ void Battleground::BroadcastWorker(Do& _do)
 Battleground::Battleground()
 {
     m_RealTypeID        = BATTLEGROUND_TYPE_NONE;
+    m_RandomTypeID      = BATTLEGROUND_TYPE_NONE;
     m_InstanceID        = 0;
     m_Status            = STATUS_NONE;
     m_ClientInstanceID  = 0;
@@ -128,6 +129,7 @@ Battleground::Battleground()
     m_StartDelayTime    = 0;
     m_IsRated           = false;
     m_BuffChange        = false;
+    m_IsRandom          = false;
     m_Name              = "";
     m_LevelMin          = 0;
     m_LevelMax          = 0;
@@ -786,7 +788,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
         stmt->setUInt64(0, battlegroundId);
         stmt->setUInt8(1, GetWinner());
         stmt->setUInt8(2, GetUniqueBracketId());
-        stmt->setUInt8(3, GetBgTypeID());
+        stmt->setUInt8(3, GetBgTypeID(true));
         CharacterDatabase.Execute(stmt);
     }
 
@@ -985,7 +987,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
         // Reward winner team
         if (bgTeamId == winnerTeamId)
         {
-            if (player->IsCurrentBattlegroundRandom() || BattlegroundMgr::IsBGWeekend(GetBgTypeID()))
+            if (IsRandom() || BattlegroundMgr::IsBGWeekend(GetBgTypeID(true)))
             {
                 UpdatePlayerScore(player, SCORE_BONUS_HONOR, GetBonusHonorFromKill(winner_kills));
 
@@ -1006,7 +1008,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
         }
         else
         {
-            if (player->IsCurrentBattlegroundRandom() || BattlegroundMgr::IsBGWeekend(GetBgTypeID()))
+            if (IsRandom() || BattlegroundMgr::IsBGWeekend(GetBgTypeID(true)))
                 UpdatePlayerScore(player, SCORE_BONUS_HONOR, GetBonusHonorFromKill(loser_kills));
         }
 

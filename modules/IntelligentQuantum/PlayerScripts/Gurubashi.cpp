@@ -9,13 +9,13 @@ class PlayerScript_Gurubashi : public PlayerScript
 	{
 		if (Killed->GetMapId() == 0 && Killed->GetAreaId() == 2177)
         {
-			if (Killer->GetGUID() == Killed->GetGUID() || Killed->GetMaxHealth() < 16000 || Killer->GetSession()->GetRemoteAddress() == Killed->GetSession()->GetRemoteAddress())
+			if (Killer->GetGUID() == Killed->GetGUID() || Killed->GetMaxHealth() < 16000)
 				return;
 
 			if (Killed->GetTeamId() == TEAM_ALLIANCE)
 			{
                 Killer->ModifyHonorPoints(+350);
-				killer->AddItem(100002, 1);
+				Killer->AddItem(100002, 1);
                 Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
@@ -26,7 +26,7 @@ class PlayerScript_Gurubashi : public PlayerScript
 			else
 			{
                 Killer->ModifyHonorPoints(+350);
-				killer->AddItem(100002, 1);
+				Killer->AddItem(100002, 1);
                 Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
 				Killed->AddAura(46705, Killed);
@@ -54,7 +54,7 @@ class PlayerScript_Gurubashi : public PlayerScript
 			{
                 Killed->RemoveAura(27827);
 				Killed->ResurrectPlayer(100, false);
-				// Killed->AddAura(46705, Killed);
+				Killed->AddAura(46705, Killed);
 				Killed->AddAura(9438, Killed);
                 Killed->CastSpell(Killed, 36910, true);
 				Killed->TeleportTo(0, -13275.427734f, 289.899292f, 42.980019f, 6.019665f);
