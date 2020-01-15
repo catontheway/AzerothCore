@@ -11,42 +11,44 @@ class PlayerScript_Duel : public PlayerScript
 			player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 	}
 
-	void GetPowers(Player *player)
+	void Powers(Player *player)
 	{
 		player->SetHealth(player->GetMaxHealth());
 
-		if (player->getPowerType() == POWER_RAGE)
+        switch (player->getPowerType())
         {
-            DruidForm(player);
-            player->SetPower(POWER_RAGE, 0);
+            case POWER_RAGE:
+                DruidForm(player);
+                player->SetPower(POWER_RAGE, 0);
+                break;
+            case POWER_ENERGY:
+                DruidForm(player);
+                player->SetPower(POWER_ENERGY, player->GetMaxPower(POWER_ENERGY));
+                break;
+            case POWER_RUNIC_POWER:
+                player->SetPower(POWER_RUNIC_POWER, 0);
+                break;
+            case POWER_MANA:
+                player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
+                break;
+            default:
+                break;
         }
-		else if (player->getPowerType() == POWER_ENERGY)
-		{
-			DruidForm(player);
-			player->SetPower(POWER_ENERGY, player->GetMaxPower(POWER_ENERGY));
-		}
-		else if (player->getPowerType() == POWER_RUNIC_POWER)
-		{
-			player->SetPower(POWER_RUNIC_POWER, 0);
-		}
-		else if (player->getPowerType() == POWER_MANA)
-		{
-			player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-		}
 	}
 
-	void SetPowers(Player * player)
+	void RemoveCooldowns(Player * player)
 	{
 		switch (player->getClass())
 		{
 			case CLASS_HUNTER:
 			case CLASS_WARLOCK:
-				GetPowers(player);
+            case CLASS_DEATH_KNIGHT:
+                Powers(player);
 				player->RemoveArenaSpellCooldowns(true);
 				break;
 			default:
 				player->RemoveArenaSpellCooldowns();
-				GetPowers(player);
+                Powers(player);
 				break;
 		}
 	}
@@ -77,14 +79,14 @@ class PlayerScript_Duel : public PlayerScript
             player2->RemoveAura(aura);
         }
 
-        SetPowers(player1);
-        SetPowers(player2);
+        RemoveCooldowns(player1);
+        RemoveCooldowns(player2);
 	}
     
     void OnDuelEnd(Player *Winner, Player *Loser, DuelCompleteType /*type*/)
 	{
-        SetPowers(Winner);
-        SetPowers(Loser);
+        Powers(Winner);
+        Powers(Loser);
 	}
 };
 
