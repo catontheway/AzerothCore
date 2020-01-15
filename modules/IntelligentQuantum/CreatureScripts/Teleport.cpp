@@ -37,7 +37,7 @@ class CreatureScript_Teleport : public CreatureScript
 				break;
 			case 13:
 				player->CastSpell(player, 35517, true);
-				player->TeleportTo(0, -5108.125977f, -1792.048340f, 497.835999f, 1.364920f);
+				player->TeleportTo(0, 4297.444824f, -2762.704346f, 19.240437f, 3.665262f);
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
 			case 14:
