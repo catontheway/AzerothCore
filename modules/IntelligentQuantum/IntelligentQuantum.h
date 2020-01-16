@@ -5,6 +5,7 @@
 void AddSC_Transmogrifier();
 void AddSC_BeastMastery();
 void AddSC_Doctor();
+void AddSC_ExChanger();
 void AddSC_Teleport();
 void AddSC_Template();
 void AddSC_TOP();
@@ -25,6 +26,7 @@ void AddIntelligentQuantumScripts()
     AddSC_Transmogrifier();
     AddSC_BeastMastery();
     AddSC_Doctor();
+    AddSC_ExChanger();
     AddSC_Teleport();
     AddSC_Template();
     AddSC_TOP();
