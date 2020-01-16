@@ -36,7 +36,7 @@ public:
             case 2:
                 if (player->HasItemCount(100002, 50))
                 {
-                    player->AddItem(100002, 2);
+                    player->AddItem(49426, 2);
                     player->DestroyItemCount(100002, 50, true);
                     player->PlayerTalkClass->SendCloseGossip();
                 }
