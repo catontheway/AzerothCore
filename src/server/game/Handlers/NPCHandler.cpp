@@ -270,8 +270,8 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket & recvData)
         return;
 
     // prevent learn extra spells
-    const int extraSpells[] = { 1785, 1786, 1787, 6783, 8649, 8650, 9913, 11197, 11198, 26866, 48669, 49913, 49914, 49915, 49916, 51426, 51427, 51428, 51429, 53720 };
-    for (size_t i = 0; i < sizeof(extraSpells); ++i)
+    const uint32 extraSpells[20] = { 1785, 1786, 1787, 6783, 8649, 8650, 9913, 11197, 11198, 26866, 48669, 49913, 49914, 49915, 49916, 51426, 51427, 51428, 51429, 53720 };
+    for (uint32 i = 0; i <= 20; ++i)
     {
         if (spellId == extraSpells[i])
             return;
