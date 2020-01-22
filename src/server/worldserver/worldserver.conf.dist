@@ -30,6 +30,8 @@
 #    TRANSMOGRIFICATION CONFIG
 #    CROSSFACTION BATTLEGROUND CONFIG
 #    EVENT LEVELUP CONFIG
+#    BATTLEGROUND REWARD CONFIG
+#    ARENA REWARD CONFIG
 #
 ###################################################################################################
 
@@ -2667,27 +2669,6 @@ Battleground.TrackDeserters.Enable = 1
 Battleground.InvitationType = 0
 
 #
-#    Battleground.Reward.Active
-#        Description: Battleground Reward Active
-#        Default:     0
-
-Battleground.Reward.Active = 0
-
-#
-#    Battleground.Reward.Item
-#        Description: Battleground Reward Item
-#        Default:     Item Entry = 40752
-
-Battleground.Reward.Item = 40752
-
-#
-#    Battleground.Reward.Item.Count
-#        Description: Battleground Reward Item Count
-#        Default:     1
-
-Battleground.Reward.Item.Count = 1
-
-#
 ###################################################################################################
 
 ###################################################################################################
@@ -2857,77 +2838,6 @@ Arena.ArenaLoseRatingModifier = 24
 #        Default:     24
 
 Arena.ArenaMatchmakerRatingModifier = 24
-
-#
-#    Arena.Reward.Active
-#        Description: Arena Reward Active
-#        Default:     0
-
-Arena.Reward.Active = 0
-
-#
-#    Winner.Arena.Reward.Item.2v2
-#	 Winner.Arena.Reward.Item.Count.2v2
-#        Description: Winner Arena Reward Item 2v2
-#					  Winner Arena Reward Item Count 2v2
-#        Default:     Item Entry = 40753
-#					  Count      = 2
-
-Winner.Arena.Reward.Item.2v2 = 40753
-Winner.Arena.Reward.Item.Count.2v2 = 2
-
-#
-#    Winner.Arena.Reward.Item.3v3
-#	 Winner.Arena.Reward.Item.Count.3v3
-#        Description: Winner Arena Reward Item 3v3
-#					  Winner Arena Reward Item Count.3v3
-#        Default:     Item Entry = 40753
-#					  Count      = 3
-
-Winner.Arena.Reward.Item.3v3 = 40753
-Winner.Arena.Reward.Item.Count.3v3 = 3
-
-#
-#    Winner.Arena.Reward.Item.5v5
-#	 Winner.Arena.Reward.Item.Count.5v5
-#        Description: Winner Arena Reward Item 5v5
-#				      Winner Arena Reward Item Count 5v5
-#        Default:     Item Entry = 40753
-#					  Count      = 5
-
-Winner.Arena.Reward.Item.5v5 = 40753
-Winner.Arena.Reward.Item.Count.5v5 = 5
-
-#
-#    Loser.Arena.Reward.Item.2v2
-#        Description: Loser Arena Reward Item 2v2
-#	                  Loser Arena Reward Item.Count 2v2
-#        Default:     Item Entry = 40753
-#					  Count      = 1
-
-Loser.Arena.Reward.Item.2v2 = 40753
-Loser.Arena.Reward.Item.Count.2v2 = 1
-
-#
-#    Loser.Arena.Reward.Item.3v3
-#	 Loser.Arena.Reward.Item.Count.3v3
-#        Description: Loser Arena Reward Item 3v3
-#        Default:     Item Entry = 40753
-#				      Count      = 2
-
-Loser.Arena.Reward.Item.3v3 = 40753
-Loser.Arena.Reward.Item.Count.3v3 = 2
-
-#
-#    Loser.Arena.Reward.Item.5v5
-#	 Loser.Arena.Reward.Item.Count.5v5
-#        Description: Loser Arena Reward Item 5v5
-#					  Loser Arena Reward Item.Count 5v5
-#        Default:     Item Entry = 40753
-#					  Count      = 3
-
-Loser.Arena.Reward.Item.5v5 = 40753
-Loser.Arena.Reward.Item.Count.5v5 = 3
 
 #
 ###################################################################################################
@@ -3467,26 +3377,26 @@ ICC.Buff.Alliance = 73828
 #    SETTINGS
 #
 #    Logger.custom.transmog
-#        Description: Transmogrification logging setting, see logger settings
-#        Default:    3, Console Server
+#       Description: Transmogrification logging setting, see logger settings
+#       Default:    3, Console Server
 #
 #    Transmogrification.EnableTransmogInfo
-#        Description: Enables / Disables the info button for transmogrification
-#        Default:    1
+#       Description: Enables / Disables the info button for transmogrification
+#       Default:    1
 #
 #    Transmogrification.TransmogNpcText
-#        Description: The npc_text entry of the info menu for transmogrification
-#        Default:    601083
+#       Description: The npc_text entry of the info menu for transmogrification
+#       Default:    601083
 #
 #    Transmogrification.Allowed
-#        Description: A list of item entries that are allowed for transmogrification (skips quality and CanUseItem check)
-#                     Example: "25 35674 5623"
-#        Default:    ""
+#       Description: A list of item entries that are allowed for transmogrification (skips quality and CanUseItem check)
+#                    Example: "25 35674 5623"
+#       Default:    ""
 #
 #    Transmogrification.NotAllowed
-#        Description: A list of item entries that are NOT allowed for transmogrification
+#       Description: A list of item entries that are NOT allowed for transmogrification
 #                     Example: "25 35674 5623"
-#        Default:    ""
+#       Default:    ""
 
 Transmogrification.EnableTransmogInfo = 1
 Transmogrification.TransmogNpcText = 601083
@@ -3498,12 +3408,12 @@ Transmogrification.NotAllowed = ""
 #    COPPER COST
 #
 #    Transmogrification.ScaledCostModifier
-#        Description: A multiplier for the default gold cost (change to 0 for no default cost)
-#        Default:    1.0
+#       Description: A multiplier for the default gold cost (change to 0 for no default cost)
+#       Default:    1.0
 #
 #    Transmogrification.CopperCost
-#        Description: Cost added on top of other costs (can be negative)
-#        Default:    0
+#       Description: Cost added on top of other costs (can be negative)
+#       Default:    0
 #
 #    For custom gold cost set ScaledCostModifier to 0.0 and CopperCost to what ever cost you want
 
@@ -3514,16 +3424,16 @@ Transmogrification.CopperCost = 0
 #    TOKEN COST
 #
 #    Transmogrification.RequireToken
-#        Description: Adds/disables token cost
-#        Default:    0
+#       Description: Adds/disables token cost
+#       Default:    0
 #
 #    Transmogrification.TokenEntry
-#        Description: Entry of the token item
-#        Default:    49426
+#       Description: Entry of the token item
+#       Default:    49426
 #
 #    Transmogrification.TokenAmount
-#        Description: Amount of tokens required
-#        Default:    1
+#       Description: Amount of tokens required
+#       Default:    1
 
 Transmogrification.RequireToken = 0
 Transmogrification.TokenEntry = 49426
@@ -3533,76 +3443,76 @@ Transmogrification.TokenAmount = 1
 #    REQUIREMENTS
 #
 #    Transmogrification.AllowPoor
-#        Description: Allow poor quality items to be used as source and target items
-#        Default:    0
+#       Description: Allow poor quality items to be used as source and target items
+#       Default:    0
 #
 #    Transmogrification.AllowCommon
-#        Description: Allow common quality items to be used as source and target items
-#        Default:    0
+#       Description: Allow common quality items to be used as source and target items
+#       Default:    0
 #
 #    Transmogrification.AllowUncommon
-#        Description: Allow uncommon quality items to be used as source and target items
-#        Default:    1
+#       Description: Allow uncommon quality items to be used as source and target items
+#       Default:    1
 #
 #    Transmogrification.AllowRare
-#        Description: Allow rare quality items to be used as source and target items
-#        Default:    1
+#       Description: Allow rare quality items to be used as source and target items
+#       Default:    1
 #
 #    Transmogrification.AllowEpic
-#        Description: Allow epic quality items to be used as source and target items
-#        Default:    1
+#       Description: Allow epic quality items to be used as source and target items
+#       Default:    1
 #
 #    Transmogrification.AllowLegendary
-#        Description: Allow legendary quality items to be used as source and target items
-#        Default:    0
+#       Description: Allow legendary quality items to be used as source and target items
+#       Default:    0
 #
 #    Transmogrification.AllowArtifact
-#        Description: Allow artifact quality items to be used as source and target items
-#        Default:    0
+#       Description: Allow artifact quality items to be used as source and target items
+#       Default:    0
 #
 #    Transmogrification.AllowHeirloom
-#        Description: Allow heirloom quality items to be used as source and target items
-#        Default:    1
+#       Description: Allow heirloom quality items to be used as source and target items
+#       Default:    1
 #
 #    Transmogrification.AllowMixedArmorTypes
-#        Description: Allow cloth items to be transmogrified with plate for example
-#        Default:    0
+#       Description: Allow cloth items to be transmogrified with plate for example
+#       Default:    0
 #
 #    Transmogrification.AllowMixedWeaponTypes
-#        Description: Allow axe to be transmogrified with dagger for example
-#        Default:    0
+#       Description: Allow axe to be transmogrified with dagger for example
+#       Default:    0
 #
 #    Transmogrification.AllowFishingPoles
-#        Description: Allow fishing poles to be transmogrified
-#        Default:    0
+#       Description: Allow fishing poles to be transmogrified
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqRace
-#        Description: Ignore required race for source items
-#        Default:    0
+#       Description: Ignore required race for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqClass
-#        Description: Ignore required class for source items
-#        Default:    0
+#       Description: Ignore required class for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqSkill
-#        Description: Ignore required skill for source items
-#        Default:    0
+#       Description: Ignore required skill for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqSpell
-#        Description: Ignore required spell for source items
-#        Default:    0
+#       Description: Ignore required spell for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqLevel
-#        Description: Ignore required level for source items
-#        Default:    0
+#       Description: Ignore required level for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqEvent
-#        Description: Ignore required event for source items
-#        Default:    0
+#       Description: Ignore required event for source items
+#       Default:    0
 #
 #    Transmogrification.IgnoreReqStats
-#        Description: Ignore stat count > 0 requirement for source items
-#        Default:    0
+#       Description: Ignore stat count > 0 requirement for source items
+#       Default:    0
 
 Transmogrification.AllowPoor = 0
 Transmogrification.AllowCommon = 0
@@ -3629,28 +3539,28 @@ Transmogrification.IgnoreReqStats = 0
 #    SET FEATURE
 #
 #    Transmogrification.EnableSets
-#        Description: Enables / Disables the set feature. If you want permanent disable, check Transmogrification.h
-#        Default:    1
+#       Description: Enables / Disables the set feature. If you want permanent disable, check Transmogrification.h
+#       Default:    1
 #
 #    Transmogrification.MaxSets
-#        Description: Maximum amount of sets a player can save (hardcap at 25)
-#        Default:    10
+#       Description: Maximum amount of sets a player can save (hardcap at 25)
+#       Default:    10
 #
 #    Transmogrification.EnableSetInfo
-#        Description: Enables / Disables the info button for set fature
-#        Default:    1
+#       Description: Enables / Disables the info button for set fature
+#       Default:    1
 #
 #    Transmogrification.SetNpcText
-#        Description: The npc_text entry of the info menu for the set feature
-#        Default:    601084
+#       Description: The npc_text entry of the info menu for the set feature
+#       Default:    601084
 #
 #    Transmogrification.SetCostModifier
-#        Description: A multiplier for the default gold cost (all costs summed together) (change to 0 for no default cost)
-#        Default:    3.0
+#       Description: A multiplier for the default gold cost (all costs summed together) (change to 0 for no default cost)
+#       Default:    3.0
 #
 #    Transmogrification.SetCopperCost
-#        Description: Cost added on top of other costs (can be negative)
-#        Default:    0
+#       Description: Cost added on top of other costs (can be negative)
+#       Default:    0
 
 Transmogrification.EnableSets = 1
 Transmogrification.MaxSets = 10
@@ -3668,16 +3578,16 @@ Transmogrification.SetCopperCost = 0
 # CROSSFACTION BATTLEGROUND CONFIG
 #
 #   CrossFactionBG.Enable
-#       Description: Enable mixed alliance and horde in one battleground
-#       Default: 0
+#      Description: Enable mixed alliance and horde in one battleground
+#      Default: 0
 #
 #   CrossFactionBG.Average.ItemLevel.Enable
-#       Description: Enable check average item level for bg
-#       Default: 0
+#      Description: Enable check average item level for bg
+#      Default: 0
 #
 #   CrossFactionBG.Players.Count.In.Group
-#       Description: Maximum players in party for enter queue
-#       Default: 3
+#      Description: Maximum players in party for enter queue
+#      Default: 3
 #
 
 CrossFactionBG.Enable = 0
@@ -3728,6 +3638,142 @@ Event.Max.Level = 80
 #        Default:	10000000 = 1k Gold
 
 Event.Reward.Money = 10000000
+
+#
+###################################################################################################
+
+###################################################################################################
+# BATTLEGROUND REWARD CONFIG
+#
+#
+#    Battleground.Reward.Enable
+#       Description: Enable Battleground Reward.
+#
+#       Default: 0  - (Disable)
+#        	     1  - (Enable)
+#
+
+Battleground.Reward.Enable = 0
+
+#
+#    Battleground.Reward.WinnerTeam.Count
+#       Description: Reward count winner battlegroud team.
+#
+#       Default: 2
+#
+
+Battleground.Reward.WinnerTeam.Count = 2
+
+#
+#    Battleground.Reward.LoserTeam.Count
+#        Description: Reward count loser battlegroud team.
+#        	  Default: 1  - (Default)
+#
+
+Battleground.Reward.LoserTeam.Count = 1
+
+#
+#    Battleground.Reward.ItemID.WS
+#       Description: Reward item on battlegroud Warsong Gulch.
+#
+#       Default: 20558
+#
+
+Battleground.Reward.ItemID.WS = 20558
+
+#
+#    Battleground.Reward.ItemID.AB
+#       Description: Reward item on battlegroud Arathi Basin.
+#
+#       Default: 20559
+#
+
+Battleground.Reward.ItemID.AB = 20559
+
+#
+#    Battleground.Reward.ItemID.EY
+#       Description: Reward item on battlegroud Eye of the Storm.
+#
+#       Default: 29024
+#
+
+Battleground.Reward.ItemID.EY = 29024
+
+#
+#    Battleground.Reward.ItemID.IC
+#       Description: Reward item on battlegroud Isle of Conquest.
+#
+#       Default: 47395
+#
+
+Battleground.Reward.ItemID.IC = 47395
+
+#
+#    Battleground.Reward.ItemID.SA
+#       Description: Reward item on battlegroud Strand of the Ancients.
+#
+#       Default: 42425
+#
+
+Battleground.Reward.ItemID.SA = 42425
+
+#
+#    Battleground.Reward.ItemID.AV
+#       Description: Reward item on battlegroud Alterac Valley.
+#
+#       Default: 20560
+#
+
+Battleground.Reward.ItemID.AV = 20560
+
+#
+###################################################################################################
+
+###################################################################################################
+# ARENA REWARD CONFIG
+#
+#
+#    Arena.Reward.Enable
+#        Description: Enable Arena Reward.
+#
+#        Default: 0  - (Disable)
+#        	      1  - (Enable)
+#
+
+Arena.Reward.Enable = 0
+
+#
+#    Arena.Reward.ItemID.2v2
+#    Arena.Reward.Count.2v2
+#       Description: Reward item on arena 2v2.
+#
+#       Default: 29434 - 1
+#
+
+Arena.Reward.ItemID.2v2 = 29434
+Arena.Reward.Count.2v2 = 1
+
+#
+#    Arena.Reward.ItemID.3v3
+#    Arena.Reward.Count.3v3
+#       Description: Reward item on arena 3v3.
+#
+#       Default: 29434 - 2
+#
+
+Arena.Reward.ItemID.3v3 = 29434
+Arena.Reward.Count.3v3 = 2
+
+#
+#    Arena.Reward.ItemID.5v5
+#    Arena.Reward.Count.5v5
+#       Description: Reward item on arena 5v5.
+#
+#       Default: 29434 - 3
+#
+
+Arena.Reward.ItemID.5v5 = 29434
+Arena.Reward.Count.5v5 = 3
 
 #
 ###################################################################################################

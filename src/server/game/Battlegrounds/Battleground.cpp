@@ -33,7 +33,6 @@
 #include "Transport.h"
 #include "ScriptMgr.h"
 #include "GameGraveyard.h"
-#include "Config.h"
 #ifdef ELUNA
 #include "LuaEngine.h"
 #endif
@@ -382,7 +381,7 @@ TeamId Battleground::GetPrematureWinner()
         return TEAM_ALLIANCE;
     else if (GetPlayersCountByTeam(TEAM_HORDE) >= GetMinPlayersPerTeam())
         return TEAM_HORDE;
-
+        
     return TEAM_NEUTRAL;
 }
 
@@ -974,7 +973,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
                 // Arena lost => reset the win_rated_arena having the "no_lose" condition
                 player->ResetAchievementCriteria(ACHIEVEMENT_CRITERIA_CONDITION_NO_LOSE, 0);
             }
-
+            
             player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_PLAY_ARENA, GetMapId());
         }
 
@@ -998,11 +997,6 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
                 if (!player->GetRandomWinner())
                     player->SetRandomWinner(true);
             }
-
-			if (!player->InArena() && (sConfigMgr->GetBoolDefault("Battleground.Reward.Active", true)))
-			{
-				player->AddItem(sConfigMgr->GetIntDefault("Battleground.Reward.Item", 40752), sConfigMgr->GetIntDefault("Battleground.Reward.Item.Count", 1));
-			}
 
             player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_BG, player->GetMapId());
         }

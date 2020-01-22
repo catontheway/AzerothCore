@@ -1,3 +1,8 @@
+#BGScripts
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/CrossFactionBG/CrossFactionBG.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/CrossFactionBG/CrossFactionBGScript.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/BattlegroundsReward.cpp")
+
 # CreatureScripts
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Transmogrification/Transmogrification.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Transmogrification/Transmogrifier.cpp")
@@ -9,8 +14,6 @@ AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Template.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/CreatureScripts/Top.cpp")
 
 # PlayerScripts
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/CrossFactionBG/CrossFactionBG.cpp")
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/CrossFactionBG/CrossFactionBGScript.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/ArenaObject.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Censure.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Duel.cpp")

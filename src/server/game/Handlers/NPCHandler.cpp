@@ -586,7 +586,7 @@ void WorldSession::SendStablePetCallback(PreparedQueryResult result, uint64 guid
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHAR_PET_BY_ENTRY_AND_SLOT);
         stmt->setUInt32(0, _player->GetGUIDLow());
         stmt->setUInt8(1, uint8(_player->GetTemporaryUnsummonedPetNumber() ? PET_SAVE_AS_CURRENT : PET_SAVE_NOT_IN_SLOT));
-
+        
         if (PreparedQueryResult _result = CharacterDatabase.AsyncQuery(stmt))
         {
             Field* fields = _result->Fetch();
@@ -594,7 +594,7 @@ void WorldSession::SendStablePetCallback(PreparedQueryResult result, uint64 guid
             data << uint32(fields[0].GetUInt32());        // id
             data << uint32(fields[1].GetUInt32());        // entry
             data << uint32(fields[4].GetUInt16());        // level
-            data << fields[8].GetString();                // petname
+            data << fields[8].GetString();                // petname 
             data << uint8(1);
             ++num;
         }
@@ -728,7 +728,7 @@ void WorldSession::HandleStablePetCallback(PreparedQueryResult result)
         trans->Append(stmt);
 
         CharacterDatabase.CommitTransaction(trans);
-
+        
         _player->SetTemporaryUnsummonedPetNumber(0);
         SendStableResult(STABLE_SUCCESS_STABLE);
         return;
@@ -967,7 +967,7 @@ void WorldSession::HandleStableSwapPetCallback(PreparedQueryResult result, uint3
     }
 
     Pet* pet = _player->GetPet();
-
+    
     // move alive pet to slot or delete dead pet
     if (pet)
         _player->RemovePet(pet, pet->IsAlive() ? PetSaveMode(slot) : PET_SAVE_AS_DELETED);

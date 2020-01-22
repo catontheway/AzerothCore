@@ -1,6 +1,10 @@
 #ifndef INTELLIGENTQUANTUM_H
 #define INTELLIGENTQUANTUM_H
 
+// BGScripts
+void AddSC_CrossFactionBG();
+void AddSC_BattlegroundsReward();
+
 // CreatureScripts
 void AddSC_Transmogrifier();
 void AddSC_BeastMastery();
@@ -11,7 +15,6 @@ void AddSC_Template();
 void AddSC_TOP();
 
 // PlayerScripts
-void AddSC_CrossFactionBG();
 void AddSC_ArenaObject();
 void AddSC_Censure();
 void AddSC_Duel();
@@ -22,6 +25,10 @@ void AddSC_Login();
 
 void AddIntelligentQuantumScripts()
 {
+    // BGScripts
+    AddSC_CrossFactionBG();
+    AddSC_BattlegroundsReward();
+
     // CreatureScripts
     AddSC_Transmogrifier();
     AddSC_BeastMastery();
@@ -32,7 +39,6 @@ void AddIntelligentQuantumScripts()
     AddSC_TOP();
 
     // PlayerScripts
-    AddSC_CrossFactionBG();
     AddSC_ArenaObject();
     AddSC_Censure();
     AddSC_Duel();
