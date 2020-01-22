@@ -20,6 +20,7 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 #include "ObjectMgr.h"
+#include "Guild.h"
 
 #ifdef ELUNA
 #include "LuaEngine.h"
@@ -196,11 +197,37 @@ void WorldSession::HandleLootMoneyOpcode(WorldPacket & /*recvData*/)
         }
         else
         {
-            player->ModifyMoney(loot->gold);
-            player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_LOOT_MONEY, loot->gold);
+            uint32 Money = loot->gold;
+
+            if (Guild* guild = player->GetGuild())
+            {
+                switch (guild->GuildLevel)
+                {
+                    case 1:
+                        Money -= uint32(Money * 0.04f);
+                        break;
+                    case 2:
+                        Money -= uint32(Money * 0.08f);
+                        break;
+                    case 3:
+                        Money += uint32(Money * 0.12f);
+                        break;
+                    case 4:
+                        Money += uint32(Money * 0.16f);
+                        break;
+                    case 5:
+                        Money += uint32(Money * 0.2f);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            player->ModifyMoney(Money);
+            player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_LOOT_MONEY, Money);
 
             WorldPacket data(SMSG_LOOT_MONEY_NOTIFY, 4 + 1);
-            data << uint32(loot->gold);
+            data << uint32(Money);
             data << uint8(1);   // "You loot..."
             SendPacket(&data);
         }
@@ -295,8 +322,8 @@ void WorldSession::DoLootRelease(uint64 lguid)
             }
             else
             {
-                go->SetLootState(GO_JUST_DEACTIVATED);                
-                
+                go->SetLootState(GO_JUST_DEACTIVATED);
+
                 // Xinef: moved event execution to loot release (after everything is looted)
                 // Xinef: 99% sure that this worked like this on blizz
                 // Xinef: prevents exploits with just opening GO and spawning bilions of npcs, which can crash core if you know what you're doin ;)

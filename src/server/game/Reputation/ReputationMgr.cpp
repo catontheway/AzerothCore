@@ -13,6 +13,7 @@
 #include "ObjectMgr.h"
 #include "ScriptMgr.h"
 #include "Opcodes.h"
+#include "Guild.h"
 
 const int32 ReputationMgr::PointsInRank[MAX_REPUTATION_RANK] = {36000, 3000, 3000, 3000, 6000, 12000, 21000, 1000};
 
@@ -352,6 +353,31 @@ bool ReputationMgr::SetOneFactionReputation(FactionEntry const* factionEntry, in
         {
             // int32 *= float cause one point loss?
             standing = int32(floor((float)standing * sWorld->getRate(RATE_REPUTATION_GAIN) + 0.5f));
+
+            if (Guild* guild = _player->GetGuild())
+            {
+                switch (guild->GuildLevel)
+                {
+                    case 1:
+                        standing += uint32(standing * 0.02f);
+                        break;
+                    case 2:
+                        standing += uint32(standing * 0.04f);
+                        break;
+                    case 3:
+                        standing += uint32(standing * 0.06f);
+                        break;
+                    case 4:
+                        standing += uint32(standing * 0.08f);
+                        break;
+                    case 5:
+                        standing += uint32(standing * 0.10f);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             standing += itr->second.Standing + BaseRep;
         }
 

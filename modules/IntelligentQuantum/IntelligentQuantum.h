@@ -18,6 +18,7 @@ void AddSC_TOP();
 void AddSC_ArenaObject();
 void AddSC_Censure();
 void AddSC_Duel();
+void AddSC_GuildSystem();
 void AddSC_Gurubashi();
 void AddSC_KillStreak();
 void AddSC_Level();
@@ -42,6 +43,7 @@ void AddIntelligentQuantumScripts()
     AddSC_ArenaObject();
     AddSC_Censure();
     AddSC_Duel();
+    AddSC_GuildSystem();
     AddSC_Gurubashi();
     AddSC_KillStreak();
     AddSC_Level();

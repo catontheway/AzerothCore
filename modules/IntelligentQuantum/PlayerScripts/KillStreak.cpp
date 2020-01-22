@@ -1,4 +1,5 @@
 #include "ScriptMgr.h"
+#include "Guild.h"
 
 class PlayerScript_KillStreak : public PlayerScript
 {
@@ -22,6 +23,12 @@ class PlayerScript_KillStreak : public PlayerScript
 
 			std::string Message = "|cffff0000Check " + Killer->GetPlayerName() + " Farm Kill/Honor|r";
 			sWorld->SendGMText(6613, Message.c_str());
+		}
+
+        if (Guild* guild = Killer->GetGuild())
+		{
+			guild->IncreaseXP(urand(75, 150));
+			guild->IncreaseKill();
 		}
 
 		if (Killer->GetSession()->GetSecurity() == SEC_PLAYER)

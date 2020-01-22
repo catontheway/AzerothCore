@@ -1197,6 +1197,12 @@ bool Guild::Create(Player* pLeader, std::string const& name)
     if (ret)
         sScriptMgr->OnGuildCreate(this, pLeader, name);
 
+    GuildXP = 0;
+    GuildLevel = 0;
+    CurrentKill = 0;
+    CurrentPoint = 0;
+    GuildNextLevel = 1000000;
+
     return ret;
 }
 
@@ -1550,7 +1556,7 @@ void Guild::HandleInviteMember(WorldSession* session, std::string const& name)
 void Guild::HandleAcceptMember(WorldSession* session)
 {
     Player* player = session->GetPlayer();
-    if (!sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GUILD) && 
+    if (!sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GUILD) &&
         player->GetTeamId() != sObjectMgr->GetPlayerTeamIdByGUID(GetLeaderGUID()))
         return;
 
@@ -1949,6 +1955,38 @@ bool Guild::LoadFromDB(Field* fields)
     m_bankTabs.resize(purchasedTabs);
     for (uint8 i = 0; i < purchasedTabs; ++i)
         m_bankTabs[i] = new BankTab(m_id, i);
+
+    PreparedStatement* STMT = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_SYSTEM);
+    STMT->setUInt32(0, m_id);
+    PreparedQueryResult Result = CharacterDatabase.Query(STMT);
+
+    if (Result)
+    {
+        GuildXP = (*Result)[0].GetUInt32();
+        GuildLevel = (*Result)[1].GetUInt8();
+        CurrentKill = (*Result)[2].GetUInt32();
+        CurrentPoint = (*Result)[3].GetUInt32();
+    }
+    else
+    {
+        GuildXP = 0;
+        GuildLevel = 0;
+        CurrentKill = 0;
+        CurrentPoint = 0;
+    }
+
+    switch (GuildLevel)
+    {
+        case 0:  GuildNextLevel = 1000000; break;
+        case 1:  GuildNextLevel = 1800000; break;
+        case 2:  GuildNextLevel = 2600000; break;
+        case 3:  GuildNextLevel = 3400000; break;
+        case 4:  GuildNextLevel = 4200000; break;
+        case 5:  GuildNextLevel = 5000000; break;
+        case 6:  GuildNextLevel = 5800000; break;
+        case 7:  GuildNextLevel = 6600000; break;
+        default: GuildNextLevel = 10000000; break;
+    }
 
     _CreateLogHolders();
     return true;
@@ -2925,4 +2963,78 @@ void Guild::ResetTimes()
         itr->second->ResetValues();
 
     _BroadcastEvent(GE_BANK_TAB_AND_MONEY_UPDATED, 0);
+}
+
+
+void Guild::IncreaseXP(uint32 Value)
+{
+    if (GuildLevel >= 5)
+        return;
+
+    if (Value > 7500)
+        Value = 7500;
+
+    if ((GuildXP + Value) >= GuildNextLevel)
+    {
+        Value = 0;
+        GuildXP = 0;
+        GuildLevel++;
+
+        PreparedStatement* STMT = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_SYSTEM_LEVEL);
+        STMT->setUInt32(0, m_id);
+        CharacterDatabase.Execute(STMT);
+
+        switch (GuildLevel)
+        {
+            case 0:  GuildNextLevel = 1000000; break;
+            case 1:  GuildNextLevel = 1800000; break;
+            case 2:  GuildNextLevel = 2600000; break;
+            case 3:  GuildNextLevel = 3400000; break;
+            case 4:  GuildNextLevel = 4200000; break;
+            case 5:  GuildNextLevel = 5000000; break;
+            case 6:  GuildNextLevel = 5800000; break;
+            case 7:  GuildNextLevel = 6600000; break;
+            default: GuildNextLevel = 10000000; break;
+        }
+
+        PreparedStatement* STMT1 = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_SYSTEM_ZERO_XP);
+        STMT1->setUInt32(0, m_id);
+        CharacterDatabase.Execute(STMT1);
+    }
+    else
+        GuildXP += Value;
+
+    PreparedStatement* STMT = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_SYSTEM_XP);
+    STMT->setUInt32(0, Value);
+    STMT->setUInt32(1, m_id);
+    CharacterDatabase.Execute(STMT);
+}
+
+void Guild::IncreaseKill()
+{
+    for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
+        if (Player* player = itr->second->FindPlayer())
+            if (player->m_guildSystem)
+                ChatHandler(player->GetSession()).PSendSysMessage("|cff00ff00Guild Received Kill!");
+
+    CurrentKill += 1;
+
+    PreparedStatement* STMT = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_SYSTEM_KILL);
+    STMT->setUInt32(0, m_id);
+    CharacterDatabase.Execute(STMT);
+}
+
+void Guild::IncreasePoint(uint32 Value)
+{
+    for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
+        if (Player* player = itr->second->FindPlayer())
+            if (player->m_guildSystem)
+                ChatHandler(player->GetSession()).PSendSysMessage("|cff00ff00Guild Received Point: %u!", Value);
+
+    CurrentPoint += Value;
+
+    PreparedStatement* STMT = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_SYSTEM_POINT);
+    STMT->setUInt32(0, Value);
+    STMT->setUInt32(1, m_id);
+    CharacterDatabase.Execute(STMT);
 }

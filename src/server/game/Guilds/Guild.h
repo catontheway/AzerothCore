@@ -754,6 +754,16 @@ public:
 
     void ResetTimes();
 
+    void IncreaseXP(uint32 Value);
+    void IncreaseKill();
+    void IncreasePoint(uint32 Value);
+
+    uint32 GuildXP;
+    uint32 CurrentKill;
+    uint32 CurrentPoint;
+    uint32 GuildNextLevel;
+    uint8 GuildLevel;
+
 protected:
     uint32 m_id;
     std::string m_name;

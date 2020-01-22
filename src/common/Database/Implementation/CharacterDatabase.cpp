@@ -570,4 +570,12 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     // Recovery Item
     PrepareStatement(CHAR_INS_RECOVERY_ITEM, "INSERT INTO recovery_item (Guid, ItemEntry, Count) VALUES (?, ?, ?)", CONNECTION_SYNCH);
     PrepareStatement(CHAR_DEL_RECOVERY_ITEM, "DELETE FROM recovery_item WHERE Guid = ? AND ItemEntry = ? AND Count = ? ORDER BY Id DESC LIMIT 1", CONNECTION_ASYNC);
+
+    // Guild System
+    PrepareStatement(CHAR_SEL_GUILD_SYSTEM, "SELECT XP, Level, `Kills`, Points FROM guild WHERE guildid = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_UPD_GUILD_SYSTEM_LEVEL, "UPDATE guild SET Level = (Level + 1) WHERE guildid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_UPD_GUILD_SYSTEM_XP, "UPDATE guild SET XP = (XP + ?) WHERE guildid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_UPD_GUILD_SYSTEM_ZERO_XP, "UPDATE guild SET XP = 0 WHERE guildid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_UPD_GUILD_SYSTEM_KILL, "UPDATE guild SET `Kills` = (`Kills` + 1) WHERE guildid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_UPD_GUILD_SYSTEM_POINT, "UPDATE guild SET Points = (Points + ?) WHERE guildid = ?", CONNECTION_ASYNC);
 }

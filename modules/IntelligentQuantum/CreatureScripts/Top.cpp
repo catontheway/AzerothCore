@@ -12,7 +12,7 @@ class CreatureScript_TOP : public CreatureScript
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank13:25|t|r TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_killxenemies_generalsroom:25|t|r TOP Killer", GOSSIP_SENDER_MAIN, 6);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\INV_Misc_Map_01:25|t|r TOP Played Time", GOSSIP_SENDER_MAIN, 10);
-		// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Spell_Holy_DevineAegis:25|t|r TOP Guild", GOSSIP_SENDER_MAIN, 11); SOON
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Spell_Holy_DevineAegis:25|t|r TOP Guild", GOSSIP_SENDER_MAIN, 11);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank12:25|t|r TOP Achievement", GOSSIP_SENDER_MAIN, 12);
 
 		player->SEND_GOSSIP_MENU(68, creature->GetGUID());
@@ -278,7 +278,15 @@ class CreatureScript_TOP : public CreatureScript
             }
             case 11:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, level, xp FROM guild ORDER BY level DESC, level DESC, xp DESC LIMIT 10");
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Ability_hunter_rapidkilling:25|t|r Level, XP", GOSSIP_SENDER_MAIN, 13);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Ability_hunter_rapidkilling:25|t|r Kills, Points", GOSSIP_SENDER_MAIN, 14);
+
+                player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                return true;
+            }
+            case 13:
+            {
+                QueryResult Result = CharacterDatabase.Query("SELECT name, Level, XP FROM guild ORDER BY Level DESC, Level DESC, XP DESC LIMIT 10");
 
                 if (Result)
                 {
@@ -294,6 +302,35 @@ class CreatureScript_TOP : public CreatureScript
 
                         std::stringstream TOP;
                         TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp;
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
+                    }
+                    while (Result->NextRow());
+
+                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                }
+                else
+                    player->PlayerTalkClass->SendCloseGossip();
+
+                return true;
+            }
+            case 14:
+            {
+                QueryResult Result = CharacterDatabase.Query("SELECT name, `Kills`, Points FROM guild ORDER BY Points DESC LIMIT 10");
+
+                if (Result)
+                {
+                    Field* Fields = Result->Fetch();
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Guild::. \n", GOSSIP_SENDER_MAIN, 0);
+
+                    do
+                    {
+                        Fields = Result->Fetch();
+                        std::string Name = Fields[0].GetString();
+                        uint32 Kills = Fields[1].GetUInt32();
+                        uint32 Points = Fields[2].GetUInt32();
+
+                        std::stringstream TOP;
+                        TOP << "Name: " << Name.c_str() << " Kills: " << Kills << " Points: " << Points;
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
                     }
                     while (Result->NextRow());

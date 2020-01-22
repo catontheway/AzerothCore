@@ -11,6 +11,7 @@
 #include "SharedDefines.h"
 #include "ScriptMgr.h"
 #include "Player.h"
+#include "Guild.h"
 #include "Creature.h"
 
 namespace acore
@@ -175,6 +176,30 @@ namespace acore
 
                 xpMod *= isBattleGround ? sWorld->getRate(RATE_XP_BG_KILL) : sWorld->getRate(RATE_XP_KILL);
                 gain = uint32(gain * xpMod);
+
+                if (Guild* guild = player->GetGuild())
+                {
+                    switch (guild->GuildLevel)
+                    {
+                        case 1:
+                            gain += uint32(gain * 0.10f);
+                            break;
+                        case 2:
+                            gain += uint32(gain * 0.20f);
+                            break;
+                        case 3:
+                            gain += uint32(gain * 0.30f);
+                            break;
+                        case 4:
+                            gain += uint32(gain * 0.40f);
+                            break;
+                        case 5:
+                            gain += uint32(gain * 0.50f);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
             //sScriptMgr->OnGainCalculation(gain, player, u); // pussywizard: optimization

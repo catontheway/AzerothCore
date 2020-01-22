@@ -37,7 +37,7 @@ class PlayerScript_Gurubashi : public PlayerScript
 		}
 	}
 
-	void OnPlayerKilledByCreature(Creature */*Killer*/, Player *Killed)
+	void OnPlayerKilledByCreature(Creature * /* Killer */, Player *Killed)
 	{
 		if (Killed->GetMapId() == 0 && Killed->GetAreaId() == 2177)
 		{
