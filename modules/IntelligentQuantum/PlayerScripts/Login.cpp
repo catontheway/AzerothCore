@@ -1,4 +1,5 @@
 ﻿#include "ScriptMgr.h"
+#include "Guild.h"
 
 class PlayerScript_Login : public PlayerScript
 {
