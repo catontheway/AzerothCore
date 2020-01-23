@@ -14,6 +14,16 @@ class PlayerScript_Login : public PlayerScript
             ChatHandler(player->GetSession()).PSendSysMessage("-- Total Kill - |cff00ffff%u|r", player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS));
             ChatHandler(player->GetSession()).PSendSysMessage("-- Arena Points - |cff00ffff%u|r", player->GetArenaPoints());
             ChatHandler(player->GetSession()).PSendSysMessage("-- Honor Points - |cff00ffff%u|r", player->GetHonorPoints());
+
+            if (Guild* guild = player->GetGuild())
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("--------------------------------------------");
+                ChatHandler(player->GetSession()).PSendSysMessage("-- Guild XP - |cff00ffff(%u / %u)|r", guild->GuildXP, guild->GuildNextLevel);
+                ChatHandler(player->GetSession()).PSendSysMessage("-- Guild Kill - |cff00ffff%u|r", guild->CurrentKill);
+                ChatHandler(player->GetSession()).PSendSysMessage("-- Guild Point - |cff00ffff%u|r", guild->CurrentPoint);
+                ChatHandler(player->GetSession()).PSendSysMessage("-- Guild Level - |cff00ffff%u|r", guild->GuildLevel);
+            }
+
             ChatHandler(player->GetSession()).PSendSysMessage("--------------------------------------------");
 
             if (player->GetSession()->GetSecurity() == 0)
