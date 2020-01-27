@@ -38,82 +38,82 @@ public:
     {
         static std::vector<ChatCommand> groupCommandTable =
         {
-            { "leader",         SEC_GAMEMASTER,             false,  &HandleGroupLeaderCommand,          "" },
-            { "disband",        SEC_GAMEMASTER,             false,  &HandleGroupDisbandCommand,         "" },
-            { "remove",         SEC_GAMEMASTER,             false,  &HandleGroupRemoveCommand,          "" },
-            { "join",           SEC_GAMEMASTER,             false,  &HandleGroupJoinCommand,            "" },
-            { "list",           SEC_GAMEMASTER,             false,  &HandleGroupListCommand,            "" }
+            { "leader",         SEC_OPERATOR,             false,  &HandleGroupLeaderCommand,          "" },
+            { "disband",        SEC_OPERATOR,             false,  &HandleGroupDisbandCommand,         "" },
+            { "remove",         SEC_OPERATOR,             false,  &HandleGroupRemoveCommand,          "" },
+            { "join",           SEC_OPERATOR,             false,  &HandleGroupJoinCommand,            "" },
+            { "list",           SEC_OPERATOR,             false,  &HandleGroupListCommand,            "" }
         };
         static std::vector<ChatCommand> petCommandTable =
         {
-            { "create",             SEC_GAMEMASTER,         false, &HandleCreatePetCommand,             "" },
-            { "learn",              SEC_GAMEMASTER,         false, &HandlePetLearnCommand,              "" },
-            { "unlearn",            SEC_GAMEMASTER,         false, &HandlePetUnlearnCommand,            "" }
+            { "create",             SEC_DEVELOPER,         false, &HandleCreatePetCommand,             "" },
+            { "learn",              SEC_DEVELOPER,         false, &HandlePetLearnCommand,              "" },
+            { "unlearn",            SEC_DEVELOPER,         false, &HandlePetUnlearnCommand,            "" }
         };
         static std::vector<ChatCommand> sendCommandTable =
         {
-            { "items",              SEC_GAMEMASTER,         true,  &HandleSendItemsCommand,             "" },
-            { "mail",               SEC_GAMEMASTER,         true,  &HandleSendMailCommand,              "" },
-            { "message",            SEC_ADMINISTRATOR,      true,  &HandleSendMessageCommand,           "" },
-            { "money",              SEC_GAMEMASTER,         true,  &HandleSendMoneyCommand,             "" }
+            { "items",              SEC_DEVELOPER,         true,  &HandleSendItemsCommand,             "" },
+            { "mail",               SEC_DEVELOPER,         true,  &HandleSendMailCommand,              "" },
+            { "message",            SEC_DEVELOPER,      true,  &HandleSendMessageCommand,           "" },
+            { "money",              SEC_DEVELOPER,         true,  &HandleSendMoneyCommand,             "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "dev",                SEC_ADMINISTRATOR,      false, &HandleDevCommand,                   "" },
-            { "gps",                SEC_MODERATOR,          false, &HandleGPSCommand,                   "" },
-            { "aura",               SEC_GAMEMASTER,         false, &HandleAuraCommand,                  "" },
-            { "unaura",             SEC_GAMEMASTER,         false, &HandleUnAuraCommand,                "" },
-            { "appear",             SEC_MODERATOR,          false, &HandleAppearCommand,                "" },
+            { "dev",                SEC_DEVELOPER,      false, &HandleDevCommand,                   "" },
+            { "gps",                SEC_GAMEMASTER,          false, &HandleGPSCommand,                   "" },
+            { "aura",               SEC_DEVELOPER,          false, &HandleAuraCommand,                  "" },
+            { "unaura",             SEC_EVENTMASTER,         false, &HandleUnAuraCommand,                "" },
+            { "appear",             SEC_TRIAL_GAMEMASTER,   false, &HandleAppearCommand,                "" },
             { "summon",             SEC_GAMEMASTER,         false, &HandleSummonCommand,                "" },
-            { "groupsummon",        SEC_GAMEMASTER,         false, &HandleGroupSummonCommand,           "" },
+            { "groupsummon",        SEC_OPERATOR,         false, &HandleGroupSummonCommand,           "" },
             { "commands",           SEC_PLAYER,             true,  &HandleCommandsCommand,              "" },
-            { "die",                SEC_GAMEMASTER,         false, &HandleDieCommand,                   "" },
-            { "revive",             SEC_GAMEMASTER,         true,  &HandleReviveCommand,                "" },
+            { "die",                SEC_HEAD_GAMEMASTER,         false, &HandleDieCommand,                   "" },
+            { "revive",             SEC_PVPMASTER,         true,  &HandleReviveCommand,                "" },
             { "dismount",           SEC_PLAYER,             false, &HandleDismountCommand,              "" },
             { "guid",               SEC_GAMEMASTER,         false, &HandleGUIDCommand,                  "" },
             { "help",               SEC_PLAYER,             true,  &HandleHelpCommand,                  "" },
-            { "itemmove",           SEC_GAMEMASTER,         false, &HandleItemMoveCommand,              "" },
-            { "cooldown",           SEC_GAMEMASTER,         false, &HandleCooldownCommand,              "" },
-            { "distance",           SEC_ADMINISTRATOR,      false, &HandleGetDistanceCommand,           "" },
-            { "recall",             SEC_GAMEMASTER,         false, &HandleRecallCommand,                "" },
+            { "itemmove",           SEC_HEAD_GAMEMASTER,         false, &HandleItemMoveCommand,              "" },
+            { "cooldown",           SEC_PVPMASTER,         false, &HandleCooldownCommand,              "" },
+            { "distance",           SEC_DEVELOPER,      false, &HandleGetDistanceCommand,           "" },
+            { "recall",             SEC_TRIAL_GAMEMASTER,         false, &HandleRecallCommand,                "" },
             { "save",               SEC_PLAYER,             false, &HandleSaveCommand,                  "" },
-            { "saveall",            SEC_GAMEMASTER,         true,  &HandleSaveAllCommand,               "" },
-            { "kick",               SEC_GAMEMASTER,         true,  &HandleKickPlayerCommand,            "" },
-            { "unstuck",            SEC_GAMEMASTER,         true,  &HandleUnstuckCommand,               "" },
+            { "saveall",            SEC_TRIAL_GAMEMASTER,         true,  &HandleSaveAllCommand,               "" },
+            { "kick",               SEC_PVPMASTER,         true,  &HandleKickPlayerCommand,            "" },
+            { "unstuck",            SEC_TRIAL_GAMEMASTER,         true,  &HandleUnstuckCommand,               "" },
             { "linkgrave",          SEC_ADMINISTRATOR,      false, &HandleLinkGraveCommand,             "" },
             { "neargrave",          SEC_GAMEMASTER,         false, &HandleNearGraveCommand,             "" },
             { "explorecheat",       SEC_ADMINISTRATOR,      false, &HandleExploreCheatCommand,          "" },
-            { "showarea",           SEC_GAMEMASTER,         false, &HandleShowAreaCommand,              "" },
-            { "hidearea",           SEC_ADMINISTRATOR,      false, &HandleHideAreaCommand,              "" },
-            { "additem",            SEC_GAMEMASTER,         false, &HandleAddItemCommand,               "" },
-            { "additemset",         SEC_GAMEMASTER,         false, &HandleAddItemSetCommand,            "" },
+            { "showarea",           SEC_DEVELOPER,         false, &HandleShowAreaCommand,              "" },
+            { "hidearea",           SEC_HEAD_GAMEMASTER,      false, &HandleHideAreaCommand,              "" },
+            { "additem",            SEC_TRANSFERMASTER,     false, &HandleAddItemCommand,               "" },
+            { "additemset",         SEC_TRANSFERMASTER,     false, &HandleAddItemSetCommand,            "" },
             { "bank",               SEC_ADMINISTRATOR,      false, &HandleBankCommand,                  "" },
-            { "wchange",            SEC_ADMINISTRATOR,      false, &HandleChangeWeather,                "" },
+            { "wchange",            SEC_DEVELOPER,      false, &HandleChangeWeather,                "" },
             { "maxskill",           SEC_GAMEMASTER,         false, &HandleMaxSkillCommand,              "" },
-            { "setskill",           SEC_GAMEMASTER,         false, &HandleSetSkillCommand,              "" },
-            { "pinfo",              SEC_GAMEMASTER,         true,  &HandlePInfoCommand,                 "" },
-            { "respawn",            SEC_GAMEMASTER,         false, &HandleRespawnCommand,               "" },
-            { "send",               SEC_GAMEMASTER,         true,  nullptr,                             "", sendCommandTable },
-            { "pet",                SEC_GAMEMASTER,         false, nullptr,                             "", petCommandTable },
+            { "setskill",           SEC_TRANSFERMASTER,         false, &HandleSetSkillCommand,              "" },
+            { "pinfo",              SEC_TRIAL_GAMEMASTER,         true,  &HandlePInfoCommand,                 "" },
+            { "respawn",            SEC_PVPMASTER,         false, &HandleRespawnCommand,               "" },
+            { "send",               SEC_DEVELOPER,         true,  nullptr,                             "", sendCommandTable },
+            { "pet",                SEC_DEVELOPER,         false, nullptr,                             "", petCommandTable },
             { "mute",               SEC_GAMEMASTER,         true,  &HandleMuteCommand,                  "" },
             { "mutehistory",        SEC_GAMEMASTER,         true,  &HandleMuteInfoCommand,              "" },
-            { "unmute",             SEC_GAMEMASTER,         true,  &HandleUnmuteCommand,                "" },
-            { "movegens",           SEC_ADMINISTRATOR,      false, &HandleMovegensCommand,              "" },
+            { "unmute",             SEC_PVPMASTER,         true,  &HandleUnmuteCommand,                "" },
+            { "movegens",           SEC_DEVELOPER,      false, &HandleMovegensCommand,              "" },
             { "cometome",           SEC_ADMINISTRATOR,      false, &HandleComeToMeCommand,              "" },
-            { "damage",             SEC_GAMEMASTER,         false, &HandleDamageCommand,                "" },
+            { "damage",             SEC_HEAD_GAMEMASTER,         false, &HandleDamageCommand,                "" },
             { "combatstop",         SEC_GAMEMASTER,         true,  &HandleCombatStopCommand,            "" },
-            { "flusharenapoints",   SEC_ADMINISTRATOR,      false, &HandleFlushArenaPointsCommand,      "" },
+            { "flusharenapoints",   SEC_HEAD_GAMEMASTER,      false, &HandleFlushArenaPointsCommand,      "" },
             { "repairitems",        SEC_GAMEMASTER,         true,  &HandleRepairitemsCommand,           "" },
             { "freeze",             SEC_GAMEMASTER,         false, &HandleFreezeCommand,                "" },
-            { "unfreeze",           SEC_GAMEMASTER,         false, &HandleUnFreezeCommand,              "" },
-            { "group",              SEC_GAMEMASTER,         false, nullptr,                             "", groupCommandTable },
+            { "unfreeze",           SEC_PVPMASTER,         false, &HandleUnFreezeCommand,              "" },
+            { "group",              SEC_OPERATOR,         false, nullptr,                             "", groupCommandTable },
             { "possess",            SEC_GAMEMASTER,         false, HandlePossessCommand,                "" },
-            { "unpossess",          SEC_GAMEMASTER,         false, HandleUnPossessCommand,              "" },
-            { "bindsight",          SEC_ADMINISTRATOR,      false, HandleBindSightCommand,              "" },
-            { "unbindsight",        SEC_ADMINISTRATOR,      false, HandleUnbindSightCommand,            "" },
-            { "playall",            SEC_GAMEMASTER,         false, HandlePlayAllCommand,                "" },
-            { "skirmish",           SEC_ADMINISTRATOR,      false, HandleSkirmishCommand,               "" },
-            { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" }
+            { "unpossess",          SEC_DEVELOPER,         false, HandleUnPossessCommand,              "" },
+            { "bindsight",          SEC_HEAD_GAMEMASTER,    false, HandleBindSightCommand,              "" },
+            { "unbindsight",        SEC_DEVELOPER,      false, HandleUnbindSightCommand,            "" },
+            { "playall",            SEC_DEVELOPER,         false, HandlePlayAllCommand,                "" },
+            { "skirmish",           SEC_DEVELOPER,      false, HandleSkirmishCommand,               "" },
+            { "mailbox",            SEC_TRIAL_GAMEMASTER,          false, &HandleMailBoxCommand,               "" }
         };
         return commandTable;
     }
@@ -1494,6 +1494,22 @@ public:
             handler->SetSentErrorMessage(true);
             return false;
         }
+
+        std::ostringstream ItemString;
+        ItemString << std::hex << ItemQualityColors[3];
+
+        std::string Message = player->GetPlayerName() + " - |c" + ItemString.str().c_str() + "|Hitem:" + std::to_string(itemTemplate->ItemId) + ":0:0:0:0:0:0:0:0:0|h[" + itemTemplate->Name1 + "]|h|r - " + std::to_string(count) + " - " + playerTarget->GetPlayerName();
+        SessionMap Sessions = sWorld->GetAllSessions();
+
+        for (SessionMap::iterator itr = Sessions.begin(); itr != Sessions.end(); ++itr)
+            if (Player* _player = itr->second->GetPlayer())
+                if (_player->GetSession()->GetSecurity() > SEC_TRANSFERMASTER)
+                {
+                    WorldPacket data(SMSG_SERVER_MESSAGE, Message.size() + 1);
+                    data << uint32(3);
+                    data << Message;
+                    _player->GetSession()->SendPacket(&data);
+                }
 
         // Subtract
         if (count < 0)

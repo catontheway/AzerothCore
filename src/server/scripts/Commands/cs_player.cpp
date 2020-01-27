@@ -17,13 +17,13 @@ public:
     {
         static std::vector<ChatCommand> playerCommandTable =
         {
-            { "learn",               SEC_GAMEMASTER,  true, &HandlePlayerLearnCommand,           "" },
-            { "unlearn",             SEC_GAMEMASTER,  true, &HandlePlayerUnLearnCommand,         "" }
+            { "learn",               SEC_DEVELOPER,  true, &HandlePlayerLearnCommand,           "" },
+            { "unlearn",             SEC_DEVELOPER,  true, &HandlePlayerUnLearnCommand,         "" }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "player",              SEC_GAMEMASTER,  true, nullptr,                             "", playerCommandTable }
+            { "player",              SEC_DEVELOPER,  true, nullptr,                             "", playerCommandTable }
         };
         return commandTable;
     }

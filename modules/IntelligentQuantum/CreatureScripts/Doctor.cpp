@@ -27,7 +27,6 @@ class CreatureScript_Doctor : public CreatureScript
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove Shaman Debuff", GOSSIP_SENDER_MAIN, 4);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove Paladin Debuff", GOSSIP_SENDER_MAIN, 5);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove All Spell Coldown", GOSSIP_SENDER_MAIN, 6);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove All Instance Save (EOF) 5X", GOSSIP_SENDER_MAIN, 7);
 
 		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 		return true;
@@ -66,29 +65,6 @@ class CreatureScript_Doctor : public CreatureScript
 				player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
-            case 7:
-                if (!player->HasItemCount(49426, 5))
-                {
-                    player->GetSession()->SendAreaTriggerMessage("You Dont Have Enough Emblem Of Frost.|r");
-                    player->PlayerTalkClass->SendCloseGossip();
-                    return false;
-                }
-                else
-                {
-                    for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
-                    {
-                        BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
-
-                        for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
-                        {
-                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
-                        }
-                    }
-
-                    player->DestroyItemCount(49426, 5, true);
-                    player->PlayerTalkClass->SendCloseGossip();
-                }
-                break;
             default:
                 break;
         }

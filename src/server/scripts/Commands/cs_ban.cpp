@@ -37,40 +37,40 @@ public:
     {
         static std::vector<ChatCommand> unbanCommandTable =
         {
-            { "account",        SEC_GAMEMASTER,  true,  &HandleUnBanAccountCommand,          "" },
-            { "character",      SEC_GAMEMASTER,  true,  &HandleUnBanCharacterCommand,        "" },
-            { "playeraccount",  SEC_GAMEMASTER,  true,  &HandleUnBanAccountByCharCommand,    "" },
-            { "ip",             SEC_GAMEMASTER,  true,  &HandleUnBanIPCommand,               "" }
+            { "account",        SEC_HEAD_GAMEMASTER,  true,  &HandleUnBanAccountCommand,          "" },
+            { "character",      SEC_HEAD_GAMEMASTER,  true,  &HandleUnBanCharacterCommand,        "" },
+            { "playeraccount",  SEC_HEAD_GAMEMASTER,  true,  &HandleUnBanAccountByCharCommand,    "" },
+            { "ip",             SEC_HEAD_GAMEMASTER,  true,  &HandleUnBanIPCommand,               "" }
         };
 
         static std::vector<ChatCommand> banlistCommandTable =
         {
-            { "account",        SEC_GAMEMASTER,  true,  &HandleBanListAccountCommand,        "" },
-            { "character",      SEC_GAMEMASTER,  true,  &HandleBanListCharacterCommand,      "" },
-            { "ip",             SEC_GAMEMASTER,  true,  &HandleBanListIPCommand,             "" }
+            { "account",        SEC_EVENTMASTER,  true,  &HandleBanListAccountCommand,        "" },
+            { "character",      SEC_EVENTMASTER,  true,  &HandleBanListCharacterCommand,      "" },
+            { "ip",             SEC_EVENTMASTER,  true,  &HandleBanListIPCommand,             "" }
         };
 
         static std::vector<ChatCommand> baninfoCommandTable =
         {
-            { "account",        SEC_GAMEMASTER,  true,  &HandleBanInfoAccountCommand,        "" },
-            { "character",      SEC_GAMEMASTER,  true,  &HandleBanInfoCharacterCommand,      "" },
-            { "ip",             SEC_GAMEMASTER,  true,  &HandleBanInfoIPCommand,             "" }
+            { "account",        SEC_EVENTMASTER,  true,  &HandleBanInfoAccountCommand,        "" },
+            { "character",      SEC_EVENTMASTER,  true,  &HandleBanInfoCharacterCommand,      "" },
+            { "ip",             SEC_EVENTMASTER,  true,  &HandleBanInfoIPCommand,             "" }
         };
 
         static std::vector<ChatCommand> banCommandTable =
         {
-            { "account",        SEC_GAMEMASTER,  true,  &HandleBanAccountCommand,            "" },
-            { "character",      SEC_GAMEMASTER,  true,  &HandleBanCharacterCommand,          "" },
-            { "playeraccount",  SEC_GAMEMASTER,  true,  &HandleBanAccountByCharCommand,      "" },
-            { "ip",             SEC_GAMEMASTER,  true,  &HandleBanIPCommand,                 "" }
+            { "account",        SEC_EVENTMASTER,  true,  &HandleBanAccountCommand,            "" },
+            { "character",      SEC_EVENTMASTER,  true,  &HandleBanCharacterCommand,          "" },
+            { "playeraccount",  SEC_HEAD_GAMEMASTER,  true,  &HandleBanAccountByCharCommand,      "" },
+            { "ip",             SEC_EVENTMASTER,  true,  &HandleBanIPCommand,                 "" }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "ban",            SEC_GAMEMASTER,  true,  nullptr,                             "", banCommandTable },
-            { "baninfo",        SEC_GAMEMASTER,  true,  nullptr,                             "", baninfoCommandTable },
-            { "banlist",        SEC_GAMEMASTER,  true,  nullptr,                             "", banlistCommandTable },
-            { "unban",          SEC_GAMEMASTER,  true,  nullptr,                             "", unbanCommandTable }
+            { "ban",            SEC_EVENTMASTER,  true,  nullptr,                             "", banCommandTable },
+            { "baninfo",        SEC_EVENTMASTER,  true,  nullptr,                             "", baninfoCommandTable },
+            { "banlist",        SEC_EVENTMASTER,  true,  nullptr,                             "", banlistCommandTable },
+            { "unban",          SEC_HEAD_GAMEMASTER,  true,  nullptr,                             "", unbanCommandTable }
         };
 
         return commandTable;
@@ -207,7 +207,7 @@ public:
             case BAN_SUCCESS:
                 if (atoi(durationStr) > 0)
                 {
-                    if (!sWorld->getBoolConfig(CONFIG_SHOW_BAN_IN_WORLD)) 
+                    if (!sWorld->getBoolConfig(CONFIG_SHOW_BAN_IN_WORLD))
                         handler->PSendSysMessage(LANG_BAN_YOUBANNED, nameOrIP.c_str(), secsToTimeString(TimeStringToSecs(durationStr), true).c_str(), reasonStr);
                 }
                 else

@@ -34,16 +34,16 @@ public:
     {
         static std::vector<ChatCommand> lfgCommandTable =
         {
-            { "player",    SEC_MODERATOR,     false, &HandleLfgPlayerInfoCommand, "" },
-            { "group",     SEC_MODERATOR,     false,  &HandleLfgGroupInfoCommand, "" },
-            { "queue",     SEC_MODERATOR,     false,  &HandleLfgQueueInfoCommand, "" },
-            { "clean",     SEC_ADMINISTRATOR, false,      &HandleLfgCleanCommand, "" },
-            { "options",   SEC_GAMEMASTER,    false,    &HandleLfgOptionsCommand, "" },
+            { "player",    SEC_DEVELOPER,     false, &HandleLfgPlayerInfoCommand, "" },
+            { "group",     SEC_DEVELOPER,     false,  &HandleLfgGroupInfoCommand, "" },
+            { "queue",     SEC_DEVELOPER,     false,  &HandleLfgQueueInfoCommand, "" },
+            { "clean",     SEC_DEVELOPER, false,      &HandleLfgCleanCommand, "" },
+            { "options",   SEC_DEVELOPER,    false,    &HandleLfgOptionsCommand, "" },
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            {  "lfg",   SEC_GAMEMASTER, false,                           nullptr, "", lfgCommandTable },
+            {  "lfg",   SEC_DEVELOPER, false,                           nullptr, "", lfgCommandTable },
         };
         return commandTable;
     }

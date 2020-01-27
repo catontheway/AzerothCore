@@ -26,13 +26,13 @@ public:
     {
         static std::vector<ChatCommand> commandTable =
         {
-            { "nameannounce",   SEC_GAMEMASTER,      true,   &HandleNameAnnounceCommand,         "" },
+            { "nameannounce",   SEC_PVPMASTER,      true,   &HandleNameAnnounceCommand,         "" },
             { "gmnameannounce", SEC_GAMEMASTER,      true,   &HandleGMNameAnnounceCommand,       "" },
-            { "announce",       SEC_GAMEMASTER,      true,   &HandleAnnounceCommand,             "" },
+            { "announce",       SEC_PVPMASTER,      true,   &HandleAnnounceCommand,             "" },
             { "gmannounce",     SEC_GAMEMASTER,      true,   &HandleGMAnnounceCommand,           "" },
-            { "notify",         SEC_GAMEMASTER,      true,   &HandleNotifyCommand,               "" },
+            { "notify",         SEC_PVPMASTER,      true,   &HandleNotifyCommand,               "" },
             { "gmnotify",       SEC_GAMEMASTER,      true,   &HandleGMNotifyCommand,             "" },
-            { "whispers",       SEC_MODERATOR,       false,  &HandleWhispersCommand,             "" }
+            { "whispers",       SEC_TRIAL_GAMEMASTER,       false,  &HandleWhispersCommand,             "" }
         };
         return commandTable;
     }

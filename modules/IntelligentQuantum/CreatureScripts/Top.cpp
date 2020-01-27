@@ -295,7 +295,7 @@ class CreatureScript_TOP : public CreatureScript
                         uint32 Points = Fields[4].GetUInt32();
 
                         std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp << "Kills: " << Kills << "Points: " << Points;
+                        TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp << " Kills: " << Kills << " Points: " << Points;
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
                     }
                     while (Result->NextRow());

@@ -29,31 +29,31 @@ public:
     {
         static std::vector<ChatCommand> ticketResponseCommandTable =
         {
-            { "append",         SEC_GAMEMASTER,      true,  &HandleGMTicketResponseAppendCommand,    "" },
-            { "appendln",       SEC_GAMEMASTER,      true,  &HandleGMTicketResponseAppendLnCommand,  "" }
+            { "append",         SEC_PVPMASTER,      true,  &HandleGMTicketResponseAppendCommand,    "" },
+            { "appendln",       SEC_PVPMASTER,      true,  &HandleGMTicketResponseAppendLnCommand,  "" }
         };
         static std::vector<ChatCommand> ticketCommandTable =
         {
-            { "assign",         SEC_GAMEMASTER,      true,  &HandleGMTicketAssignToCommand,          "" },
-            { "close",          SEC_GAMEMASTER,      true,  &HandleGMTicketCloseByIdCommand,         "" },
-            { "closedlist",     SEC_GAMEMASTER,      true,  &HandleGMTicketListClosedCommand,        "" },
-            { "comment",        SEC_GAMEMASTER,      true,  &HandleGMTicketCommentCommand,           "" },
-            { "complete",       SEC_GAMEMASTER,      true,  &HandleGMTicketCompleteCommand,          "" },
-            { "delete",         SEC_ADMINISTRATOR,   true,  &HandleGMTicketDeleteByIdCommand,        "" },
-            { "escalate",       SEC_GAMEMASTER,      true,  &HandleGMTicketEscalateCommand,          "" },
-            { "escalatedlist",  SEC_GAMEMASTER,      true,  &HandleGMTicketListEscalatedCommand,     "" },
-            { "list",           SEC_GAMEMASTER,      true,  &HandleGMTicketListCommand,              "" },
-            { "onlinelist",     SEC_GAMEMASTER,      true,  &HandleGMTicketListOnlineCommand,        "" },
-            { "reset",          SEC_CONSOLE,         true,  &HandleGMTicketResetCommand,             "" },
-            { "response",       SEC_GAMEMASTER,      true,  nullptr,                                 "", ticketResponseCommandTable },
-            { "togglesystem",   SEC_ADMINISTRATOR,   true,  &HandleToggleGMTicketSystem,             "" },
-            { "unassign",       SEC_GAMEMASTER,      true,  &HandleGMTicketUnAssignCommand,          "" },
-            { "viewid",         SEC_GAMEMASTER,      true,  &HandleGMTicketGetByIdCommand,           "" },
-            { "viewname",       SEC_GAMEMASTER,      true,  &HandleGMTicketGetByNameCommand,         "" }
+            { "assign",         SEC_TRIAL_GAMEMASTER,      true,  &HandleGMTicketAssignToCommand,          "" },
+            { "close",          SEC_OPERATOR,      true,  &HandleGMTicketCloseByIdCommand,         "" },
+            { "closedlist",     SEC_OPERATOR,      true,  &HandleGMTicketListClosedCommand,        "" },
+            { "comment",        SEC_OPERATOR,      true,  &HandleGMTicketCommentCommand,           "" },
+            { "complete",       SEC_OPERATOR,      true,  &HandleGMTicketCompleteCommand,          "" },
+            { "delete",         SEC_PVPMASTER,   true,  &HandleGMTicketDeleteByIdCommand,        "" },
+            { "escalate",       SEC_PVPMASTER,      true,  &HandleGMTicketEscalateCommand,          "" },
+            { "escalatedlist",  SEC_PVPMASTER,      true,  &HandleGMTicketListEscalatedCommand,     "" },
+            { "list",           SEC_TRIAL_GAMEMASTER,      true,  &HandleGMTicketListCommand,              "" },
+            { "onlinelist",     SEC_TRIAL_GAMEMASTER,      true,  &HandleGMTicketListOnlineCommand,        "" },
+            { "reset",          SEC_DEVELOPER,         true,  &HandleGMTicketResetCommand,             "" },
+            { "response",       SEC_PVPMASTER,      true,  nullptr,                                 "", ticketResponseCommandTable },
+            { "togglesystem",   SEC_DEVELOPER,   true,  &HandleToggleGMTicketSystem,             "" },
+            { "unassign",       SEC_DEVELOPER,      true,  &HandleGMTicketUnAssignCommand,          "" },
+            { "viewid",         SEC_TRIAL_GAMEMASTER,      true,  &HandleGMTicketGetByIdCommand,           "" },
+            { "viewname",       SEC_TRIAL_GAMEMASTER,      true,  &HandleGMTicketGetByNameCommand,         "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "ticket",         SEC_GAMEMASTER,      false, nullptr,                                 "", ticketCommandTable }
+            { "ticket",         SEC_TRIAL_GAMEMASTER,      false, nullptr,                                 "", ticketCommandTable }
         };
         return commandTable;
     }
@@ -194,7 +194,7 @@ public:
 
         std::string const assignedName = ticket->GetAssignedToName();
         std::string msg = ticket->FormatMessageString(*handler, assignedName.empty() ? nullptr : assignedName.c_str(), nullptr, nullptr, nullptr);
-        
+
         msg += handler->PGetParseString(LANG_COMMAND_TICKETLISTADDCOMMENT, player ? player->GetName().c_str() : "Console", comment);
         handler->SendGlobalGMSysMessage(msg.c_str());
 

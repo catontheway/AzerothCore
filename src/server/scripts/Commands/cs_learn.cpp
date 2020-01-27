@@ -30,32 +30,32 @@ public:
     {
         static std::vector<ChatCommand> learnAllMyCommandTable =
         {
-            { "class",          SEC_GAMEMASTER,  false, &HandleLearnAllMyClassCommand,       "" },
-            { "pettalents",     SEC_GAMEMASTER,  false, &HandleLearnAllMyPetTalentsCommand,  "" },
-            { "spells",         SEC_GAMEMASTER,  false, &HandleLearnAllMySpellsCommand,      "" },
-            { "talents",        SEC_GAMEMASTER,  false, &HandleLearnAllMyTalentsCommand,     "" }
+            { "class",          SEC_DEVELOPER,  false, &HandleLearnAllMyClassCommand,       "" },
+            { "pettalents",     SEC_DEVELOPER,  false, &HandleLearnAllMyPetTalentsCommand,  "" },
+            { "spells",         SEC_DEVELOPER,  false, &HandleLearnAllMySpellsCommand,      "" },
+            { "talents",        SEC_DEVELOPER,  false, &HandleLearnAllMyTalentsCommand,     "" }
         };
 
         static std::vector<ChatCommand> learnAllCommandTable =
         {
-            { "my",             SEC_GAMEMASTER,  false, nullptr,                             "", learnAllMyCommandTable },
-            { "gm",             SEC_GAMEMASTER,  false, &HandleLearnAllGMCommand,            "" },
-            { "crafts",         SEC_GAMEMASTER,  false, &HandleLearnAllCraftsCommand,        "" },
-            { "default",        SEC_GAMEMASTER,  false, &HandleLearnAllDefaultCommand,       "" },
-            { "lang",           SEC_GAMEMASTER,  false, &HandleLearnAllLangCommand,          "" },
-            { "recipes",        SEC_GAMEMASTER,  false, &HandleLearnAllRecipesCommand,       "" }
+            { "my",             SEC_DEVELOPER,  false, nullptr,                             "", learnAllMyCommandTable },
+            { "gm",             SEC_HEAD_GAMEMASTER,  false, &HandleLearnAllGMCommand,            "" },
+            { "crafts",         SEC_TRANSFERMASTER,  false, &HandleLearnAllCraftsCommand,        "" },
+            { "default",        SEC_HEAD_GAMEMASTER,  false, &HandleLearnAllDefaultCommand,       "" },
+            { "lang",           SEC_HEAD_GAMEMASTER,  false, &HandleLearnAllLangCommand,          "" },
+            { "recipes",        SEC_DEVELOPER,  false, &HandleLearnAllRecipesCommand,       "" }
         };
 
         static std::vector<ChatCommand> learnCommandTable =
         {
-            { "all",            SEC_GAMEMASTER,  false, nullptr,                             "", learnAllCommandTable },
-            { "",               SEC_GAMEMASTER,  false, &HandleLearnCommand,                 "" }
+            { "all",            SEC_TRANSFERMASTER,  false, nullptr,                             "", learnAllCommandTable },
+            { "",               SEC_DEVELOPER,  false, &HandleLearnCommand,                 "" }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "learn",          SEC_GAMEMASTER,  false, nullptr,                             "", learnCommandTable },
-            { "unlearn",        SEC_GAMEMASTER,  false, &HandleUnLearnCommand,               "" }
+            { "learn",          SEC_TRANSFERMASTER,  false, nullptr,                             "", learnCommandTable },
+            { "unlearn",        SEC_DEVELOPER,  false, &HandleUnLearnCommand,               "" }
         };
         return commandTable;
     }

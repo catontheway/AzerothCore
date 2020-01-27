@@ -29,42 +29,42 @@ public:
     {
         static std::vector<ChatCommand> modifyspeedCommandTable =
         {
-            { "fly",            SEC_GAMEMASTER,      false, &HandleModifyFlyCommand,           "" },
-            { "all",            SEC_GAMEMASTER,      false, &HandleModifyASpeedCommand,        "" },
-            { "walk",           SEC_GAMEMASTER,      false, &HandleModifySpeedCommand,         "" },
-            { "backwalk",       SEC_GAMEMASTER,      false, &HandleModifyBWalkCommand,         "" },
-            { "swim",           SEC_GAMEMASTER,      false, &HandleModifySwimCommand,          "" },
+            { "fly",            SEC_TRIAL_GAMEMASTER,      false, &HandleModifyFlyCommand,           "" },
+            { "all",            SEC_TRANSFERMASTER,      false, &HandleModifyASpeedCommand,        "" },
+            { "walk",           SEC_TRIAL_GAMEMASTER,      false, &HandleModifySpeedCommand,         "" },
+            { "backwalk",       SEC_TRANSFERMASTER,      false, &HandleModifyBWalkCommand,         "" },
+            { "swim",           SEC_TRIAL_GAMEMASTER,      false, &HandleModifySwimCommand,          "" },
             { "",               SEC_GAMEMASTER,      false, &HandleModifyASpeedCommand,        "" }
         };
 
         static std::vector<ChatCommand> modifyCommandTable =
         {
-            { "hp",             SEC_GAMEMASTER,      false, &HandleModifyHPCommand,            "" },
-            { "mana",           SEC_GAMEMASTER,      false, &HandleModifyManaCommand,          "" },
-            { "rage",           SEC_GAMEMASTER,      false, &HandleModifyRageCommand,          "" },
-            { "runicpower",     SEC_GAMEMASTER,      false, &HandleModifyRunicPowerCommand,    "" },
-            { "energy",         SEC_GAMEMASTER,      false, &HandleModifyEnergyCommand,        "" },
-            { "money",          SEC_GAMEMASTER,      false, &HandleModifyMoneyCommand,         "" },
-            { "scale",          SEC_GAMEMASTER,      false, &HandleModifyScaleCommand,         "" },
-            { "bit",            SEC_GAMEMASTER,      false, &HandleModifyBitCommand,           "" },
-            { "faction",        SEC_ADMINISTRATOR,   false, &HandleModifyFactionCommand,       "" },
-            { "spell",          SEC_GAMEMASTER,      false, &HandleModifySpellCommand,         "" },
-            { "talentpoints",   SEC_GAMEMASTER,      false, &HandleModifyTalentCommand,        "" },
-            { "mount",          SEC_GAMEMASTER,      false, &HandleModifyMountCommand,         "" },
-            { "honor",          SEC_GAMEMASTER,      false, &HandleModifyHonorCommand,         "" },
-            { "reputation",     SEC_GAMEMASTER,      false, &HandleModifyRepCommand,           "" },
-            { "arenapoints",    SEC_GAMEMASTER,      false, &HandleModifyArenaCommand,         "" },
-            { "drunk",          SEC_GAMEMASTER,      false, &HandleModifyDrunkCommand,         "" },
-            { "standstate",     SEC_GAMEMASTER,      false, &HandleModifyStandStateCommand,    "" },
-            { "phase",          SEC_GAMEMASTER,      false, &HandleModifyPhaseCommand,         "" },
-            { "gender",         SEC_GAMEMASTER,      false, &HandleModifyGenderCommand,        "" },
-            { "speed",          SEC_GAMEMASTER,      false, nullptr,                           "", modifyspeedCommandTable }
+            { "hp",             SEC_TRANSFERMASTER,      false, &HandleModifyHPCommand,            "" },
+            { "mana",           SEC_TRANSFERMASTER,      false, &HandleModifyManaCommand,          "" },
+            { "rage",           SEC_TRANSFERMASTER,      false, &HandleModifyRageCommand,          "" },
+            { "runicpower",     SEC_TRANSFERMASTER,      false, &HandleModifyRunicPowerCommand,    "" },
+            { "energy",         SEC_HEAD_GAMEMASTER,      false, &HandleModifyEnergyCommand,        "" },
+            { "money",          SEC_TRANSFERMASTER,      false, &HandleModifyMoneyCommand,         "" },
+            { "scale",          SEC_PVPMASTER,      false, &HandleModifyScaleCommand,         "" },
+            { "bit",            SEC_HEAD_GAMEMASTER,      false, &HandleModifyBitCommand,           "" },
+            { "faction",        SEC_HEAD_GAMEMASTER,   false, &HandleModifyFactionCommand,       "" },
+            { "spell",          SEC_ADMINISTRATOR,      false, &HandleModifySpellCommand,         "" },
+            { "talentpoints",   SEC_HEAD_GAMEMASTER,      false, &HandleModifyTalentCommand,        "" },
+            { "mount",          SEC_TRANSFERMASTER,      false, &HandleModifyMountCommand,         "" },
+            { "honor",          SEC_TRANSFERMASTER,      false, &HandleModifyHonorCommand,         "" },
+            { "reputation",     SEC_TRANSFERMASTER,      false, &HandleModifyRepCommand,           "" },
+            { "arenapoints",    SEC_HEAD_GAMEMASTER,      false, &HandleModifyArenaCommand,         "" },
+            { "drunk",          SEC_HEAD_GAMEMASTER,      false, &HandleModifyDrunkCommand,         "" },
+            { "standstate",     SEC_HEAD_GAMEMASTER,      false, &HandleModifyStandStateCommand,    "" },
+            { "phase",          SEC_DEVELOPER,      false, &HandleModifyPhaseCommand,         "" },
+            { "gender",         SEC_HEAD_GAMEMASTER,      false, &HandleModifyGenderCommand,        "" },
+            { "speed",          SEC_TRIAL_GAMEMASTER,      false, nullptr,                           "", modifyspeedCommandTable }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "morph",          SEC_MODERATOR,      false, &HandleModifyMorphCommand,          "" },
-            { "demorph",        SEC_MODERATOR,      false, &HandleDeMorphCommand,              "" },
-            { "modify",         SEC_GAMEMASTER,     false, nullptr,                            "", modifyCommandTable }
+            { "morph",          SEC_GAMEMASTER,      false, &HandleModifyMorphCommand,          "" },
+            { "demorph",        SEC_GAMEMASTER,      false, &HandleDeMorphCommand,              "" },
+            { "modify",         SEC_TRANSFERMASTER,     false, nullptr,                            "", modifyCommandTable }
         };
         return commandTable;
     }

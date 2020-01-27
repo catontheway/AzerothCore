@@ -29,16 +29,16 @@ public:
     {
         static std::vector<ChatCommand> pdumpCommandTable =
         {
-            { "load",           SEC_ADMINISTRATOR,  true,  &HandlePDumpLoadCommand,                 "" },
-            { "write",          SEC_ADMINISTRATOR,  true,  &HandlePDumpWriteCommand,                "" }
+            { "load",           SEC_DEVELOPER,  true,  &HandlePDumpLoadCommand,                 "" },
+            { "write",          SEC_DEVELOPER,  true,  &HandlePDumpWriteCommand,                "" }
         };
 
         static std::vector<ChatCommand> characterDeletedCommandTable =
         {
-            { "delete",        SEC_CONSOLE,          true,  &HandleCharacterDeletedDeleteCommand,  "" },
+            { "delete",        SEC_ADMINISTRATOR,          true,  &HandleCharacterDeletedDeleteCommand,  "" },
             { "list",          SEC_ADMINISTRATOR,    true,  &HandleCharacterDeletedListCommand,    "" },
             { "restore",       SEC_ADMINISTRATOR,    true,  &HandleCharacterDeletedRestoreCommand, "" },
-            { "old",           SEC_CONSOLE,          true,  &HandleCharacterDeletedOldCommand,     "" },
+            { "old",           SEC_ADMINISTRATOR,          true,  &HandleCharacterDeletedOldCommand,     "" },
         };
 
         static std::vector<ChatCommand> characterCheckCommandTable =
@@ -49,22 +49,23 @@ public:
 
         static std::vector<ChatCommand> characterCommandTable =
         {
-            { "customize",      SEC_GAMEMASTER,     true,  &HandleCharacterCustomizeCommand,       "" },
-            { "changefaction",  SEC_GAMEMASTER,     true,  &HandleCharacterChangeFactionCommand,   "" },
-            { "changerace",     SEC_GAMEMASTER,     true,  &HandleCharacterChangeRaceCommand,      "" },
+            { "customize",      SEC_TRANSFERMASTER,     true,  &HandleCharacterCustomizeCommand,       "" },
+            { "changefaction",  SEC_TRANSFERMASTER,     true,  &HandleCharacterChangeFactionCommand,   "" },
+            { "changerace",     SEC_TRANSFERMASTER,     true,  &HandleCharacterChangeRaceCommand,      "" },
+            { "check",          SEC_GAMEMASTER,     false, nullptr,                                "", characterCheckCommandTable },
             { "erase",          SEC_CONSOLE,        true,  &HandleCharacterEraseCommand,           "" },
             { "deleted",        SEC_ADMINISTRATOR,  true,  nullptr,                                "", characterDeletedCommandTable },
-            { "level",          SEC_GAMEMASTER,     true,  &HandleCharacterLevelCommand,           "" },
-            { "rename",         SEC_GAMEMASTER,     true,  &HandleCharacterRenameCommand,          "" },
-            { "reputation",     SEC_GAMEMASTER,     true,  &HandleCharacterReputationCommand,      "" },
-            { "titles",         SEC_GAMEMASTER,     true,  &HandleCharacterTitlesCommand,          "" }
+            { "level",          SEC_TRANSFERMASTER,     true,  &HandleCharacterLevelCommand,           "" },
+            { "rename",         SEC_TRANSFERMASTER,     true,  &HandleCharacterRenameCommand,          "" },
+            { "reputation",     SEC_TRANSFERMASTER,     true,  &HandleCharacterReputationCommand,      "" },
+            { "titles",         SEC_TRANSFERMASTER,     true,  &HandleCharacterTitlesCommand,          "" }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "character",      SEC_GAMEMASTER,     true,  nullptr,                                "", characterCommandTable },
-            { "levelup",        SEC_GAMEMASTER,     false, &HandleLevelUpCommand,                  "" },
-            { "pdump",          SEC_ADMINISTRATOR,  true,  nullptr,                                "", pdumpCommandTable }
+            { "character",      SEC_TRANSFERMASTER,     true,  nullptr,                                "", characterCommandTable },
+            { "levelup",        SEC_TRANSFERMASTER,     false, &HandleLevelUpCommand,                  "" },
+            { "pdump",          SEC_DEVELOPER,  true,  nullptr,                                "", pdumpCommandTable }
         };
         return commandTable;
     }
@@ -125,7 +126,7 @@ public:
                 Field* fields = result->Fetch();
 
                 DeletedInfo info;
-                
+
                 info.lowGuid    = fields[0].GetUInt32();
                 info.name       = fields[1].GetString();
                 info.accountId  = fields[2].GetUInt32();
@@ -220,7 +221,7 @@ public:
         stmt->setUInt32(0, delInfo.lowGuid);
         if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
             sWorld->AddGlobalPlayerData(delInfo.lowGuid, delInfo.accountId, delInfo.name, (*result)[2].GetUInt8(), (*result)[0].GetUInt8(), (*result)[1].GetUInt8(), (*result)[3].GetUInt8(), 0, 0);
-                    
+
     }
 
     static void HandleCharacterLevel(Player* player, uint64 playerGuid, uint32 oldLevel, uint32 newLevel, ChatHandler* handler)
@@ -510,7 +511,7 @@ public:
     *
     * @param args the search string which either contains a player GUID or a part fo the character-name
     */
-    
+
     static bool HandleCharacterDeletedListCommand(ChatHandler* handler, char const* args)
     {
         DeletedInfoList foundList;

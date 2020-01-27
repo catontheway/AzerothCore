@@ -30,40 +30,40 @@ public:
     {
         static std::vector<ChatCommand> lookupPlayerCommandTable =
         {
-            { "ip",             SEC_GAMEMASTER,     true,  &HandleLookupPlayerIpCommand,        "" },
-            { "account",        SEC_GAMEMASTER,     true,  &HandleLookupPlayerAccountCommand,   "" },
-            { "email",          SEC_GAMEMASTER,     true,  &HandleLookupPlayerEmailCommand,     "" }
+            { "ip",             SEC_PVPMASTER,     true,  &HandleLookupPlayerIpCommand,        "" },
+            { "account",        SEC_PVPMASTER,     true,  &HandleLookupPlayerAccountCommand,   "" },
+            { "email",          SEC_PVPMASTER,     true,  &HandleLookupPlayerEmailCommand,     "" }
         };
 
         static std::vector<ChatCommand> lookupSpellCommandTable =
         {
-            { "id",             SEC_MODERATOR,      true,  &HandleLookupSpellIdCommand,         "" },
-            { "",               SEC_MODERATOR,      true,  &HandleLookupSpellCommand,           "" }
+            { "id",             SEC_GAMEMASTER,      true,  &HandleLookupSpellIdCommand,         "" },
+            { "",               SEC_GAMEMASTER,      true,  &HandleLookupSpellCommand,           "" }
         };
 
         static std::vector<ChatCommand> lookupCommandTable =
         {
-            { "area",           SEC_MODERATOR,      true,  &HandleLookupAreaCommand,        "" },
-            { "creature",       SEC_MODERATOR,      true,  &HandleLookupCreatureCommand,    "" },
-            { "event",          SEC_MODERATOR,      true,  &HandleLookupEventCommand,       "" },
-            { "faction",        SEC_MODERATOR,      true,  &HandleLookupFactionCommand,     "" },
-            { "item",           SEC_MODERATOR,      true,  &HandleLookupItemCommand,        "" },
-            { "itemset",        SEC_MODERATOR,      true,  &HandleLookupItemSetCommand,     "" },
-            { "object",         SEC_MODERATOR,      true,  &HandleLookupObjectCommand,      "" },
-            { "gobject",        SEC_MODERATOR,      true,  &HandleLookupObjectCommand,      "" },
-            { "quest",          SEC_MODERATOR,      true,  &HandleLookupQuestCommand,       "" },
-            { "skill",          SEC_MODERATOR,      true,  &HandleLookupSkillCommand,       "" },
-            { "taxinode",       SEC_MODERATOR,      true,  &HandleLookupTaxiNodeCommand,    "" },
-            { "tele",           SEC_MODERATOR,      true,  &HandleLookupTeleCommand,        "" },
-            { "title",          SEC_MODERATOR,      true,  &HandleLookupTitleCommand,       "" },
-            { "map",            SEC_MODERATOR,      true,  &HandleLookupMapCommand,         "" },
-            { "player",         SEC_GAMEMASTER,     true,  nullptr, "", lookupPlayerCommandTable },
-            { "spell",          SEC_MODERATOR,      true,  nullptr, "", lookupSpellCommandTable }
+            { "area",           SEC_EVENTMASTER,      true,  &HandleLookupAreaCommand,        "" },
+            { "creature",       SEC_EVENTMASTER,      true,  &HandleLookupCreatureCommand,    "" },
+            { "event",          SEC_EVENTMASTER,      true,  &HandleLookupEventCommand,       "" },
+            { "faction",        SEC_EVENTMASTER,      true,  &HandleLookupFactionCommand,     "" },
+            { "item",           SEC_TRANSFERMASTER,      true,  &HandleLookupItemCommand,        "" },
+            { "itemset",        SEC_TRANSFERMASTER,      true,  &HandleLookupItemSetCommand,     "" },
+            { "object",         SEC_EVENTMASTER,      true,  &HandleLookupObjectCommand,      "" },
+            { "gobject",        SEC_EVENTMASTER,      true,  &HandleLookupObjectCommand,      "" },
+            { "quest",          SEC_HEAD_GAMEMASTER,      true,  &HandleLookupQuestCommand,       "" },
+            { "skill",          SEC_HEAD_GAMEMASTER,      true,  &HandleLookupSkillCommand,       "" },
+            { "taxinode",       SEC_HEAD_GAMEMASTER,      true,  &HandleLookupTaxiNodeCommand,    "" },
+            { "tele",           SEC_TRIAL_GAMEMASTER,      true,  &HandleLookupTeleCommand,        "" },
+            { "title",          SEC_PVPMASTER,      true,  &HandleLookupTitleCommand,       "" },
+            { "map",            SEC_EVENTMASTER,      true,  &HandleLookupMapCommand,         "" },
+            { "player",         SEC_PVPMASTER,     true,  nullptr, "", lookupPlayerCommandTable },
+            { "spell",          SEC_HEAD_GAMEMASTER,      true,  nullptr, "", lookupSpellCommandTable }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "lookup",         SEC_MODERATOR,  true,  nullptr,                                 "", lookupCommandTable }
+            { "lookup",         SEC_EVENTMASTER,  true,  nullptr,                                 "", lookupCommandTable }
         };
         return commandTable;
     }
@@ -171,7 +171,7 @@ public:
                 if (creatureLocale->Name.size() > localeIndex && !creatureLocale->Name[localeIndex].empty())
                 {
                     std::string name = creatureLocale->Name[localeIndex];
-            
+
                     if (Utf8FitTo(name, wNamePart))
                     {
                         if (maxResults && count++ == maxResults)
@@ -179,15 +179,15 @@ public:
                             handler->PSendSysMessage(LANG_COMMAND_LOOKUP_MAX_RESULTS, maxResults);
                             return true;
                         }
-            
+
                         if (handler->GetSession())
                             handler->PSendSysMessage(LANG_CREATURE_ENTRY_LIST_CHAT, id, id, name.c_str());
                         else
                             handler->PSendSysMessage(LANG_CREATURE_ENTRY_LIST_CONSOLE, id, name.c_str());
-            
+
                         if (!found)
                             found = true;
-            
+
                         continue;
                     }
                 }
@@ -409,7 +409,7 @@ public:
                     if (il->Name.size() > ulocaleIndex && !il->Name[ulocaleIndex].empty())
                     {
                         std::string name = il->Name[ulocaleIndex];
-            
+
                         if (Utf8FitTo(name, wNamePart))
                         {
                             if (maxResults && count++ == maxResults)
@@ -417,15 +417,15 @@ public:
                                 handler->PSendSysMessage(LANG_COMMAND_LOOKUP_MAX_RESULTS, maxResults);
                                 return true;
                             }
-            
+
                             if (handler->GetSession())
                                 handler->PSendSysMessage(LANG_ITEM_LIST_CHAT, itr->second.ItemId, itr->second.ItemId, name.c_str());
                             else
                                 handler->PSendSysMessage(LANG_ITEM_LIST_CONSOLE, itr->second.ItemId, name.c_str());
-            
+
                             if (!found)
                                 found = true;
-            
+
                             continue;
                         }
                     }
@@ -558,7 +558,7 @@ public:
                 if (objectLocalte->Name.size() > localeIndex && !objectLocalte->Name[localeIndex].empty())
                 {
                     std::string name = objectLocalte->Name[localeIndex];
-            
+
                     if (Utf8FitTo(name, wNamePart))
                     {
                         if (maxResults && count++ == maxResults)
@@ -566,15 +566,15 @@ public:
                             handler->PSendSysMessage(LANG_COMMAND_LOOKUP_MAX_RESULTS, maxResults);
                             return true;
                         }
-            
+
                         if (handler->GetSession())
                             handler->PSendSysMessage(LANG_GO_ENTRY_LIST_CHAT, itr->second.entry, itr->second.entry, name.c_str());
                         else
                             handler->PSendSysMessage(LANG_GO_ENTRY_LIST_CONSOLE, itr->second.entry, name.c_str());
-            
+
                         if (!found)
                             found = true;
-            
+
                         continue;
                     }
                 }
@@ -965,7 +965,7 @@ public:
                     found = true;
             }
         }
-        
+
         if (!found)
             handler->SendSysMessage(LANG_COMMAND_NOSPELLFOUND);
 

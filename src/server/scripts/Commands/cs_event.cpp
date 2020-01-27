@@ -26,14 +26,14 @@ public:
     {
         static std::vector<ChatCommand> eventCommandTable =
         {
-            { "activelist",     SEC_GAMEMASTER,     true,  &HandleEventActiveListCommand,     "" },
-            { "start",          SEC_GAMEMASTER,     true,  &HandleEventStartCommand,          "" },
-            { "stop",           SEC_GAMEMASTER,     true,  &HandleEventStopCommand,           "" },
-            { "",               SEC_GAMEMASTER,     true,  &HandleEventInfoCommand,           "" }
+            { "activelist",     SEC_TRANSFERMASTER,     true,  &HandleEventActiveListCommand,     "" },
+            { "start",          SEC_TRANSFERMASTER,     true,  &HandleEventStartCommand,          "" },
+            { "stop",           SEC_TRANSFERMASTER,     true,  &HandleEventStopCommand,           "" },
+            { "",               SEC_TRANSFERMASTER,     true,  &HandleEventInfoCommand,           "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "event",          SEC_GAMEMASTER,     false, nullptr,                  "", eventCommandTable }
+            { "event",          SEC_TRANSFERMASTER,     false, nullptr,                  "", eventCommandTable }
         };
         return commandTable;
     }

@@ -26,14 +26,14 @@ public:
     {
         static std::vector<ChatCommand> questCommandTable =
         {
-            { "add",            SEC_GAMEMASTER,  false, &HandleQuestAdd,                    "" },
-            { "complete",       SEC_GAMEMASTER,  false, &HandleQuestComplete,               "" },
-            { "remove",         SEC_GAMEMASTER,  false, &HandleQuestRemove,                 "" },
-            { "reward",         SEC_GAMEMASTER,  false, &HandleQuestReward,                 "" },
+            { "add",            SEC_HEAD_GAMEMASTER,  false, &HandleQuestAdd,                    "" },
+            { "complete",       SEC_HEAD_GAMEMASTER,  false, &HandleQuestComplete,               "" },
+            { "remove",         SEC_HEAD_GAMEMASTER,  false, &HandleQuestRemove,                 "" },
+            { "reward",         SEC_HEAD_GAMEMASTER,  false, &HandleQuestReward,                 "" },
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "quest",          SEC_GAMEMASTER,  false, nullptr, "", questCommandTable },
+            { "quest",          SEC_HEAD_GAMEMASTER,  false, nullptr, "", questCommandTable },
         };
         return commandTable;
     }
@@ -64,7 +64,7 @@ public:
             handler->SetSentErrorMessage(true);
             return false;
         }
-		
+
 		if (player->IsActiveQuest(entry))
         {
             handler->PSendSysMessage("This quest is already active!");

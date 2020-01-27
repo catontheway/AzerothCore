@@ -3,10 +3,10 @@ INSERT INTO `creature_template` (`entry`, `modelid1`, `name`, `subname`, `IconNa
 (200000, 12345, 'Template', '', 'Trainer', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_Template'),
 (200001, 12345, 'BeastMastery', '', 'Gunner', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_BeastMastery'),
 (200002, 12345, 'TOP', '', 'Attack', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_TOP'),
-(200003, 12345, 'Doctor', '', 'Driver', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_Doctor');
+(200003, 12345, 'Doctor', '', 'Driver', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_Doctor'),
 (200004, 12345, 'Teleport', '', 'Taxi', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_Teleport'),
 (200005, 12345, 'Transmogrifier', '', 'Interact', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_Transmogrifier'),
-(200006, 12345, 'Ex-Changer', '', 'Buy', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_ExChanger');
+(200006, 12345, 'Ex-Changer', '', 'Buy', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_ExChanger'),
 (200007, 12345, 'Character Tools', '', 'Buy', 0, 100, 100, 2, 35, 1, 0.8, 0, 2000, 0, 1, 0, 0, 7, 138936390, 100000, 'CreatureScript_CharacterTools');
 
 -- Gurubashi Invisible

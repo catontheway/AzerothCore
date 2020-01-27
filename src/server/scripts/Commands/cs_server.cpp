@@ -30,54 +30,54 @@ public:
     {
         static std::vector<ChatCommand> serverIdleRestartCommandTable =
         {
-            { "cancel",         SEC_ADMINISTRATOR,  true,  &HandleServerShutDownCancelCommand,      "" },
-            { ""   ,            SEC_ADMINISTRATOR,  true,  &HandleServerIdleRestartCommand,         "" }
+            { "cancel",         SEC_DEVELOPER,  true,  &HandleServerShutDownCancelCommand,      "" },
+            { ""   ,            SEC_DEVELOPER,  true,  &HandleServerIdleRestartCommand,         "" }
         };
 
         static std::vector<ChatCommand> serverIdleShutdownCommandTable =
         {
-            { "cancel",         SEC_ADMINISTRATOR,  true,  &HandleServerShutDownCancelCommand,      "" },
-            { ""   ,            SEC_ADMINISTRATOR,  true,  &HandleServerIdleShutDownCommand,        "" }
+            { "cancel",         SEC_DEVELOPER,  true,  &HandleServerShutDownCancelCommand,      "" },
+            { ""   ,            SEC_DEVELOPER,  true,  &HandleServerIdleShutDownCommand,        "" }
         };
 
         static std::vector<ChatCommand> serverRestartCommandTable =
         {
-            { "cancel",         SEC_ADMINISTRATOR,  true,  &HandleServerShutDownCancelCommand,      "" },
-            { ""   ,            SEC_ADMINISTRATOR,  true,  &HandleServerRestartCommand,             "" }
+            { "cancel",         SEC_DEVELOPER,  true,  &HandleServerShutDownCancelCommand,      "" },
+            { ""   ,            SEC_DEVELOPER,  true,  &HandleServerRestartCommand,             "" }
         };
 
         static std::vector<ChatCommand> serverShutdownCommandTable =
         {
-            { "cancel",         SEC_ADMINISTRATOR,  true,  &HandleServerShutDownCancelCommand,      "" },
-            { ""   ,            SEC_ADMINISTRATOR,  true,  &HandleServerShutDownCommand,            "" }
+            { "cancel",         SEC_DEVELOPER,  true,  &HandleServerShutDownCancelCommand,      "" },
+            { ""   ,            SEC_DEVELOPER,  true,  &HandleServerShutDownCommand,            "" }
         };
 
         static std::vector<ChatCommand> serverSetCommandTable =
         {
-            { "difftime",       SEC_CONSOLE,        true,  &HandleServerSetDiffTimeCommand,         "" },
-            { "loglevel",       SEC_CONSOLE,        true,  &HandleServerSetLogLevelCommand,         "" },
-            { "logfilelevel",   SEC_CONSOLE,        true,  &HandleServerSetLogFileLevelCommand,     "" },
-            { "motd",           SEC_ADMINISTRATOR,  true,  &HandleServerSetMotdCommand,             "" },
-            { "closed",         SEC_ADMINISTRATOR,  true,  &HandleServerSetClosedCommand,           "" }
+            { "difftime",       SEC_DEVELOPER,        true,  &HandleServerSetDiffTimeCommand,         "" },
+            { "loglevel",       SEC_DEVELOPER,        true,  &HandleServerSetLogLevelCommand,         "" },
+            { "logfilelevel",   SEC_DEVELOPER,        true,  &HandleServerSetLogFileLevelCommand,     "" },
+            { "motd",           SEC_DEVELOPER,  true,  &HandleServerSetMotdCommand,             "" },
+            { "closed",         SEC_DEVELOPER,  true,  &HandleServerSetClosedCommand,           "" }
         };
 
         static std::vector<ChatCommand> serverCommandTable =
         {
-            { "corpses",        SEC_GAMEMASTER,     true,  &HandleServerCorpsesCommand,             "" },
-            { "exit",           SEC_CONSOLE,        true,  &HandleServerExitCommand,                "" },
-            { "idlerestart",    SEC_ADMINISTRATOR,  true,  nullptr,                                 "", serverIdleRestartCommandTable },
-            { "idleshutdown",   SEC_ADMINISTRATOR,  true,  nullptr,                                 "", serverIdleShutdownCommandTable },
-            { "info",           SEC_PLAYER,         true,  &HandleServerInfoCommand,                "" },
-            { "motd",           SEC_PLAYER,         true,  &HandleServerMotdCommand,                "" },
-            { "restart",        SEC_ADMINISTRATOR,  true,  nullptr,                                 "", serverRestartCommandTable },
-            { "shutdown",       SEC_ADMINISTRATOR,  true,  nullptr,                                 "", serverShutdownCommandTable },
-            { "set",            SEC_ADMINISTRATOR,  true,  nullptr,                                 "", serverSetCommandTable },
-            { "togglequerylog", SEC_CONSOLE,        true,  &HandleServerToggleQueryLogging,         "" }
+            { "corpses",        SEC_DEVELOPER,     true,  &HandleServerCorpsesCommand,             "" },
+            { "exit",           SEC_DEVELOPER,        true,  &HandleServerExitCommand,                "" },
+            { "idlerestart",    SEC_DEVELOPER,  true,  nullptr,                                 "", serverIdleRestartCommandTable },
+            { "idleshutdown",   SEC_DEVELOPER,  true,  nullptr,                                 "", serverIdleShutdownCommandTable },
+            { "info",           SEC_DEVELOPER,         true,  &HandleServerInfoCommand,                "" },
+            { "motd",           SEC_DEVELOPER,         true,  &HandleServerMotdCommand,                "" },
+            { "restart",        SEC_DEVELOPER,  true,  nullptr,                                 "", serverRestartCommandTable },
+            { "shutdown",       SEC_DEVELOPER,  true,  nullptr,                                 "", serverShutdownCommandTable },
+            { "set",            SEC_DEVELOPER,  true,  nullptr,                                 "", serverSetCommandTable },
+            { "togglequerylog", SEC_DEVELOPER,        true,  &HandleServerToggleQueryLogging,         "" }
         };
 
          static std::vector<ChatCommand> commandTable =
         {
-            { "server",         SEC_PLAYER,         true,  nullptr,                                 "", serverCommandTable }
+            { "server",         SEC_DEVELOPER,         true,  nullptr,                                 "", serverCommandTable }
         };
         return commandTable;
     }

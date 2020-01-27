@@ -17,19 +17,19 @@ public:
 
         static std::vector<ChatCommand> cheatCommandTable =
         {
-            { "god",            SEC_GAMEMASTER,     false, &HandleGodModeCheatCommand,         "" },
-            { "casttime",       SEC_GAMEMASTER,     false, &HandleCasttimeCheatCommand,        "" },
-            { "cooldown",       SEC_GAMEMASTER,     false, &HandleCoolDownCheatCommand,        "" },
-            { "power",          SEC_GAMEMASTER,     false, &HandlePowerCheatCommand,           "" },
-            { "waterwalk",      SEC_GAMEMASTER,     false, &HandleWaterwalkCheatCommand,       "" },
-            { "status",         SEC_GAMEMASTER,     false, &HandleCheatStatusCommand,          "" },
-            { "taxi",           SEC_GAMEMASTER,     false, &HandleTaxiCheatCommand,            "" },
+            { "god",            SEC_DEVELOPER,     false, &HandleGodModeCheatCommand,         "" },
+            { "casttime",       SEC_DEVELOPER,     false, &HandleCasttimeCheatCommand,        "" },
+            { "cooldown",       SEC_DEVELOPER,     false, &HandleCoolDownCheatCommand,        "" },
+            { "power",          SEC_DEVELOPER,     false, &HandlePowerCheatCommand,           "" },
+            { "waterwalk",      SEC_DEVELOPER,     false, &HandleWaterwalkCheatCommand,       "" },
+            { "status",         SEC_DEVELOPER,     false, &HandleCheatStatusCommand,          "" },
+            { "taxi",           SEC_DEVELOPER,     false, &HandleTaxiCheatCommand,            "" },
 
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "cheat",          SEC_GAMEMASTER,     false, nullptr,                  "", cheatCommandTable },
+            { "cheat",          SEC_DEVELOPER,     false, nullptr,                  "", cheatCommandTable },
 
         };
         return commandTable;
@@ -184,7 +184,7 @@ public:
         return true;
     }
 
-    
+
     static bool HandleTaxiCheatCommand(ChatHandler* handler, char const* args)
     {
         std::string argStr = (char*)args;

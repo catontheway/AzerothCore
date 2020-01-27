@@ -30,30 +30,30 @@ public:
     {
         static std::vector<ChatCommand> removeDisableCommandTable =
         {
-            { "spell",                SEC_ADMINISTRATOR,    true, &HandleRemoveDisableSpellCommand,               "" },
-            { "quest",                SEC_ADMINISTRATOR,    true, &HandleRemoveDisableQuestCommand,               "" },
-            { "map",                  SEC_ADMINISTRATOR,    true, &HandleRemoveDisableMapCommand,                 "" },
-            { "battleground",         SEC_ADMINISTRATOR,    true, &HandleRemoveDisableBattlegroundCommand,        "" },
-            { "outdoorpvp",           SEC_ADMINISTRATOR,    true, &HandleRemoveDisableOutdoorPvPCommand,          "" },
-            { "vmap",                 SEC_ADMINISTRATOR,    true, &HandleRemoveDisableVmapCommand,                "" },
+            { "spell",                SEC_DEVELOPER,    true, &HandleRemoveDisableSpellCommand,               "" },
+            { "quest",                SEC_DEVELOPER,    true, &HandleRemoveDisableQuestCommand,               "" },
+            { "map",                  SEC_DEVELOPER,    true, &HandleRemoveDisableMapCommand,                 "" },
+            { "battleground",         SEC_DEVELOPER,    true, &HandleRemoveDisableBattlegroundCommand,        "" },
+            { "outdoorpvp",           SEC_DEVELOPER,    true, &HandleRemoveDisableOutdoorPvPCommand,          "" },
+            { "vmap",                 SEC_DEVELOPER,    true, &HandleRemoveDisableVmapCommand,                "" },
         };
         static std::vector<ChatCommand> addDisableCommandTable =
         {
-            { "spell",                SEC_ADMINISTRATOR,    true, &HandleAddDisableSpellCommand,                  "" },
-            { "quest",                SEC_ADMINISTRATOR,    true, &HandleAddDisableQuestCommand,                  "" },
-            { "map",                  SEC_ADMINISTRATOR,    true, &HandleAddDisableMapCommand,                    "" },
-            { "battleground",         SEC_ADMINISTRATOR,    true, &HandleAddDisableBattlegroundCommand,           "" },
-            { "outdoorpvp",           SEC_ADMINISTRATOR,    true, &HandleAddDisableOutdoorPvPCommand,             "" },
-            { "vmap",                 SEC_ADMINISTRATOR,    true, &HandleAddDisableVmapCommand,                   "" },
+            { "spell",                SEC_DEVELOPER,    true, &HandleAddDisableSpellCommand,                  "" },
+            { "quest",                SEC_DEVELOPER,    true, &HandleAddDisableQuestCommand,                  "" },
+            { "map",                  SEC_DEVELOPER,    true, &HandleAddDisableMapCommand,                    "" },
+            { "battleground",         SEC_DEVELOPER,    true, &HandleAddDisableBattlegroundCommand,           "" },
+            { "outdoorpvp",           SEC_DEVELOPER,    true, &HandleAddDisableOutdoorPvPCommand,             "" },
+            { "vmap",                 SEC_DEVELOPER,    true, &HandleAddDisableVmapCommand,                   "" },
         };
         static std::vector<ChatCommand> disableCommandTable =
         {
-            { "add",    SEC_ADMINISTRATOR,  true, NULL, "", addDisableCommandTable },
-            { "remove", SEC_ADMINISTRATOR,  true, NULL, "", removeDisableCommandTable },
+            { "add",    SEC_DEVELOPER,  true, NULL, "", addDisableCommandTable },
+            { "remove", SEC_DEVELOPER,  true, NULL, "", removeDisableCommandTable },
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "disable", SEC_ADMINISTRATOR, false, NULL, "", disableCommandTable },
+            { "disable", SEC_DEVELOPER, false, NULL, "", disableCommandTable },
         };
         return commandTable;
     }
