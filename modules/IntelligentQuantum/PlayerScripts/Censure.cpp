@@ -1,6 +1,6 @@
 #include "ScriptMgr.h"
 
-static const char* List[] = { "game", "server", "guild", "fix", "event", "site", "bug", "ticket", "gm", "admin", "hack", "cheat", "change", "gaming", "trans", "wow", "chat", "dev" };
+static const char* List[] = { "game", "server", "guild", "fix", "event", "site", "bug", "ticket", "gm", "admin", "hack", "cheat", "change", "gaming", "trans", "wow", "chat", "dev", "sv", "ninja" };
 static const char Forbidden[] = ":-\\";
 
 class PlayerScript_Censure : public PlayerScript

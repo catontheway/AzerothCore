@@ -14,13 +14,13 @@ class CreatureScript_Teleport : public CreatureScript
 			return false;
 		}
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Temp:30|t|r .::Shop::.", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\INV_Pick_02:30|t|r .::Work Center::.", GOSSIP_SENDER_MAIN, 8);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\INV_Enchant_ShardNexusLarge:30|t|r .::Transmog Center::.", GOSSIP_SENDER_MAIN, 9);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_bg_winwsg:30|t|r .::DuelZone::.", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_BG_AB_defendflags:30|t|r .::PvPZone::.", GOSSIP_SENDER_MAIN, 3);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Achievement_Dungeon_Icecrown_Frostmourne:30|t|r .::Icecrown::.", GOSSIP_SENDER_MAIN, 4);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_hunter_huntervswild:30|t|r .::Daily Zone::.", GOSSIP_SENDER_MAIN, 5);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Shop Mall", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Work Center", GOSSIP_SENDER_MAIN, 8);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Transmog Center", GOSSIP_SENDER_MAIN, 9);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "DuelZone", GOSSIP_SENDER_MAIN, 2);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "PvPZone", GOSSIP_SENDER_MAIN, 3);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Icecrown", GOSSIP_SENDER_MAIN, 4);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Daily Zone", GOSSIP_SENDER_MAIN, 5);
 
 		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 		return true;
@@ -53,8 +53,8 @@ class CreatureScript_Teleport : public CreatureScript
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
 			case 5:
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportStormWind:25|t|r Stormwind", GOSSIP_SENDER_MAIN, 6);
-            	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|cff00ff00|TInterface\\icons\\Spell_Arcane_TeleportOrgrimmar:25|t|r Orgrimmar", GOSSIP_SENDER_MAIN, 7);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Stormwind", GOSSIP_SENDER_MAIN, 6);
+            	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Orgrimmar", GOSSIP_SENDER_MAIN, 7);
 
 				player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 				break;
@@ -78,6 +78,8 @@ class CreatureScript_Teleport : public CreatureScript
 				player->TeleportTo(571, 8428.708008f, 2879.004883f, 606.259583f, 1.633352f);
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
+            default:
+                break;
 		}
 		return true;
 	}

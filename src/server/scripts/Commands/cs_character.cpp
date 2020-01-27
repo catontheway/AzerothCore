@@ -52,7 +52,6 @@ public:
             { "customize",      SEC_GAMEMASTER,     true,  &HandleCharacterCustomizeCommand,       "" },
             { "changefaction",  SEC_GAMEMASTER,     true,  &HandleCharacterChangeFactionCommand,   "" },
             { "changerace",     SEC_GAMEMASTER,     true,  &HandleCharacterChangeRaceCommand,      "" },
-            { "check",          SEC_GAMEMASTER,     false, nullptr,                                "", characterCheckCommandTable },
             { "erase",          SEC_CONSOLE,        true,  &HandleCharacterEraseCommand,           "" },
             { "deleted",        SEC_ADMINISTRATOR,  true,  nullptr,                                "", characterDeletedCommandTable },
             { "level",          SEC_GAMEMASTER,     true,  &HandleCharacterLevelCommand,           "" },
@@ -102,7 +101,7 @@ public:
                 stmt->setUInt32(0, uint32(atoi(searchString.c_str())));
                 result = CharacterDatabase.Query(stmt);
             }
-                // search by name
+            // search by name
             else
             {
                 if (!normalizePlayerName(searchString))
@@ -126,7 +125,7 @@ public:
                 Field* fields = result->Fetch();
 
                 DeletedInfo info;
-
+                
                 info.lowGuid    = fields[0].GetUInt32();
                 info.name       = fields[1].GetString();
                 info.accountId  = fields[2].GetUInt32();
@@ -221,7 +220,7 @@ public:
         stmt->setUInt32(0, delInfo.lowGuid);
         if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
             sWorld->AddGlobalPlayerData(delInfo.lowGuid, delInfo.accountId, delInfo.name, (*result)[2].GetUInt8(), (*result)[0].GetUInt8(), (*result)[1].GetUInt8(), (*result)[3].GetUInt8(), 0, 0);
-
+                    
     }
 
     static void HandleCharacterLevel(Player* player, uint64 playerGuid, uint32 oldLevel, uint32 newLevel, ChatHandler* handler)
@@ -511,7 +510,7 @@ public:
     *
     * @param args the search string which either contains a player GUID or a part fo the character-name
     */
-
+    
     static bool HandleCharacterDeletedListCommand(ChatHandler* handler, char const* args)
     {
         DeletedInfoList foundList;
@@ -657,7 +656,7 @@ public:
             if (keepDays < 0)
                 return false;
         }
-            // config option value 0 -> disabled and can't be used
+        // config option value 0 -> disabled and can't be used
         else if (keepDays <= 0)
             return false;
 

@@ -9,11 +9,11 @@ class CreatureScript_TOP : public CreatureScript
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank13:25|t|r TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_killxenemies_generalsroom:25|t|r TOP Killer", GOSSIP_SENDER_MAIN, 6);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\INV_Misc_Map_01:25|t|r TOP Played Time", GOSSIP_SENDER_MAIN, 10);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Spell_Holy_DevineAegis:25|t|r TOP Guild", GOSSIP_SENDER_MAIN, 11);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/PvPRankBadges/PvPRank12:25|t|r TOP Achievement", GOSSIP_SENDER_MAIN, 12);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Killer", GOSSIP_SENDER_MAIN, 6);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Played Time", GOSSIP_SENDER_MAIN, 10);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Guild", GOSSIP_SENDER_MAIN, 11);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Achievement", GOSSIP_SENDER_MAIN, 12);
 
 		player->SEND_GOSSIP_MENU(68, creature->GetGUID());
 		return true;
@@ -27,10 +27,10 @@ class CreatureScript_TOP : public CreatureScript
 		{
 			case 1:
 			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_2v2_7:25|t|r Arena Team Top 2v2", GOSSIP_SENDER_MAIN, 2);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_3v3_7:25|t|r Arena Team Top 3v3", GOSSIP_SENDER_MAIN, 3);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_Arena_5v5_7:25|t|r Arena Team Top 5v5", GOSSIP_SENDER_MAIN, 4);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\PVPFrame\\Pvp-arenapoints-icon:25|t|r Top 5 Arena Points", GOSSIP_SENDER_MAIN, 5);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 2v2", GOSSIP_SENDER_MAIN, 2);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 3v3", GOSSIP_SENDER_MAIN, 3);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 5v5", GOSSIP_SENDER_MAIN, 4);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Top 5 Arena Points", GOSSIP_SENDER_MAIN, 5);
 
 				player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
 				return true;
@@ -152,9 +152,9 @@ class CreatureScript_TOP : public CreatureScript
             }
             case 6:
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carrier:25|t|r Total Kills", GOSSIP_SENDER_MAIN, 7);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carriereos:25|t|r Today Kills", GOSSIP_SENDER_MAIN, 8);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Achievement_bg_kill_flag_carrierwsg:25|t|r Yesterday Kills", GOSSIP_SENDER_MAIN, 9);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Total Kills", GOSSIP_SENDER_MAIN, 7);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Today Kills", GOSSIP_SENDER_MAIN, 8);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Yesterday Kills", GOSSIP_SENDER_MAIN, 9);
 
                 player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
                 return true;
@@ -278,15 +278,7 @@ class CreatureScript_TOP : public CreatureScript
             }
             case 11:
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Ability_hunter_rapidkilling:25|t|r Level, XP", GOSSIP_SENDER_MAIN, 13);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface\\icons\\Ability_hunter_rapidkilling:25|t|r Kills, Points", GOSSIP_SENDER_MAIN, 14);
-
-                player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-                return true;
-            }
-            case 13:
-            {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, Level, XP FROM guild ORDER BY Level DESC, Level DESC, XP DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name, Level, XP, `Kills`, Points FROM guild ORDER BY Level DESC, Level DESC, XP DESC LIMIT 10");
 
                 if (Result)
                 {
@@ -299,38 +291,11 @@ class CreatureScript_TOP : public CreatureScript
                         std::string Name = Fields[0].GetString();
                         std::string Level = Fields[1].GetString();
                         uint32 Xp = Fields[2].GetUInt32();
+                        uint32 Kills = Fields[3].GetUInt32();
+                        uint32 Points = Fields[4].GetUInt32();
 
                         std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-                }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
-
-                return true;
-            }
-            case 14:
-            {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, `Kills`, Points FROM guild ORDER BY Points DESC LIMIT 10");
-
-                if (Result)
-                {
-                    Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Guild::. \n", GOSSIP_SENDER_MAIN, 0);
-
-                    do
-                    {
-                        Fields = Result->Fetch();
-                        std::string Name = Fields[0].GetString();
-                        uint32 Kills = Fields[1].GetUInt32();
-                        uint32 Points = Fields[2].GetUInt32();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Kills: " << Kills << " Points: " << Points;
+                        TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp << "Kills: " << Kills << "Points: " << Points;
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
                     }
                     while (Result->NextRow());

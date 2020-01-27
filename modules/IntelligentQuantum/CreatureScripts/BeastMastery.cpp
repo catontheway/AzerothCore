@@ -64,12 +64,12 @@ class CreatureScript_BeastMastery : public CreatureScript
 
 	bool OnGossipHello(Player * player, Creature * m_creature)
 	{
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Hunter_BeastTaming:30|t|r Normal Pets", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Normal Pets", GOSSIP_SENDER_MAIN, 1);
 
 		if (player->CanTameExoticPets())
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "|TInterface\\icons\\Ability_Hunter_BeastCall:30|t|r Exotic Pets", GOSSIP_SENDER_MAIN, 2);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Exotic Pets", GOSSIP_SENDER_MAIN, 2);
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface\\icons\\Ability_Hunter_BeastTraining:30|t|r Food Shop", GOSSIP_SENDER_MAIN, 3);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Food Shop", GOSSIP_SENDER_MAIN, 3);
 		player->SEND_GOSSIP_MENU(68, m_creature->GetGUID());
 		return true;
 	}
@@ -81,31 +81,31 @@ class CreatureScript_BeastMastery : public CreatureScript
 		switch (Action)
 		{
 			case 1:
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_ravager:25|t Ravager|r", GOSSIP_SENDER_MAIN, 100);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_spider:25|t Spider|r", GOSSIP_SENDER_MAIN, 101);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_wolf:25|t Wolf|r", GOSSIP_SENDER_MAIN, 102);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_beasttraining:25|t Scorpion|t", GOSSIP_SENDER_MAIN, 103);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_vulture:25|t Carrion Bird|t", GOSSIP_SENDER_MAIN, 104);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_hyena:25|t Hyena|r", GOSSIP_SENDER_MAIN, 105);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_gorilla:25|t Gorilla|r", GOSSIP_SENDER_MAIN, 106);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_crocolisk:25|t Crocolisk|r", GOSSIP_SENDER_MAIN, 107);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_windserpent:25|t Serpent|r", GOSSIP_SENDER_MAIN, 108);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_cat:25|t Cat|r", GOSSIP_SENDER_MAIN, 109);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_crab:25|t Crab|r", GOSSIP_SENDER_MAIN, 110);
+                player->ADD_GOSSIP_ITEM(4, "Ravager", GOSSIP_SENDER_MAIN, 100);
+                player->ADD_GOSSIP_ITEM(4, "Spider", GOSSIP_SENDER_MAIN, 101);
+                player->ADD_GOSSIP_ITEM(4, "Wolf", GOSSIP_SENDER_MAIN, 102);
+                player->ADD_GOSSIP_ITEM(4, "Scorpion", GOSSIP_SENDER_MAIN, 103);
+                player->ADD_GOSSIP_ITEM(4, "Carrion Bird", GOSSIP_SENDER_MAIN, 104);
+                player->ADD_GOSSIP_ITEM(4, "Hyena", GOSSIP_SENDER_MAIN, 105);
+                player->ADD_GOSSIP_ITEM(4, "Gorilla", GOSSIP_SENDER_MAIN, 106);
+                player->ADD_GOSSIP_ITEM(4, "Crocolisk", GOSSIP_SENDER_MAIN, 107);
+                player->ADD_GOSSIP_ITEM(4, "Serpent", GOSSIP_SENDER_MAIN, 108);
+                player->ADD_GOSSIP_ITEM(4, "Cat", GOSSIP_SENDER_MAIN, 109);
+                player->ADD_GOSSIP_ITEM(4, "Crab", GOSSIP_SENDER_MAIN, 110);
 
 				player->SEND_GOSSIP_MENU(68, m_creature->GetGUID());
 				break;
 			case 2:
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_chimera:25|t Chimaera|r", GOSSIP_SENDER_MAIN, 200);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_corehound:25|t Core Hound|r", GOSSIP_SENDER_MAIN, 201);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_devilsaur:25|t Devilsaur|r", GOSSIP_SENDER_MAIN, 202);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_rhino:25|t Rhino|r", GOSSIP_SENDER_MAIN, 203);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_silithid:25|t Silithid|r", GOSSIP_SENDER_MAIN, 204);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_worm:25|t Worm|r", GOSSIP_SENDER_MAIN, 205);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_bear:25|t Spirit Beast (Bear)|r", GOSSIP_SENDER_MAIN, 206);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_beasttraining:25|t Spirit Beast (Tiger)|r", GOSSIP_SENDER_MAIN, 207);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_pet_wolf:25|t Spirit Beast (Wolf)|r", GOSSIP_SENDER_MAIN, 208);
-                player->ADD_GOSSIP_ITEM(4, "|TInterface\\icons\\Ability_hunter_beasttraining:25|t Spirit Beast (Leopard)|r", GOSSIP_SENDER_MAIN, 209);
+                player->ADD_GOSSIP_ITEM(4, "Chimaera", GOSSIP_SENDER_MAIN, 200);
+                player->ADD_GOSSIP_ITEM(4, "Core Hound", GOSSIP_SENDER_MAIN, 201);
+                player->ADD_GOSSIP_ITEM(4, "Devilsaur", GOSSIP_SENDER_MAIN, 202);
+                player->ADD_GOSSIP_ITEM(4, "Rhino", GOSSIP_SENDER_MAIN, 203);
+                player->ADD_GOSSIP_ITEM(4, "Silithid", GOSSIP_SENDER_MAIN, 204);
+                player->ADD_GOSSIP_ITEM(4, "Worm", GOSSIP_SENDER_MAIN, 205);
+                player->ADD_GOSSIP_ITEM(4, "Spirit Beast (Bear)", GOSSIP_SENDER_MAIN, 206);
+                player->ADD_GOSSIP_ITEM(4, "Spirit Beast (Tiger)", GOSSIP_SENDER_MAIN, 207);
+                player->ADD_GOSSIP_ITEM(4, "Spirit Beast (Wolf)", GOSSIP_SENDER_MAIN, 208);
+                player->ADD_GOSSIP_ITEM(4, "Spirit Beast (Leopard)", GOSSIP_SENDER_MAIN, 209);
 
 				player->SEND_GOSSIP_MENU(68, m_creature->GetGUID());
 				break;
@@ -175,6 +175,8 @@ class CreatureScript_BeastMastery : public CreatureScript
 			case 209:
 				CreatePet(player, m_creature, 32517);
 				break;
+            default:
+                break;
 		}
 		return true;
 	}

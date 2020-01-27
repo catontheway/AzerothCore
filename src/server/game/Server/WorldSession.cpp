@@ -96,7 +96,7 @@ WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, uint8
     m_Socket(sock),
     _security(sec),
     _skipQueue(skipQueue),
-    _accountId(id),    
+    _accountId(id),
     m_expansion(expansion),
     m_total_time(TotalTime),
     _logoutTime(0),
@@ -109,7 +109,7 @@ WorldSession::WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, uint8
     m_latency(0),
     m_clientTimeDelay(0),
     m_TutorialsChanged(false),
-    recruiterId(recruiter),    
+    recruiterId(recruiter),
     isRecruiter(isARecruiter),
     m_currentVendorEntry(0),
     m_currentBankerGUID(0),
@@ -252,10 +252,10 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
     if (updater.ProcessLogout())
     {
         UpdateTimeOutTime(diff);
-        
+
         /// If necessary, kick the player because the client didn't send anything for too long
         /// (or they've been idling in character select)
-        if (sWorld->getBoolConfig(CONFIG_CLOSE_IDLE_CONNECTIONS) && IsConnectionIdle())
+        if (sWorld->getBoolConfig(CONFIG_CLOSE_IDLE_CONNECTIONS) && IsConnectionIdle() && m_Socket)
             m_Socket->CloseSocket("Client didn't send anything for too long");
     }
 
@@ -561,7 +561,7 @@ void WorldSession::LogoutPlayer(bool save)
         {
             _player->GetGroup()->SendUpdate();
             _player->GetGroup()->ResetMaxEnchantingLevel();
-			
+
             Map::PlayerList const &playerList = _player->GetMap()->GetPlayers();
 
             if (_player->GetMap()->IsDungeon() || _player->GetMap()->IsRaidOrHeroicDungeon())
@@ -921,7 +921,7 @@ void WorldSession::ReadMovementInfo(WorldPacket &data, MovementInfo* mi)
         e.g. aerial combat.
     */
 
-    
+
     REMOVE_VIOLATING_FLAGS(mi->HasMovementFlag(MOVEMENTFLAG_FLYING | MOVEMENTFLAG_CAN_FLY) && GetSecurity() == SEC_PLAYER && !GetPlayer()->m_mover->HasAuraType(SPELL_AURA_FLY) && !GetPlayer()->m_mover->HasAuraType(SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED),
         MOVEMENTFLAG_FLYING | MOVEMENTFLAG_CAN_FLY);
 

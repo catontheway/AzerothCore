@@ -322,8 +322,8 @@ void WorldSession::DoLootRelease(uint64 lguid)
             }
             else
             {
-                go->SetLootState(GO_JUST_DEACTIVATED);
-
+                go->SetLootState(GO_JUST_DEACTIVATED);                
+                
                 // Xinef: moved event execution to loot release (after everything is looted)
                 // Xinef: 99% sure that this worked like this on blizz
                 // Xinef: prevents exploits with just opening GO and spawning bilions of npcs, which can crash core if you know what you're doin ;)

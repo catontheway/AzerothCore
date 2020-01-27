@@ -10,11 +10,11 @@ public:
 
     void OnBattlegroundEndReward(Battleground* bg, Player* player, TeamId winnerTeamId) override
     {
+        TeamId bgTeamId = player->GetBgTeamId();
+        uint32 RewardCount = 0;
+
         if (sConfigMgr->GetBoolDefault("Battleground.Reward.Enable", true) && !bg->isArena())
         {
-            TeamId bgTeamId = player->GetBgTeamId();
-            uint32 RewardCount = 0;
-
             if (bgTeamId == winnerTeamId)
                 RewardCount = sConfigMgr->GetIntDefault("Battleground.Reward.WinnerTeam.Count", 2);
             else
@@ -47,12 +47,23 @@ public:
 
         if (sConfigMgr->GetBoolDefault("Arena.Reward.Enable", true) && !bg->isBattleground())
         {
-            if (ARENA_TEAM_2v2)
-                player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.2v2", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.2v2", 1));
-            else if (ARENA_TEAM_3v3)
-                player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.3v3", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.3v3", 2));
-            else if (ARENA_TEAM_5v5)
-                player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.5v5", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.5v5", 3));
+            if (bgTeamId == winnerTeamId)
+                RewardCount = sConfigMgr->GetIntDefault("Arena.Reward.WinnerTeam.Count", 2);
+            else
+                RewardCount = sConfigMgr->GetIntDefault("Arena.Reward.LoserTeam.Count", 1);
+
+            switch (bg->GetArenaType())
+            {
+                case ARENA_TEAM_2v2:
+                    player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.2v2", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.2v2", RewardCount));
+                    break;
+                case ARENA_TEAM_3v3:
+                    player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.3v3", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.3v3", RewardCount));
+                    break;
+                case ARENA_TEAM_5v5:
+                    player->AddItem(sConfigMgr->GetIntDefault("Arena.Reward.ItemID.5v5", 29434), sConfigMgr->GetIntDefault("Arena.Reward.Count.5v5", RewardCount));
+                    break;
+            }
         }
     }
 };

@@ -1556,7 +1556,7 @@ void Guild::HandleInviteMember(WorldSession* session, std::string const& name)
 void Guild::HandleAcceptMember(WorldSession* session)
 {
     Player* player = session->GetPlayer();
-    if (!sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GUILD) &&
+    if (!sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GUILD) && 
         player->GetTeamId() != sObjectMgr->GetPlayerTeamIdByGUID(GetLeaderGUID()))
         return;
 
@@ -2964,7 +2964,6 @@ void Guild::ResetTimes()
 
     _BroadcastEvent(GE_BANK_TAB_AND_MONEY_UPDATED, 0);
 }
-
 
 void Guild::IncreaseXP(uint32 Value)
 {
