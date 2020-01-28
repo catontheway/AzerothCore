@@ -477,8 +477,8 @@ Battleground* BattlegroundMgr::CreateNewBattleground(BattlegroundTypeId original
             case ARENA_TYPE_3v3:
                 maxPlayersPerTeam = 3;
                 break;
-            case ARENA_TYPE_5v5:
-                maxPlayersPerTeam = 5;
+            case ARENA_TYPE_3v3_SOLO:
+                maxPlayersPerTeam = 3;
                 break;
         }
 
@@ -754,8 +754,8 @@ BattlegroundQueueTypeId BattlegroundMgr::BGQueueTypeId(BattlegroundTypeId bgType
                 return BATTLEGROUND_QUEUE_2v2;
             case ARENA_TYPE_3v3:
                 return BATTLEGROUND_QUEUE_3v3;
-            case ARENA_TYPE_5v5:
-                return BATTLEGROUND_QUEUE_5v5;
+            case ARENA_TYPE_3v3_SOLO:
+                return BATTLEGROUND_QUEUE_3v3_SOLO;
             default:
                 return BATTLEGROUND_QUEUE_NONE;
         }
@@ -785,8 +785,8 @@ uint8 BattlegroundMgr::BGArenaType(BattlegroundQueueTypeId bgQueueTypeId)
             return ARENA_TYPE_2v2;
         case BATTLEGROUND_QUEUE_3v3:
             return ARENA_TYPE_3v3;
-        case BATTLEGROUND_QUEUE_5v5:
-            return ARENA_TYPE_5v5;
+        case BATTLEGROUND_QUEUE_3v3_SOLO:
+            return ARENA_TYPE_3v3_SOLO;
         default:
             return 0;
     }
@@ -806,7 +806,7 @@ void BattlegroundMgr::ToggleArenaTesting()
 
 void BattlegroundMgr::SetHolidayWeekends(uint32 mask)
 {
-    for (uint32 bgtype = 1; bgtype < MAX_BATTLEGROUND_TYPE_ID; ++bgtype)
+    for (uint32 bgtype = 1; bgtype < MAX_BATTLEGROUND_TYPE_ID && bgtype < 32; ++bgtype)
     {
         if (bgtype == BATTLEGROUND_RB)
             continue;
@@ -999,10 +999,10 @@ void BattlegroundMgr::InviteGroupToBG(GroupQueueInfo* ginfo, Battleground* bg, T
     ginfo->RemoveInviteTime = World::GetGameTimeMS() + INVITE_ACCEPT_WAIT_TIME;
 
     // loop through the players
-    for (auto itr : ginfo->Players)
+    for (std::map<uint64, PlayerQueueInfo*>::iterator itr = ginfo->Players.begin(); itr != ginfo->Players.end(); ++itr)
     {
         // get the player
-        Player* player = ObjectAccessor::FindPlayerInOrOutOfWorld(itr);
+        Player* player = ObjectAccessor::FindPlayerInOrOutOfWorld(itr->first);
         if (!player)
             continue;
 
@@ -1054,17 +1054,18 @@ std::unordered_map<int, BattlegroundQueueTypeId> BattlegroundMgr::bgToQueue = {
 };
 
 std::unordered_map<int, BattlegroundTypeId> BattlegroundMgr::queueToBg = {
-    { BATTLEGROUND_QUEUE_NONE,  BATTLEGROUND_TYPE_NONE },
-    { BATTLEGROUND_QUEUE_AV,    BATTLEGROUND_AV },
-    { BATTLEGROUND_QUEUE_WS,    BATTLEGROUND_WS },
-    { BATTLEGROUND_QUEUE_AB,    BATTLEGROUND_AB },
-    { BATTLEGROUND_QUEUE_EY,    BATTLEGROUND_EY },
-    { BATTLEGROUND_QUEUE_SA,    BATTLEGROUND_SA },
-    { BATTLEGROUND_QUEUE_IC,    BATTLEGROUND_IC },
-    { BATTLEGROUND_QUEUE_RB,    BATTLEGROUND_RB },
-    { BATTLEGROUND_QUEUE_2v2,   BATTLEGROUND_AA },
-    { BATTLEGROUND_QUEUE_3v3,   BATTLEGROUND_AA },
-    { BATTLEGROUND_QUEUE_5v5,   BATTLEGROUND_AA },
+    { BATTLEGROUND_QUEUE_NONE,     BATTLEGROUND_TYPE_NONE },
+    { BATTLEGROUND_QUEUE_AV,       BATTLEGROUND_AV },
+    { BATTLEGROUND_QUEUE_WS,       BATTLEGROUND_WS },
+    { BATTLEGROUND_QUEUE_AB,       BATTLEGROUND_AB },
+    { BATTLEGROUND_QUEUE_EY,       BATTLEGROUND_EY },
+    { BATTLEGROUND_QUEUE_SA,       BATTLEGROUND_SA },
+    { BATTLEGROUND_QUEUE_IC,       BATTLEGROUND_IC },
+    { BATTLEGROUND_QUEUE_RB,       BATTLEGROUND_RB },
+    { BATTLEGROUND_QUEUE_2v2,      BATTLEGROUND_AA },
+    { BATTLEGROUND_QUEUE_3v3,      BATTLEGROUND_AA },
+    { BATTLEGROUND_QUEUE_3v3_SOLO, BATTLEGROUND_AA },
+    { BATTLEGROUND_QUEUE_5v5,      BATTLEGROUND_AA },
 };
 
 std::unordered_map<int, Battleground*> BattlegroundMgr::bgtypeToBattleground = {

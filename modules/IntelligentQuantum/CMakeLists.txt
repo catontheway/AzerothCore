@@ -1,6 +1,7 @@
 #BGScripts
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/CrossFactionBG/CrossFactionBG.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/CrossFactionBG/CrossFactionBGScript.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/Solo3v3/Solo3v3.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/BGScripts/BattlegroundsReward.cpp")
 
 # CreatureScripts

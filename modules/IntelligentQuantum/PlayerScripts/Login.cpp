@@ -8,8 +8,26 @@ class PlayerScript_Login : public PlayerScript
 
         void OnLogin(Player* player) override
         {
+            std::string AccountType;
+
+            switch (player->GetSession()->GetSecurity())
+            {
+                case SEC_PLAYER:            AccountType = "Player";             break;
+                case SEC_TRIAL_GAMEMASTER:  AccountType = "Trial Game Master";  break;
+                case SEC_OPERATOR:          AccountType = "Operator";           break;
+                case SEC_GAMEMASTER:        AccountType = "Game Master";        break;
+                case SEC_PVPMASTER:         AccountType = "PvP Master";         break;
+                case SEC_EVENTMASTER:       AccountType = "Event Master";       break;
+                case SEC_TRANSFERMASTER:    AccountType = "Transfer Master";    break;
+                case SEC_HEAD_GAMEMASTER:   AccountType = "Head Game Master";   break;
+                case SEC_DEVELOPER:         AccountType = "Developer";          break;
+                case SEC_ADMINISTRATOR:     AccountType = "Administrator";      break;
+                case SEC_CONSOLE:           AccountType = "Console";            break;
+            }
+
             ChatHandler(player->GetSession()).PSendSysMessage("--------------------------------------------");
             ChatHandler(player->GetSession()).PSendSysMessage("-- Welcome Back - |cff00ffff%s|r", player->GetName().c_str());
+            ChatHandler(player->GetSession()).PSendSysMessage("-- Account Type - |cff00ffff%s|r", AccountType.c_str());
             ChatHandler(player->GetSession()).PSendSysMessage("--------------------------------------------");
             ChatHandler(player->GetSession()).PSendSysMessage("-- ItemLevel - |cff00ffff%u|r", (int) player->GetAverageItemLevel());
             ChatHandler(player->GetSession()).PSendSysMessage("-- Total Kill - |cff00ffff%u|r", player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS));

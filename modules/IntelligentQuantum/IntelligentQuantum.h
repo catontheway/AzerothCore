@@ -3,6 +3,7 @@
 
 // BGScripts
 void AddSC_CrossFactionBG();
+void AddSC_Solo3v3();
 void AddSC_BattlegroundsReward();
 
 // CreatureScripts
@@ -29,6 +30,7 @@ void AddIntelligentQuantumScripts()
 {
     // BGScripts
     AddSC_CrossFactionBG();
+    AddSC_Solo3v3();
     AddSC_BattlegroundsReward();
 
     // CreatureScripts
