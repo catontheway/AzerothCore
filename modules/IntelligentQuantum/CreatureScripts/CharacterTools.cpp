@@ -7,12 +7,12 @@ class CreatureScript_CharacterTools : public CreatureScript
 
 	bool OnGossipHello(Player* player, Creature* creature)
 	{
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Change My Race", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Change My Name", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Change My Faction", GOSSIP_SENDER_MAIN, 3);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Change My Appearance", GOSSIP_SENDER_MAIN, 4);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_2, "Change My Race (PvP Token 50x)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_2, "Change My Name (Donate Token 5x)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_2, "Change My Faction (PvP Token 100x)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_2, "Change My Appearance (PvP Token 50x)", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
 
-		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+		SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature);
 		return true;
 	}
 
@@ -20,25 +20,65 @@ class CreatureScript_CharacterTools : public CreatureScript
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		switch (Actions)
-		{
-			case 1:
-				player->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-            case 2:
-				player->SetAtLoginFlag(AT_LOGIN_RENAME);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-            case 3:
-				player->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-            case 4:
-				player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
+        switch (Actions)
+        {
+            case GOSSIP_ACTION_INFO_DEF + 1:
+                if (!player->HasItemCount(100002, 20))
+                {
+                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
+                    CloseGossipMenuFor(player);
+                    return false;
+                }
+
+                player->GetSession()->SendAreaTriggerMessage("Please Logout For Race Change");
+                player->DestroyItemCount(100002, 20, true);
+                player->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 2:
+                if (!player->HasItemCount(100002, 100))
+                {
+                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
+                    CloseGossipMenuFor(player);
+                    return false;
+                }
+
+                player->GetSession()->SendAreaTriggerMessage("Please Logout For Name Change");
+                player->DestroyItemCount(100002, 100, true);
+                player->SetAtLoginFlag(AT_LOGIN_RENAME);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 3:
+                if (!player->HasItemCount(100002, 100))
+                {
+                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
+                    CloseGossipMenuFor(player);
+                    return false;
+                }
+
+                player->GetSession()->SendAreaTriggerMessage("Please Logout For Faction Change");
+                player->DestroyItemCount(100002, 100, true);
+                player->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 4:
+                if (!player->HasItemCount(100002, 20))
+                {
+                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
+                    CloseGossipMenuFor(player);
+                    return false;
+                }
+
+                player->GetSession()->SendAreaTriggerMessage("Please Logout For Character Customize");
+                player->DestroyItemCount(100002, 20, true);
+                player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
+                CloseGossipMenuFor(player);
+                break;
+            default:
+                CloseGossipMenuFor(player);
+                break;
         }
+
 		return true;
 	}
 

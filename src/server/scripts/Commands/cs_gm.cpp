@@ -29,16 +29,16 @@ public:
     {
         static std::vector<ChatCommand> gmCommandTable =
         {
-            { "chat",           SEC_TRIAL_GAMEMASTER,      false, &HandleGMChatCommand,              "" },
-            { "fly",            SEC_TRIAL_GAMEMASTER,      false, &HandleGMFlyCommand,               "" },
-            { "ingame",         SEC_TRIAL_GAMEMASTER,          true,  &HandleGMListIngameCommand,        "" },
-            { "list",           SEC_TRIAL_GAMEMASTER,      true,  &HandleGMListFullCommand,          "" },
-            { "visible",        SEC_TRIAL_GAMEMASTER,      false, &HandleGMVisibleCommand,           "" },
-            { "",               SEC_TRIAL_GAMEMASTER,      false, &HandleGMCommand,                  "" }
+            { "chat",           SEC_GAMEMASTER,      false, &HandleGMChatCommand,              "" },
+            { "fly",            SEC_GAMEMASTER,      false, &HandleGMFlyCommand,               "" },
+            { "ingame",         SEC_PLAYER,          true,  &HandleGMListIngameCommand,        "" },
+            { "list",           SEC_GAMEMASTER,      true,  &HandleGMListFullCommand,          "" },
+            { "visible",        SEC_GAMEMASTER,      false, &HandleGMVisibleCommand,           "" },
+            { "",               SEC_GAMEMASTER,      false, &HandleGMCommand,                  "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "gm",             SEC_TRIAL_GAMEMASTER,      false, nullptr,                     "", gmCommandTable }
+            { "gm",             SEC_MODERATOR,      false, nullptr,                     "", gmCommandTable }
         };
         return commandTable;
     }
@@ -149,7 +149,7 @@ public:
     {
         ///- Get the accounts with GM Level >0
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_GM_ACCOUNTS);
-        stmt->setUInt8(0, uint8(SEC_TRIAL_GAMEMASTER));
+        stmt->setUInt8(0, uint8(SEC_MODERATOR));
         stmt->setInt32(1, int32(realmID));
         PreparedQueryResult result = LoginDatabase.Query(stmt);
 

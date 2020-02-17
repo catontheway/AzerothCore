@@ -28,10 +28,10 @@ public:
         static std::vector<ChatCommand> guildCommandTable =
         {
             { "create",         SEC_GAMEMASTER,     true,  &HandleGuildCreateCommand,           "" },
-            { "delete",         SEC_HEAD_GAMEMASTER,     true,  &HandleGuildDeleteCommand,           "" },
+            { "delete",         SEC_GAMEMASTER,     true,  &HandleGuildDeleteCommand,           "" },
             { "invite",         SEC_GAMEMASTER,     true,  &HandleGuildInviteCommand,           "" },
-            { "uninvite",       SEC_HEAD_GAMEMASTER,     true,  &HandleGuildUninviteCommand,         "" },
-            { "rank",           SEC_HEAD_GAMEMASTER,     true,  &HandleGuildRankCommand,             "" },
+            { "uninvite",       SEC_GAMEMASTER,     true,  &HandleGuildUninviteCommand,         "" },
+            { "rank",           SEC_GAMEMASTER,     true,  &HandleGuildRankCommand,             "" },
             { "info",           SEC_GAMEMASTER,     true,  &HandleGuildInfoCommand,             "" }
         };
         static std::vector<ChatCommand> commandTable =

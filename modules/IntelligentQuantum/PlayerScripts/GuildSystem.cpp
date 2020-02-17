@@ -243,7 +243,7 @@ class PlayerScript_GuildSystem : public PlayerScript
 
         void SendAnnounce(std::string CreatureName, std::string GuildName, uint8 Mode, std::string LeaderName)
         {
-            std::string Message = "|cffff0000" + CreatureName + "|r |cffffffff Have Been Killed By Guild|r |cff00f130" + GuildName + "|r |cffffffff On|r |cff00f130 " + GetModeName(Mode) + "|r |cffffffff Leader Was|r |cff00f130" + LeaderName + "|r";
+            std::string Message = "|cffff0000" + CreatureName + "|r |cffffffff Have Been Killed By Guild|r |cff00f130" + GuildName + "|r|cffffffff On|r |cff00f130 " + GetModeName(Mode) + "|r |cffffffff Leader Was|r |cff00f130" + LeaderName + "|r";
             SessionMap Sessions = sWorld->GetAllSessions();
 
             for (SessionMap::iterator itr = Sessions.begin(); itr != Sessions.end(); ++itr)

@@ -7,314 +7,191 @@ class CreatureScript_TOP : public CreatureScript
 
 	bool OnGossipHello(Player* player, Creature* creature) override
 	{
-		player->PlayerTalkClass->ClearMenus();
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Arena", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Guild", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Activity", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 6);
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Killer", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7);
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Money", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
+        AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "Top Achievement", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Arena Team", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Killer", GOSSIP_SENDER_MAIN, 6);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Played Time", GOSSIP_SENDER_MAIN, 10);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Guild", GOSSIP_SENDER_MAIN, 11);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "TOP Achievement", GOSSIP_SENDER_MAIN, 12);
-
-		player->SEND_GOSSIP_MENU(68, creature->GetGUID());
-		return true;
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature);
+        return true;
 	}
 
 	bool OnGossipSelect(Player* player, Creature* creature, uint32 /*Sender*/, uint32 Action) override
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		switch (Action)
-		{
-			case 1:
-			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 2v2", GOSSIP_SENDER_MAIN, 2);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 3v3", GOSSIP_SENDER_MAIN, 3);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Arena Team Top 5v5", GOSSIP_SENDER_MAIN, 4);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Top 5 Arena Points", GOSSIP_SENDER_MAIN, 5);
-
-				player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-				return true;
-			}
-			case 2:
-			{
-				QueryResult Result = CharacterDatabase.Query("SELECT name, rating, seasonGames, seasonWins FROM arena_team WHERE type = 2 ORDER BY rating DESC LIMIT 10");
-
-				if (Result)
-				{
-					Field* Fields = Result->Fetch();
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Arena Team 2vs2::. \n", GOSSIP_SENDER_MAIN, 0);
-
-					do
-					{
-						std::string Name = Fields[0].GetString();
-						int16 Rating = Fields[1].GetInt16();
-						int16 Games = Fields[2].GetInt16();
-						int16 Wins = Fields[3].GetInt16();
-
-						std::stringstream TOP;
-						TOP << "Name: " << Name.c_str() << " Rating: " << Rating << " Win: " << Wins << " Lose: " << Games - Wins;
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-					}
-					while (Result->NextRow());
-
-					player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-				}
-				else
-					player->PlayerTalkClass->SendCloseGossip();
-
-				return true;
-			}
-            case 3:
+        switch (Action)
+        {
+            case GOSSIP_ACTION_INFO_DEF + 1:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, rating, seasonGames, seasonWins FROM arena_team WHERE type = 3 ORDER BY rating DESC LIMIT 10");
+                AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "2 Vs 2", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+                AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "3 Vs 3", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+                AddGossipItemFor(player, GOSSIP_ICON_BATTLE, "5 Vs 5", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
+
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                return true;
+            }
+            case GOSSIP_ACTION_INFO_DEF + 2:
+            {
+                QueryResult Result = CharacterDatabase.Query("SELECT name,rating,seasonGames,seasonWins FROM arena_team WHERE type = 2 ORDER BY rating DESC LIMIT 10");
 
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Arena Team 3vs3::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Arena 2 vs 2]|r");
 
                     do
                     {
                         std::string Name = Fields[0].GetString();
-                        int16 Rating = Fields[1].GetInt16();
-                        int16 Games = Fields[2].GetInt16();
-                        int16 Wins = Fields[3].GetInt16();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Rating: " << Rating << " Win: " << Wins << " Lose: " << Games - Wins;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        uint16 Rating = Fields[1].GetUInt16();
+                        uint16 Games = Fields[2].GetUInt16();
+                        uint16 Wins = Fields[3].GetUInt16();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Rating: |cff00ffff%u|r Win: |cff00ffff%u|r Lose: |cff00ffff%u|r", Name.c_str(), Rating, Wins, Games - Wins);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 4:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 3:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, rating, seasonGames, seasonWins FROM arena_team WHERE type = 5 ORDER BY rating DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name,rating,seasonGames,seasonWins FROM arena_team WHERE type = 3 ORDER BY rating DESC LIMIT 10");
 
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Arena Team 3vs3 Solo::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Arena 3 vs 3]|r");
 
                     do
                     {
                         std::string Name = Fields[0].GetString();
-                        int16 Rating = Fields[1].GetInt16();
-                        int16 Games = Fields[2].GetInt16();
-                        int16 Wins = Fields[3].GetInt16();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Rating: " << Rating << " Win: " << Wins << " Lose: " << Games - Wins;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        uint16 Rating = Fields[1].GetUInt16();
+                        uint16 Games = Fields[2].GetUInt16();
+                        uint16 Wins = Fields[3].GetUInt16();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Rating: |cff00ffff%u|r Win: |cff00ffff%u|r Lose: |cff00ffff%u|r", Name.c_str(), Rating, Wins, Games - Wins);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 5:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 4:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,arenaPoints FROM characters ORDER BY arenaPoints DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name,rating,seasonGames,seasonWins FROM arena_team WHERE type = 5 ORDER BY rating DESC LIMIT 10");
 
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Arena Points::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Arena 5 vs 5]|r");
 
                     do
                     {
-                        Fields = Result->Fetch();
                         std::string Name = Fields[0].GetString();
-                        uint32 arenaPoints = Fields[1].GetUInt32();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Arena Points: " << arenaPoints;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        uint16 Rating = Fields[1].GetUInt16();
+                        uint16 Games = Fields[2].GetUInt16();
+                        uint16 Wins = Fields[3].GetUInt16();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Rating: |cff00ffff%u|r Win: |cff00ffff%u|r Lose: |cff00ffff%u|r", Name.c_str(), Rating, Wins, Games - Wins);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 6:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 5:
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Total Kills", GOSSIP_SENDER_MAIN, 7);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Today Kills", GOSSIP_SENDER_MAIN, 8);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Yesterday Kills", GOSSIP_SENDER_MAIN, 9);
-
-                player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-                return true;
-            }
-            case 7:
-            {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,totalKills FROM characters ORDER BY totalKills DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name,level,`kill`,point FROM guild ORDER BY point DESC LIMIT 10");
 
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Total Kills::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Guild]|r");
 
                     do
                     {
-                        Fields = Result->Fetch();
                         std::string Name = Fields[0].GetString();
-                        uint32 totalKills = Fields[1].GetUInt32();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Total Kills: " << totalKills;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        uint32 Level = Fields[1].GetUInt32();
+                        uint32 Kill = Fields[2].GetUInt32();
+                        uint32 Point = Fields[3].GetUInt32();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Point: |cff00ffff%u|r Kill: |cff00ffff%u|r Level: |cff00ffff%u|r", Name.c_str(), Point, Kill, Level);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 8:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 6:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,todayKills FROM characters ORDER BY todayKills DESC LIMIT 10");
-
+                QueryResult Result = CharacterDatabase.Query("SELECT name,leveltime FROM characters ORDER BY leveltime DESC LIMIT 10");
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Today Kills::. \n", GOSSIP_SENDER_MAIN, 0);
-
-                    do
-                    {
-                        Fields = Result->Fetch();
-                        std::string Name = Fields[0].GetString();
-                        uint16 todayKills = Fields[1].GetUInt16();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Today Kills: " << todayKills;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-                }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
-
-                return true;
-            }
-            case 9:
-            {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,yesterdayKills FROM characters ORDER BY yesterdayKills DESC LIMIT 10");
-
-                if (Result)
-                {
-                    Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Yesterday Kills::. \n", GOSSIP_SENDER_MAIN, 0);
-
-                    do
-                    {
-                        Fields = Result->Fetch();
-                        std::string Name = Fields[0].GetString();
-                        uint16 yesterdayKills = Fields[1].GetUInt16();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Yesterday Kills: " << yesterdayKills;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
-                }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
-
-                return true;
-            }
-            case 10:
-            {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,totaltime FROM characters WHERE name != '' ORDER BY totaltime DESC LIMIT 10");
-
-                if (Result)
-                {
-                    Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Played Time::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Activity]|r");
 
                     do
                     {
                         std::string Name = Fields[0].GetString();
                         uint32 Time = Fields[1].GetUInt32();
 
-                        uint32 Day = floor(Time / 86400);
-                        Time = Time - (Day * 86400);
-                        uint32 Hour = floor(Time / 3600);
-                        Time = Time - (Hour * 3600);
-                        uint32 Min = floor(Time / 60);
+                        Time = std::floor(Time / 1000);
 
-                        std::stringstream TOP;
-                        TOP << " Name: " << Name.c_str() << " Days: " << Day << " Hours: " << Hour << " Minutes: " << Min;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Activity: |cff00ffff%u|r Hours", Name.c_str(), Time);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 11:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 7:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name, Level, XP, `Kills`, Points FROM guild ORDER BY Level DESC, Level DESC, XP DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name,totalKills FROM characters ORDER BY totalKills DESC LIMIT 10");
 
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Guild::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Killer]|r");
 
                     do
                     {
-                        Fields = Result->Fetch();
                         std::string Name = Fields[0].GetString();
-                        std::string Level = Fields[1].GetString();
-                        uint32 Xp = Fields[2].GetUInt32();
-                        uint32 Kills = Fields[3].GetUInt32();
-                        uint32 Points = Fields[4].GetUInt32();
-
-                        std::stringstream TOP;
-                        TOP << "Name: " << Name.c_str() << " Level: " << Level.c_str() << " XP: " << Xp << " Kills: " << Kills << " Points: " << Points;
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                        uint32 Kill = Fields[1].GetUInt32();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Kill: |cff00ffff%u|r", Name.c_str(), Kill);
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
-            case 12:
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 8:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT Guid, COUNT(*) as Achievement FROM character_achievement GROUP BY guid ORDER BY Achievement DESC LIMIT 10");
-
+                QueryResult Result = CharacterDatabase.Query("SELECT name,money FROM characters ORDER BY money DESC LIMIT 10");
                 if (Result)
                 {
                     Field* Fields = Result->Fetch();
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, ".::Achievement::. \n", GOSSIP_SENDER_MAIN, 0);
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Money]|r");
+
+                    do
+                    {
+                        std::string Name = Fields[0].GetString();
+                        uint32 Money = Fields[1].GetUInt32();
+
+                        Money = std::floor(Money / 10000);
+
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Money: |cff00ffff%u|r Gold", Name.c_str(), Money);
+                    } while (Result->NextRow());
+                }
+
+                CloseGossipMenuFor(player);
+            }
+            break;
+            case GOSSIP_ACTION_INFO_DEF + 9:
+            {
+                QueryResult Result = CharacterDatabase.Query("SELECT Guid, COUNT(*) as Achievement FROM character_achievement GROUP BY guid ORDER BY Achievement DESC LIMIT 20");
+                if (Result)
+                {
+                    Field* Fields = Result->Fetch();
+                    ChatHandler(player->GetSession()).PSendSysMessage("|cffffffff[Top Achievement]|r");
 
                     do
                     {
@@ -325,27 +202,22 @@ class CreatureScript_TOP : public CreatureScript
                         if (CharResult)
                         {
                             Field* CharFields = CharResult->Fetch();
+
                             std::string Name = CharFields[0].GetString();
 
-                            std::stringstream TOP;
-                            TOP << "Name: " << Name.c_str() << " Achievement: " << (Achievement * 10);
-                            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, TOP.str(), GOSSIP_SENDER_MAIN, 0);
+                            ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Achievement: |cff00ffff%u|r", Name.c_str(), (Achievement * 10));
                         }
-                    }
-                    while (Result->NextRow());
-
-                    player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+                    } while (Result->NextRow());
                 }
-                else
-                    player->PlayerTalkClass->SendCloseGossip();
 
-                return true;
+                CloseGossipMenuFor(player);
             }
+            break;
             default:
+                CloseGossipMenuFor(player);
                 break;
-		}
+        }
 
-		player->CLOSE_GOSSIP_MENU();
 		return true;
 	}
 

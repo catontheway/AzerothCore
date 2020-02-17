@@ -26,19 +26,19 @@ public:
     {
         static std::vector<ChatCommand> honorAddCommandTable =
         {
-            { "kill",           SEC_TRANSFERMASTER,     false, &HandleHonorAddKillCommand,         "" },
-            { "",               SEC_TRANSFERMASTER,     false, &HandleHonorAddCommand,             "" }
+            { "kill",           SEC_GAMEMASTER,     false, &HandleHonorAddKillCommand,         "" },
+            { "",               SEC_GAMEMASTER,     false, &HandleHonorAddCommand,             "" }
         };
 
         static std::vector<ChatCommand> honorCommandTable =
         {
-            { "add",            SEC_TRANSFERMASTER,     false, nullptr,                            "", honorAddCommandTable },
-            { "update",         SEC_TRANSFERMASTER,     false, &HandleHonorUpdateCommand,          "" }
+            { "add",            SEC_GAMEMASTER,     false, nullptr,                            "", honorAddCommandTable },
+            { "update",         SEC_GAMEMASTER,     false, &HandleHonorUpdateCommand,          "" }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "honor",          SEC_TRANSFERMASTER,     false, nullptr,                            "", honorCommandTable }
+            { "honor",          SEC_GAMEMASTER,     false, nullptr,                            "", honorCommandTable }
         };
         return commandTable;
     }

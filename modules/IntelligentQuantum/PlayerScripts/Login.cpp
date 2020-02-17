@@ -27,7 +27,7 @@ class PlayerScript_Login : public PlayerScript
 
             ChatHandler(player->GetSession()).PSendSysMessage("--------------------------------------------");
 
-            if (player->GetSession()->GetSecurity() == 0)
+            if (player->GetSession()->GetSecurity() == SEC_PLAYER)
             {
                 uint32 SkillCount = 0;
 

@@ -27,8 +27,8 @@ public:
         static std::vector<ChatCommand> accountSetCommandTable =
         {
             { "addon", SEC_GAMEMASTER, true, &HandleAccountSetAddonCommand, "" },
-            { "gmlevel", SEC_ADMINISTRATOR, true, &HandleAccountSetGmLevelCommand, "" },
-            { "password", SEC_ADMINISTRATOR, true, &HandleAccountSetPasswordCommand, "" }
+            { "gmlevel", SEC_CONSOLE, true, &HandleAccountSetGmLevelCommand, "" },
+            { "password", SEC_CONSOLE, true, &HandleAccountSetPasswordCommand, "" }
         };
         static std::vector<ChatCommand> accountLockCommandTable
         {
@@ -37,18 +37,18 @@ public:
         };
         static std::vector<ChatCommand> accountCommandTable =
         {
-            { "addon", SEC_GAMEMASTER, false, &HandleAccountAddonCommand, "" },
-            { "create", SEC_GAMEMASTER, true, &HandleAccountCreateCommand, "" },
-            { "delete", SEC_ADMINISTRATOR, true, &HandleAccountDeleteCommand, "" },
-            { "onlinelist", SEC_EVENTMASTER, true, &HandleAccountOnlineListCommand, "" },
+            { "addon", SEC_MODERATOR, false, &HandleAccountAddonCommand, "" },
+            { "create", SEC_CONSOLE, true, &HandleAccountCreateCommand, "" },
+            { "delete", SEC_CONSOLE, true, &HandleAccountDeleteCommand, "" },
+            { "onlinelist", SEC_CONSOLE, true, &HandleAccountOnlineListCommand, "" },
             { "lock", SEC_PLAYER, false, nullptr, "", accountLockCommandTable },
-            { "set", SEC_GAMEMASTER, true, nullptr, "", accountSetCommandTable },
-            { "password", SEC_TRIAL_GAMEMASTER, false, &HandleAccountPasswordCommand, "" },
-            { "", SEC_TRIAL_GAMEMASTER, false, &HandleAccountCommand, "" }
+            { "set", SEC_ADMINISTRATOR, true, nullptr, "", accountSetCommandTable },
+            { "password", SEC_PLAYER, false, &HandleAccountPasswordCommand, "" },
+            { "", SEC_PLAYER, false, &HandleAccountCommand, "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "account", SEC_TRIAL_GAMEMASTER, true, nullptr, "", accountCommandTable }
+            { "account", SEC_PLAYER, true, nullptr, "", accountCommandTable }
         };
         return commandTable;
     }

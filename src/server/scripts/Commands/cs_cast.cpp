@@ -26,17 +26,17 @@ public:
     std::vector<ChatCommand> GetCommands() const override
     {
         static std::vector<ChatCommand> castCommandTable =
-        {
-            { "back",           SEC_DEVELOPER,  false, &HandleCastBackCommand,              "" },
-            { "dist",           SEC_DEVELOPER,  false, &HandleCastDistCommand,              "" },
-            { "self",           SEC_DEVELOPER,  false, &HandleCastSelfCommand,              "" },
-            { "target",         SEC_DEVELOPER,  false, &HandleCastTargetCommad,             "" },
-            { "dest",           SEC_DEVELOPER,  false, &HandleCastDestCommand,              "" },
-            { "",               SEC_DEVELOPER,  false, &HandleCastCommand,                  "" }
+        {   
+            { "back",           SEC_GAMEMASTER,  false, &HandleCastBackCommand,              "" },
+            { "dist",           SEC_GAMEMASTER,  false, &HandleCastDistCommand,              "" },
+            { "self",           SEC_GAMEMASTER,  false, &HandleCastSelfCommand,              "" },
+            { "target",         SEC_GAMEMASTER,  false, &HandleCastTargetCommad,             "" },
+            { "dest",           SEC_GAMEMASTER,  false, &HandleCastDestCommand,              "" },
+            { "",               SEC_GAMEMASTER,  false, &HandleCastCommand,                  "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "cast",           SEC_DEVELOPER,  false, nullptr,                                "", castCommandTable }
+            { "cast",           SEC_GAMEMASTER,  false, nullptr,                                "", castCommandTable }
         };
         return commandTable;
     }

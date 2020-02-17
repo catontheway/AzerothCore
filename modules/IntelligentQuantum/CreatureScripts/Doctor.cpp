@@ -21,14 +21,15 @@ class CreatureScript_Doctor : public CreatureScript
 			return false;
 		}
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Max Skill", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Give Me Gold", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove Sickness", GOSSIP_SENDER_MAIN, 3);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove Shaman Debuff", GOSSIP_SENDER_MAIN, 4);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove Paladin Debuff", GOSSIP_SENDER_MAIN, 5);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Remove All Spell Coldown", GOSSIP_SENDER_MAIN, 6);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Max Skill", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Give Me Gold", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Repair All Items", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Remove Sickness", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Remove Shaman Debuff", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Remove Paladin Debuff", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 6);
+        AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, "Remove All Spell Coldown", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7);
 
-		player->PlayerTalkClass->SendGossipMenu(68, creature->GetGUID());
+		SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature);
 		return true;
 	}
 
@@ -36,38 +37,44 @@ class CreatureScript_Doctor : public CreatureScript
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		switch (Actions)
-		{
-			case 1:
-				player->UpdateSkillsToMaxSkillsForLevel();
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-            case 2:
-				player->ModifyMoney(1 * 500000000);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 3:
-				player->RemoveAurasDueToSpell(15007);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 4:
-				player->RemoveAurasDueToSpell(57723);
-				player->RemoveAurasDueToSpell(57724);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 5:
-				player->RemoveAurasDueToSpell(25771);
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
-			case 6:
-				player->RemoveArenaSpellCooldowns(true);
-				player->SetHealth(player->GetMaxHealth());
-				player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-				player->PlayerTalkClass->SendCloseGossip();
-				break;
+        switch (Actions)
+        {
+            case GOSSIP_ACTION_INFO_DEF + 1:
+                player->UpdateSkillsToMaxSkillsForLevel();
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 2:
+                player->ModifyMoney(1 * 500000000);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 3:
+                player->DurabilityRepairAll(false, 0.0f, true);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 4:
+                player->RemoveAurasDueToSpell(15007);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 5:
+                player->RemoveAurasDueToSpell(57723);
+                player->RemoveAurasDueToSpell(57724);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 6:
+                player->RemoveAurasDueToSpell(25771);
+                CloseGossipMenuFor(player);
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 7:
+                player->RemoveArenaSpellCooldowns(true);
+                player->SetHealth(player->GetMaxHealth());
+                player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
+                CloseGossipMenuFor(player);
+                break;
             default:
+                CloseGossipMenuFor(player);
                 break;
         }
+
 		return true;
 	}
 

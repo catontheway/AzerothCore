@@ -28,15 +28,15 @@ public:
     {
         static std::vector<ChatCommand> listCommandTable =
         {
-            { "creature",       SEC_GAMEMASTER,  true,  &HandleListCreatureCommand,          "" },
-            { "item",           SEC_GAMEMASTER,  true,  &HandleListItemCommand,              "" },
-            { "object",         SEC_GAMEMASTER,  true,  &HandleListObjectCommand,            "" },
-            { "gobject",        SEC_GAMEMASTER,  true,  &HandleListObjectCommand,            "" },
-            { "auras",          SEC_GAMEMASTER,  false, &HandleListAurasCommand,             "" }
+            { "creature",       SEC_MODERATOR,  true,  &HandleListCreatureCommand,          "" },
+            { "item",           SEC_MODERATOR,  true,  &HandleListItemCommand,              "" },
+            { "object",         SEC_MODERATOR,  true,  &HandleListObjectCommand,            "" },
+            { "gobject",        SEC_MODERATOR,  true,  &HandleListObjectCommand,            "" },
+            { "auras",          SEC_MODERATOR,  false, &HandleListAurasCommand,             "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "list",          SEC_GAMEMASTER,   true, nullptr,                                 "", listCommandTable }
+            { "list",          SEC_MODERATOR,   true, nullptr,                                 "", listCommandTable }
         };
         return commandTable;
     }

@@ -4287,7 +4287,7 @@ void Spell::EffectDuel(SpellEffIndex effIndex)
         return;
     }
 
-    if (caster->GetMapId() == 0 && caster->GetAreaId() == 2177)
+    if (caster->GetMapId() == 0 && caster->GetAreaId() == 2298)
     {
         SendCastResult(SPELL_FAILED_NO_DUELING);
         return;

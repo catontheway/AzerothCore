@@ -26,18 +26,18 @@ public:
     {
         static std::vector<ChatCommand> titlesSetCommandTable =
         {
-            { "mask",           SEC_TRANSFERMASTER,     false, &HandleTitlesSetMaskCommand,        "" }
+            { "mask",           SEC_GAMEMASTER,     false, &HandleTitlesSetMaskCommand,        "" }
         };
         static std::vector<ChatCommand> titlesCommandTable =
         {
-            { "add",            SEC_TRANSFERMASTER,     false, &HandleTitlesAddCommand,            "" },
-            { "current",        SEC_TRANSFERMASTER,     false, &HandleTitlesCurrentCommand,        "" },
-            { "remove",         SEC_TRANSFERMASTER,     false, &HandleTitlesRemoveCommand,         "" },
-            { "set",            SEC_TRANSFERMASTER,     false, nullptr,                            "", titlesSetCommandTable }
+            { "add",            SEC_GAMEMASTER,     false, &HandleTitlesAddCommand,            "" },
+            { "current",        SEC_GAMEMASTER,     false, &HandleTitlesCurrentCommand,        "" },
+            { "remove",         SEC_GAMEMASTER,     false, &HandleTitlesRemoveCommand,         "" },
+            { "set",            SEC_GAMEMASTER,     false, nullptr,                            "", titlesSetCommandTable }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "titles",         SEC_TRANSFERMASTER,     false, nullptr,                            "", titlesCommandTable }
+            { "titles",         SEC_GAMEMASTER,     false, nullptr,                            "", titlesCommandTable }
         };
         return commandTable;
     }

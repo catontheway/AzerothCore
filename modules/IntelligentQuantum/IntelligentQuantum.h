@@ -15,15 +15,17 @@ void AddSC_Teleport();
 void AddSC_Template();
 void AddSC_TOP();
 
+// ItemScripts
+void AddSC_BuffStone();
+
 // PlayerScripts
 void AddSC_ArenaObject();
 void AddSC_Censure();
 void AddSC_Duel();
 void AddSC_GuildSystem();
-void AddSC_Gurubashi();
 void AddSC_KillStreak();
-void AddSC_Level();
 void AddSC_Login();
+void AddSC_PvPZone();
 
 void AddIntelligentQuantumScripts()
 {
@@ -41,15 +43,17 @@ void AddIntelligentQuantumScripts()
     AddSC_Template();
     AddSC_TOP();
 
+    // ItemScripts
+    AddSC_BuffStone();
+
     // PlayerScripts
     AddSC_ArenaObject();
     AddSC_Censure();
     AddSC_Duel();
     AddSC_GuildSystem();
-    AddSC_Gurubashi();
     AddSC_KillStreak();
-    AddSC_Level();
     AddSC_Login();
+    AddSC_PvPZone();
 }
 
 #endif

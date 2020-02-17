@@ -28,17 +28,17 @@ public:
     {
         static std::vector<ChatCommand> resetCommandTable =
         {
-            { "achievements",   SEC_HEAD_GAMEMASTER,  true,  &HandleResetAchievementsCommand,     "" },
-            { "honor",          SEC_HEAD_GAMEMASTER,  true,  &HandleResetHonorCommand,            "" },
-            { "level",          SEC_HEAD_GAMEMASTER,  true,  &HandleResetLevelCommand,            "" },
-            { "spells",         SEC_HEAD_GAMEMASTER,  true,  &HandleResetSpellsCommand,           "" },
-            { "stats",          SEC_HEAD_GAMEMASTER,  true,  &HandleResetStatsCommand,            "" },
-            { "talents",        SEC_HEAD_GAMEMASTER,  true,  &HandleResetTalentsCommand,          "" },
-            { "all",            SEC_HEAD_GAMEMASTER,        true,  &HandleResetAllCommand,              "" }
+            { "achievements",   SEC_ADMINISTRATOR,  true,  &HandleResetAchievementsCommand,     "" },
+            { "honor",          SEC_ADMINISTRATOR,  true,  &HandleResetHonorCommand,            "" },
+            { "level",          SEC_ADMINISTRATOR,  true,  &HandleResetLevelCommand,            "" },
+            { "spells",         SEC_ADMINISTRATOR,  true,  &HandleResetSpellsCommand,           "" },
+            { "stats",          SEC_ADMINISTRATOR,  true,  &HandleResetStatsCommand,            "" },
+            { "talents",        SEC_ADMINISTRATOR,  true,  &HandleResetTalentsCommand,          "" },
+            { "all",            SEC_CONSOLE,        true,  &HandleResetAllCommand,              "" }
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "reset",          SEC_HEAD_GAMEMASTER,  true, nullptr,                              "", resetCommandTable }
+            { "reset",          SEC_ADMINISTRATOR,  true, nullptr,                              "", resetCommandTable }
         };
         return commandTable;
     }

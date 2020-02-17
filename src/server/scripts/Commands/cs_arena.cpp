@@ -27,16 +27,16 @@ public:
     {
         static std::vector<ChatCommand> arenaCommandTable =
         {
-            { "create",         SEC_HEAD_GAMEMASTER,  true,   &HandleArenaCreateCommand,   "" },
-            { "disband",        SEC_HEAD_GAMEMASTER,  true,   &HandleArenaDisbandCommand,  "" },
-            { "rename",         SEC_HEAD_GAMEMASTER,  true,   &HandleArenaRenameCommand,   "" },
-            { "captain",        SEC_HEAD_GAMEMASTER,  false,  &HandleArenaCaptainCommand,  "" },
-            { "info",           SEC_HEAD_GAMEMASTER,     true,   &HandleArenaInfoCommand,     "" },
-            { "lookup",         SEC_HEAD_GAMEMASTER,     false,  &HandleArenaLookupCommand,   "" },
+            { "create",         SEC_ADMINISTRATOR,  true,   &HandleArenaCreateCommand,   "" },
+            { "disband",        SEC_ADMINISTRATOR,  true,   &HandleArenaDisbandCommand,  "" },
+            { "rename",         SEC_ADMINISTRATOR,  true,   &HandleArenaRenameCommand,   "" },
+            { "captain",        SEC_ADMINISTRATOR,  false,  &HandleArenaCaptainCommand,  "" },
+            { "info",           SEC_GAMEMASTER,     true,   &HandleArenaInfoCommand,     "" },
+            { "lookup",         SEC_GAMEMASTER,     false,  &HandleArenaLookupCommand,   "" },
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "arena",          SEC_HEAD_GAMEMASTER,     false, nullptr,                       "", arenaCommandTable },
+            { "arena",          SEC_GAMEMASTER,     false, nullptr,                       "", arenaCommandTable },
         };
         return commandTable;
     }

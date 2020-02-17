@@ -27,7 +27,9 @@ ArenaTeam::ArenaTeam()
     Stats.SeasonWins  = 0;
 }
 
-ArenaTeam::~ArenaTeam() { }
+ArenaTeam::~ArenaTeam()
+{
+}
 
 bool ArenaTeam::Create(uint64 captainGuid, uint8 type, std::string const& teamName, uint32 backgroundColor, uint8 emblemStyle, uint32 emblemColor, uint8 borderStyle, uint32 borderColor)
 {
