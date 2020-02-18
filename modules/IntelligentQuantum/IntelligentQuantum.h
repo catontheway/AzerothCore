@@ -25,7 +25,6 @@ void AddSC_Duel();
 void AddSC_GuildSystem();
 void AddSC_KillStreak();
 void AddSC_Login();
-void AddSC_PlayedTimeReward();
 void AddSC_PvPZone();
 
 void AddIntelligentQuantumScripts()
@@ -54,7 +53,6 @@ void AddIntelligentQuantumScripts()
     AddSC_GuildSystem();
     AddSC_KillStreak();
     AddSC_Login();
-    AddSC_PlayedTimeReward();
     AddSC_PvPZone();
 }
 

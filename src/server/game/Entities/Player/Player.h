@@ -2634,6 +2634,9 @@ class Player : public Unit, public GridObject<Player>
         std::string GetPlayerName();
 
         bool m_guildSystem;
+
+        time_t m_playedTimeReward;
+
     protected:
         // Gamemaster whisper whitelist
         WhisperListContainer WhisperList;

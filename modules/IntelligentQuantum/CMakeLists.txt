@@ -24,7 +24,6 @@ AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Duel.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/GuildSystem.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/KillStreak.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/Login.cpp")
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/PlayedTimeReward.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/PlayerScripts/PvPZone.cpp")
 
 AC_ADD_SCRIPT_LOADER("IntelligentQuantum" "${CMAKE_CURRENT_LIST_DIR}/IntelligentQuantum.h")

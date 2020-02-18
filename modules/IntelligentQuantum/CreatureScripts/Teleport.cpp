@@ -25,7 +25,7 @@ class CreatureScript_Teleport : public CreatureScript
 
         AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Shop Mall", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 12);
         AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Duel Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 13);
-        AddGossipItemFor(player, GOSSIP_ICON_TAXI, "PvP Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 18);
+        // AddGossipItemFor(player, GOSSIP_ICON_TAXI, "PvP Zone", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 18);
         AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Work Center", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 14);
         AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Transmog Center", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 15);
         AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Cosmetic Room", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 16);

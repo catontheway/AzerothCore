@@ -937,6 +937,8 @@ Player::Player(WorldSession* session): Unit(true), m_mover(this)
     m_isInstantFlightOn = true;
 
     m_guildSystem = true;
+
+    m_playedTimeReward = time(nullptr) + 3600;
 }
 
 Player::~Player()
@@ -1604,6 +1606,17 @@ void Player::Update(uint32 p_time)
         m_Played_time[PLAYED_TIME_LEVEL] += elapsed;        // Level played time
         GetSession()->SetTotalTime(GetSession()->GetTotalTime() + elapsed);
         m_Last_tick = now;
+    }
+
+    if (m_playedTimeReward < now)
+    {
+        if (getLevel() == 80)
+        {
+            ChatHandler(GetSession()).PSendSysMessage("|cff00ffffYou Have Benn Recevied Online Time Reward");
+
+            AddItem(100006, 1);
+            m_playedTimeReward = time(nullptr) + 3600;
+        }
     }
 
     // If mute expired, remove it from the DB

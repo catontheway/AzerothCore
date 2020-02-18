@@ -11,7 +11,7 @@ public:
     {
         if (!player->InArena() && !player->duel && !player->IsInCombat())
         {
-            player->AddAura(43223, player);
+            player->AddAura(48162, player);
         }
 
         return true;
@@ -27,8 +27,8 @@ public:
     {
         if (!player->InArena() && !player->duel && !player->IsInCombat())
         {
-            player->AddAura(43223, player);
             player->AddAura(48162, player);
+            player->AddAura(48170, player);
         }
 
         return true;
@@ -44,8 +44,8 @@ public:
     {
         if (!player->InArena() && !player->duel && !player->IsInCombat())
         {
-            player->AddAura(43223, player);
             player->AddAura(48162, player);
+            player->AddAura(48170, player);
             player->AddAura(48074, player);
         }
 
@@ -62,10 +62,10 @@ public:
     {
         if (!player->InArena() && !player->duel && !player->IsInCombat())
         {
-            player->AddAura(43223, player);
             player->AddAura(48162, player);
-            player->AddAura(48074, player);
             player->AddAura(48170, player);
+            player->AddAura(48074, player);
+            player->AddAura(48470, player);
         }
 
         return true;
@@ -81,11 +81,11 @@ public:
     {
         if (!player->InArena() && !player->duel && !player->IsInCombat())
         {
-            player->AddAura(43223, player);
             player->AddAura(48162, player);
-            player->AddAura(48074, player);
             player->AddAura(48170, player);
+            player->AddAura(48074, player);
             player->AddAura(48470, player);
+            player->AddAura(43002, player);
         }
 
         return true;
