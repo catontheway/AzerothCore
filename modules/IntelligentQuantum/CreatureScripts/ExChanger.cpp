@@ -9,7 +9,7 @@ public:
     {
         AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 100x PvP Token To 2K Honor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 10K Honor To 100x PvP Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
-        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 1K Arena To 1x Donate Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 1K Arena Points To 1x Donate Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
         AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 24x Played Time Token To 1x Donate Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
         AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 3x Played Time Token To 10x Trans Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 6);
         AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "Change 3x Played Time Token To 5x Cosmetic Token", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7);

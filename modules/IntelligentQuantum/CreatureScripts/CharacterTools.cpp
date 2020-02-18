@@ -23,7 +23,7 @@ class CreatureScript_CharacterTools : public CreatureScript
         switch (Actions)
         {
             case GOSSIP_ACTION_INFO_DEF + 1:
-                if (!player->HasItemCount(100002, 20))
+                if (!player->HasItemCount(100002, 50))
                 {
                     player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
                     CloseGossipMenuFor(player);
@@ -31,20 +31,20 @@ class CreatureScript_CharacterTools : public CreatureScript
                 }
 
                 player->GetSession()->SendAreaTriggerMessage("Please Logout For Race Change");
-                player->DestroyItemCount(100002, 20, true);
+                player->DestroyItemCount(100002, 50, true);
                 player->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
                 CloseGossipMenuFor(player);
                 break;
             case GOSSIP_ACTION_INFO_DEF + 2:
-                if (!player->HasItemCount(100002, 100))
+                if (!player->HasItemCount(100004, 5))
                 {
-                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
+                    player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough Donate Token|r");
                     CloseGossipMenuFor(player);
                     return false;
                 }
 
                 player->GetSession()->SendAreaTriggerMessage("Please Logout For Name Change");
-                player->DestroyItemCount(100002, 100, true);
+                player->DestroyItemCount(100004, 5, true);
                 player->SetAtLoginFlag(AT_LOGIN_RENAME);
                 CloseGossipMenuFor(player);
                 break;
@@ -62,7 +62,7 @@ class CreatureScript_CharacterTools : public CreatureScript
                 CloseGossipMenuFor(player);
                 break;
             case GOSSIP_ACTION_INFO_DEF + 4:
-                if (!player->HasItemCount(100002, 20))
+                if (!player->HasItemCount(100002, 50))
                 {
                     player->GetSession()->SendAreaTriggerMessage("|cff00ffffYou don't have enough PvP Token|r");
                     CloseGossipMenuFor(player);
@@ -70,7 +70,7 @@ class CreatureScript_CharacterTools : public CreatureScript
                 }
 
                 player->GetSession()->SendAreaTriggerMessage("Please Logout For Character Customize");
-                player->DestroyItemCount(100002, 20, true);
+                player->DestroyItemCount(100002, 50, true);
                 player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
                 CloseGossipMenuFor(player);
                 break;

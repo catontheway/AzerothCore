@@ -101,7 +101,7 @@ class CreatureScript_TOP : public CreatureScript
             break;
             case GOSSIP_ACTION_INFO_DEF + 5:
             {
-                QueryResult Result = CharacterDatabase.Query("SELECT name,level,`kill`,point FROM guild ORDER BY point DESC LIMIT 10");
+                QueryResult Result = CharacterDatabase.Query("SELECT name, Level, `Kills`, Points FROM guild ORDER BY Points DESC LIMIT 10");
 
                 if (Result)
                 {
@@ -112,9 +112,9 @@ class CreatureScript_TOP : public CreatureScript
                     {
                         std::string Name = Fields[0].GetString();
                         uint32 Level = Fields[1].GetUInt32();
-                        uint32 Kill = Fields[2].GetUInt32();
-                        uint32 Point = Fields[3].GetUInt32();
-                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Point: |cff00ffff%u|r Kill: |cff00ffff%u|r Level: |cff00ffff%u|r", Name.c_str(), Point, Kill, Level);
+                        uint32 Kills = Fields[2].GetUInt32();
+                        uint32 Points = Fields[3].GetUInt32();
+                        ChatHandler(player->GetSession()).PSendSysMessage("Name: |cff00ffff%s|r Points: |cff00ffff%u|r Kills: |cff00ffff%u|r Level: |cff00ffff%u|r", Name.c_str(), Points, Kills, Level);
                     } while (Result->NextRow());
                 }
 
